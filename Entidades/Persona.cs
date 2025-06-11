@@ -19,6 +19,8 @@ namespace Entidades
         public int IdProvincia { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
+
+        // FUERA DE TABLA PERSONAS:
         public string Localidad { get; set; }   
         public string Provincia { get; set; }   
     }

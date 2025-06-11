@@ -19,14 +19,10 @@ namespace TP_INT_P2
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            NegocioLogin login = new NegocioLogin();
-            Usuario u = new Usuario(txtUsuario.Text, txtPassword.Text);
-            NegocioPersona negPersona = new NegocioPersona();
-            Persona persona = new Persona();
+            NegocioUsuario negUsuario = new NegocioUsuario();
+            Usuario usuario = new Usuario(txtUsername.Text, txtPassword.Text);
 
-
-
-            bool accesoAprobado = login.LoginOK(u);
+            bool accesoAprobado = negUsuario.LoginOK(usuario);
 
             if (accesoAprobado)
             {
@@ -34,29 +30,28 @@ namespace TP_INT_P2
                 Master.FindControl("cerrarSesion").Visible = true;
 
                 // Guardo el nombre de usuario logueado en una variable de sesión para usar en toda la app
-                Session["Usuario"] = txtUsuario.Text;
-
-
-                // Busco datos de la persona que se logueó:
-                persona.Username = txtUsuario.Text;
-                persona = negPersona.GetPersona(persona);
-                Session["FullName"] = $"{persona.Nombre}";
+                Session["Usuario"] = txtUsername.Text;
 
 
                 // Busco el rol de la persona logueada para ver a donde la redirijo
-                Persona personaRole = new Persona();
-                personaRole.Username = txtUsuario.Text;
-                string tipo = login.GetRole(personaRole);
-                Session["Tipo"] = tipo;
+                usuario = negUsuario.GetData(usuario);
+                
+                Session["Tipo"] = usuario.Tipo;
 
-                if (tipo == "01")
+                if (usuario.Tipo == "01")
                 {
                     Response.Redirect("~/InicioAdministrador.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
 
                 }
-                else if (tipo == "02")
+                else if (usuario.Tipo == "02")
                 {
+                    // Busco datos de la persona que se logueó:
+                    NegocioMedico negocioMedico = new NegocioMedico();
+                    Medico medico = new Medico();
+                    medico = negocioMedico.getDatos(usuario);
+                    Session["FullName"] = $"{medico.Nombre}";
+
                     Response.Redirect("~/InicioMedico.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
                 }

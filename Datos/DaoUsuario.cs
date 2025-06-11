@@ -11,15 +11,15 @@ namespace Datos
     public class DaoUsuario
     {
         AccesoDatos ac = new AccesoDatos();
-        public bool ExisteUsuario(Usuario c)
+        public bool ExisteUsuario(Usuario u)
         {
-            string consulta = "SELECT 1 FROM USUARIOS WHERE usuario_U = @usuario AND password_U = @password";
+            string consulta = "SELECT 1 FROM USUARIOS WHERE username_U = @username AND password_U = @password";
             using (SqlCommand comando = new SqlCommand())
             {
                 comando.CommandText = consulta;
                 comando.Connection = ac.obtenerConexion();
-                comando.Parameters.AddWithValue("@usuario", c.Username);
-                comando.Parameters.AddWithValue("@password", c.Password);
+                comando.Parameters.AddWithValue("@username", u.Username);
+                comando.Parameters.AddWithValue("@password", u.Password);
 
                 object result = comando.ExecuteScalar();
 
@@ -28,18 +28,25 @@ namespace Datos
 
         }
 
-        public string GetRole(Persona p)
+        public Usuario GetData(Usuario usuario)
         {
-            string consulta = "SELECT tipo_U FROM USUARIOS WHERE usuario_U = @usuario";
+            string consulta = "SELECT * FROM USUARIOS WHERE username_U = @username";
             using (SqlCommand comando = new SqlCommand())
             {
                 comando.CommandText = consulta;
                 comando.Connection = ac.obtenerConexion();
-                comando.Parameters.AddWithValue("@usuario", p.Username);
-
-                object result = comando.ExecuteScalar();
-
-                return result?.ToString();
+                comando.Parameters.AddWithValue("@username", usuario.Username);
+                
+                SqlDataReader data = comando.ExecuteReader();
+                if (data.Read())
+                {
+                    usuario.Tipo = data["tipo_U"].ToString();
+                    usuario.Email = data["email_U"].ToString();
+                    usuario.Username = data["username_U"].ToString();
+                    usuario.Password = data["password_U"].ToString();
+                }
+                comando.Connection.Close();
+                return usuario;
             }
         }
     }

@@ -13,5 +13,10 @@ namespace Entidades
         public string Horario { get; set; }
         public bool Estado { get; set; }
         public string Imagen { get; set; }
+        
+        // FUERA DE TABLA MEDICOS:
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Especialidad { get; set; }
     }
 }

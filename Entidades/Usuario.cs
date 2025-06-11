@@ -12,5 +12,18 @@ namespace Entidades
         public string Password { get; set; }
         public string Email { get; set; }
         public string Tipo  { get; set; }
+        public Usuario() {}
+        public Usuario(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+        public Usuario(string username, string password, string email, string tipo)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+            Tipo = tipo;
+        }
     }
 }

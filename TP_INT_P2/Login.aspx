@@ -9,8 +9,8 @@
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
                 <div class="mb-3">
-                    <label for="txtUsuario" class="form-label">Usuario</label>
-                    <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" />
+                    <label for="txtUsername" class="form-label">Usuario</label>
+                    <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" />
                 </div>
 
                 <div class="mb-3">

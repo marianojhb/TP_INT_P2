@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Datos;
+using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +15,9 @@ namespace Negocio
         {
             return daoUsuario.ExisteUsuario(u);
         }
-        public string GetRole(Persona p)
+        public Usuario GetData(Usuario u)
         {
-
-            string tipo = daoUsuario.GetRole(p);
-
-            return tipo;
+            return daoUsuario.GetData(u);
         }
     }
 }
