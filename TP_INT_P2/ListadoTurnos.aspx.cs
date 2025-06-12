@@ -11,7 +11,8 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Tipo"] == null || Session["Tipo"].ToString() != "02")
+            if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
+
             {
                 Response.Redirect("~/Login.aspx");
             }

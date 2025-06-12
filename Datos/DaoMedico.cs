@@ -67,11 +67,6 @@ namespace Datos
             }
         }
 
-        public bool AgregarMedicoCheckDNI(Medico m)
-        {
-            string consulta = "SELECT 1 FROM PERSONAS WHERE dni_P = '" + m.DNI + "'";
-            return ac.Existe(consulta);
-        }
 
         public bool ExisteDNI(string dni)
         {

@@ -15,7 +15,7 @@ namespace Datos
         public List<Localidad> GetLocalidades(string provincia)
         {
             List<Localidad> lista = new List<Localidad>();
-            string consulta = "SELECT idLocalidad_L, nombre_L FROM LOCALIDADES WHERE idProvincia_L = @provincia";
+            string consulta = "SELECT idLocalidad_L, nombre_L FROM LOCALIDADES WHERE idProvincia_L = @provincia ORDER BY nombre_L ASC";
 
             SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
 

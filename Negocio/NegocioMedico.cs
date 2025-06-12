@@ -17,11 +17,6 @@ namespace Negocio
             return daoMedico.GetMedico(u);
         }
 
-        public bool AgregarMedicoCheckDNI(Medico m)
-        {
-            return daoMedico.AgregarMedicoCheckDNI(m);
-        }
-
         public int ProximoLegajo()
         {
             return daoMedico.ProximoLegajo();

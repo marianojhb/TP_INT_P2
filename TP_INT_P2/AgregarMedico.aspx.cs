@@ -92,6 +92,12 @@ namespace TP_INT_P2
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
+            LimpiarFormularioAgregarMedico();
+
+        }
+
+        protected void LimpiarFormularioAgregarMedico()
+        {
             txtDni.Text = String.Empty;
             txtNombre.Text = String.Empty;
             txtApellido.Text = String.Empty;
@@ -108,7 +114,6 @@ namespace TP_INT_P2
             ddlLocalidades.SelectedValue = "0";
             txtUsername.Text = String.Empty;
             txtPassword.Text = String.Empty;
-
         }
 
         protected void CargarEspecialidades()
@@ -135,7 +140,7 @@ namespace TP_INT_P2
             m.DNI = txtDni.Text.Trim();
             m.Nombre = txtNombre.Text.Trim();
             m.Apellido = txtApellido.Text.Trim();
-            
+
             // Radio button de Sexo:
             {
                 string sexoSeleccionado = "";
@@ -152,13 +157,13 @@ namespace TP_INT_P2
             m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
             m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
             m.Telefono = txtTelefono.Text.Trim();
-            
+
             // TABLA MEDICOS
             m.Legajo = txtLegajo.Text;
             m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
             m.Horario = txtHorario.Text.Trim();
             m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble
-            
+
             // TABLA USUARIOS
             m.Username = txtUsername.Text.Trim();
             m.Password = txtPassword.Text.Trim();
@@ -167,36 +172,55 @@ namespace TP_INT_P2
             // PREPARAMOS PARA CHEQUEAR LA BBDD PARA VALIDACIONES
 
             NegocioMedico negocioMedico = new NegocioMedico();
-            bool ingresoValidado = false; 
-            
+            bool ingresoValidado = false;
+
 
             // VALIDACION 1. CHEQUEAMOS SI EXISTE EL DNI
 
-            ingresoValidado = !negocioMedico.AgregarMedicoCheckDNI(m);
+            ingresoValidado = !negocioMedico.ExisteDNI(m.DNI); //si no existe dni se valida
+            
 
             //TODO: CARGAR EN LA BASE DE DATOS
             if (ingresoValidado)
             {
-                //Response.Write(ingresoValidado);
+                
+
                 int insercionOK = negocioMedico.AgregarMedico(m);
-                if (insercionOK == 1)
+
+                Response.Write(insercionOK); // true
+
+                if (insercionOK > 0)
                 {
-                    // Si fue exitoso
                     pnlExito.Visible = true;
                     pnlError.Visible = false;
 
-
-                    // Registrar script para ocultar el panel después de 3 segundos
-                    ClientScript.RegisterStartupScript(this.GetType(), "OcultarPanel", "<script>setTimeout(ocultarPanel, 3000);</script>", false);
-
+                    // Mostrar toast éxito y ocultarlo luego
+                    string script = @"
+                            var toastEl = document.querySelector('#" + pnlExito.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                            }";
+                    ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
                 }
                 else
                 {
-                    // Si falló
                     pnlExito.Visible = false;
                     pnlError.Visible = true;
+
+                    // Mostrar toast error y ocultarlo luego
+                    string script = @"
+                            var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                            }";
+                    ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
                 }
             }
+            LimpiarFormularioAgregarMedico();
         }
 
         protected void btnChequearDNI_Click(object sender, EventArgs e)

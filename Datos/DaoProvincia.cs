@@ -15,7 +15,7 @@ namespace Datos
         public List<Provincia> GetProvincias()
         {
             List<Provincia> lista = new List<Provincia>();
-            string consulta = "SELECT idProvincia_PROV, nombre_PROV FROM Provincias";
+            string consulta = "SELECT idProvincia_PROV, nombre_PROV FROM Provincias ORDER BY nombre_PROV ASC";
 
             SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
             SqlDataReader data = cmd.ExecuteReader();

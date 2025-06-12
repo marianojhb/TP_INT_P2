@@ -15,7 +15,7 @@ namespace Datos
         public List<Especialidad> GetEspecialidades()
         {
             List<Especialidad> lista = new List<Especialidad>();
-            string consulta = "SELECT codEspecialidad_E, nombre_E FROM ESPECIALIDADES";
+            string consulta = "SELECT codEspecialidad_E, nombre_E FROM ESPECIALIDADES ORDER BY nombre_E ASC";
 
             SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
             SqlDataReader data = cmd.ExecuteReader();

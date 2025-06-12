@@ -174,7 +174,7 @@
 <!-- Toast de Exito -->
 <asp:Panel ID="pnlExito" runat="server" Visible="false">
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-        <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
                     <strong>¡Éxito!</strong> El registro se guardó correctamente.
@@ -188,7 +188,7 @@
 <!-- Toast de Error -->
 <asp:Panel ID="pnlError" runat="server" Visible="false">
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-        <div class="toast align-items-center text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
                     <strong>¡Error!</strong> Ocurrió un problema al guardar el registro.
@@ -221,15 +221,6 @@
     }
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var toastEl = document.querySelector('.toast');
-        if (toastEl) {
-            var bsToast = new bootstrap.Toast(toastEl);
-            bsToast.show();
-        }
-    });
-</script>
 
 
 </asp:Content>
