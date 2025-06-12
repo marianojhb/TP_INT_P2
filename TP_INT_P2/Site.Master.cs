@@ -11,25 +11,26 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Gestión de cookies
+            {
+                HttpCookie ckTema = Request.Cookies["Tema"];
+
+                // Si existe la cookie del tema la aplico
+                if (ckTema != null && !string.IsNullOrEmpty(ckTema.Value))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarTema", "document.documentElement.setAttribute('data-bs-theme', '" + ckTema.Value + "');", true);
+                }
+                // Si no existe la cookie, la creo:
+                else
+                {
+                    ckTema = new HttpCookie("Tema", "light");
+                    ckTema.Expires = DateTime.Now.AddDays(365);
+                    this.Response.Cookies.Add(ckTema);
+                }
+            }
             if (!IsPostBack)
             {
-                // Gestión de cookies
-                {
-                    HttpCookie ckTema = Request.Cookies["Tema"];
 
-                    // Si existe la cookie del tema la aplico
-                    if (ckTema != null && !string.IsNullOrEmpty(ckTema.Value))
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarTema", "document.documentElement.setAttribute('data-bs-theme', '" + ckTema.Value + "');", true);
-                    }
-                    // Si no existe la cookie, la creo:
-                    else
-                    {
-                        ckTema = new HttpCookie("Tema", "light");
-                        ckTema.Expires = DateTime.Now.AddDays(365);
-                        this.Response.Cookies.Add(ckTema);
-                    }
-                }
 
                 // Gestión de usuario:
                 {

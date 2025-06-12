@@ -1,16 +1,3 @@
-﻿<%@ Page Title="Listado de Médicos | TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoMedicos.aspx.cs" Inherits="TP_INT_P2.ListadoMedicos" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        th {
-            text-align:center !important;
-        }
-    </style>
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>LISTADO MÉDICOS</h2>
-    <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
-    <asp:Label runat="server" Text="Label"></asp:Label>
-
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" GroupItemCount="3" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
         <AlternatingItemTemplate>
             <td runat="server" style="background-color: #FFFFFF;color: #284775;">imagen_M:
@@ -378,15 +365,3 @@
             <asp:Parameter Name="TIPO" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
-
-
-    <script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
-            });
-        });
-    </script>
-    </asp:Content>

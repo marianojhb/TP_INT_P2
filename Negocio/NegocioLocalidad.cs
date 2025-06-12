@@ -10,5 +10,10 @@ namespace Negocio
 {
     public class NegocioLocalidad
     {
+        public List<Localidad> GetLocalidades(string provincia)
+        {
+            DaoLocalidad dao = new DaoLocalidad();
+            return dao.GetLocalidades(provincia);
+        }
     }
 }

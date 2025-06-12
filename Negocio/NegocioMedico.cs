@@ -10,11 +10,30 @@ namespace Negocio
 {
     public class NegocioMedico
     {
+        DaoMedico daoMedico = new DaoMedico();
+
         public Medico getDatos(Usuario u)
         {
-            DaoMedico daoMedico = new DaoMedico();
-            
             return daoMedico.GetMedico(u);
+        }
+
+        public bool AgregarMedicoCheckDNI(Medico m)
+        {
+            return daoMedico.AgregarMedicoCheckDNI(m);
+        }
+
+        public int ProximoLegajo()
+        {
+            return daoMedico.ProximoLegajo();
+        }
+        public bool ExisteDNI(string dni)
+        {
+            return daoMedico.ExisteDNI(dni);
+        }
+
+        public int AgregarMedico(Medico m)
+        {
+            return daoMedico.AgregarMedico(m);
         }
     }
 }
