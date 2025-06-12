@@ -6,72 +6,76 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
     <h2>LISTADO MÉDICOS</h2>
+<asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-50 border p-3">
     <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
-    <asp:Label runat="server" Text="Label"></asp:Label>
+    
 
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" GroupItemCount="3" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
-        <AlternatingItemTemplate>
-            <td runat="server" style="background-color: #FFFFFF;color: #284775;">imagen_M:
+
+        <ItemTemplate>
+            <td runat="server" style="background-color: #E0FFFF; color: #333333;">&nbsp;<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" />
+                <br />
                 <asp:Label ID="imagen_MLabel" runat="server" Text='<%# Eval("imagen_M") %>' />
                 <br />
-                legajo_M:
+                Legajo:
                 <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
                 <br />
-                dni_P:
+                DNI:
                 <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
                 <br />
-                nombre_P:
+                Nombre:
                 <asp:Label ID="nombre_PLabel" runat="server" Text='<%# Eval("nombre_P") %>' />
                 <br />
-                apellido_P:
+                Apellido:
                 <asp:Label ID="apellido_PLabel" runat="server" Text='<%# Eval("apellido_P") %>' />
                 <br />
-                sexo_P:
+                Sexo:
                 <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Eval("sexo_P") %>' />
                 <br />
-                nacionalidad_P:
+                Nacionalidad:
                 <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
                 <br />
-                fechaNac_P:
+                Fecha de Nacimiento
                 <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P") %>' />
                 <br />
-                direccion_P:
+                Dirección:
                 <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Eval("direccion_P") %>' />
                 <br />
-                nombre_L:
+                Localidad:
                 <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Eval("nombre_L") %>' />
                 <br />
-                nombre_PROV:
+                Provincia:
                 <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Eval("nombre_PROV") %>' />
                 <br />
-                email_P:
+                Email:
                 <asp:Label ID="email_PLabel" runat="server" Text='<%# Eval("email_P") %>' />
                 <br />
-                telefono_P:
+                Teléfono:
                 <asp:Label ID="telefono_PLabel" runat="server" Text='<%# Eval("telefono_P") %>' />
                 <br />
-                nombre_E:
+                Especialidad:
                 <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Eval("nombre_E") %>' />
                 <br />
-                username_U:
+                Usuario:
                 <asp:Label ID="username_ULabel" runat="server" Text='<%# Eval("username_U") %>' />
                 <br />
-                password_U:
+                Contraseña:
                 <asp:Label ID="password_ULabel" runat="server" Text='<%# Eval("password_U") %>' />
                 <br />
-                tipo_U:
+                Tipo:
                 <asp:Label ID="tipo_ULabel" runat="server" Text='<%# Eval("tipo_U") %>' />
                 <br />
-                <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="false" Text="estado_M" />
+                <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="False" Text="estado_M" />
                 <br />
+
                 <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Eliminar" />
                 <br />
                 <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Editar" />
                 <br />
             </td>
-        </AlternatingItemTemplate>
+        </ItemTemplate>
         <EditItemTemplate>
             <td runat="server" style="background-color: #999999;">imagen_M:
                 <asp:TextBox ID="imagen_MTextBox" runat="server" Text='<%# Bind("imagen_M") %>' />
@@ -147,126 +151,6 @@
                 <td id="itemPlaceholder" runat="server"></td>
             </tr>
         </GroupTemplate>
-        <InsertItemTemplate>
-            <td runat="server" style="">imagen_M:
-                <asp:TextBox ID="imagen_MTextBox" runat="server" Text='<%# Bind("imagen_M") %>' />
-                <br />
-                legajo_M:
-                <asp:TextBox ID="legajo_MTextBox" runat="server" Text='<%# Bind("legajo_M") %>' />
-                <br />
-                dni_P:
-                <asp:TextBox ID="dni_PTextBox" runat="server" Text='<%# Bind("dni_P") %>' />
-                <br />
-                nombre_P:
-                <asp:TextBox ID="nombre_PTextBox" runat="server" Text='<%# Bind("nombre_P") %>' />
-                <br />
-                apellido_P:
-                <asp:TextBox ID="apellido_PTextBox" runat="server" Text='<%# Bind("apellido_P") %>' />
-                <br />
-                sexo_P:
-                <asp:TextBox ID="sexo_PTextBox" runat="server" Text='<%# Bind("sexo_P") %>' />
-                <br />
-                nacionalidad_P:
-                <asp:TextBox ID="nacionalidad_PTextBox" runat="server" Text='<%# Bind("nacionalidad_P") %>' />
-                <br />
-                fechaNac_P:
-                <asp:TextBox ID="fechaNac_PTextBox" runat="server" Text='<%# Bind("fechaNac_P") %>' />
-                <br />
-                direccion_P:
-                <asp:TextBox ID="direccion_PTextBox" runat="server" Text='<%# Bind("direccion_P") %>' />
-                <br />
-                nombre_L:
-                <asp:TextBox ID="nombre_LTextBox" runat="server" Text='<%# Bind("nombre_L") %>' />
-                <br />
-                nombre_PROV:
-                <asp:TextBox ID="nombre_PROVTextBox" runat="server" Text='<%# Bind("nombre_PROV") %>' />
-                <br />
-                email_P:
-                <asp:TextBox ID="email_PTextBox" runat="server" Text='<%# Bind("email_P") %>' />
-                <br />
-                telefono_P:
-                <asp:TextBox ID="telefono_PTextBox" runat="server" Text='<%# Bind("telefono_P") %>' />
-                <br />
-                nombre_E:
-                <asp:TextBox ID="nombre_ETextBox" runat="server" Text='<%# Bind("nombre_E") %>' />
-                <br />
-                username_U:
-                <asp:TextBox ID="username_UTextBox" runat="server" Text='<%# Bind("username_U") %>' />
-                <br />
-                password_U:
-                <asp:TextBox ID="password_UTextBox" runat="server" Text='<%# Bind("password_U") %>' />
-                <br />
-                tipo_U:
-                <asp:TextBox ID="tipo_UTextBox" runat="server" Text='<%# Bind("tipo_U") %>' />
-                <br />
-                <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Bind("estado_M") %>' Text="estado_M" />
-                <br />
-                <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insertar" />
-                <br />
-                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Borrar" />
-                <br />
-            </td>
-        </InsertItemTemplate>
-        <ItemTemplate>
-            <td runat="server" style="background-color: #E0FFFF; color: #333333;">imagen_M:
-                <asp:Label ID="imagen_MLabel" runat="server" Text='<%# Eval("imagen_M") %>' />
-                <br />
-                legajo_M:
-                <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
-                <br />
-                dni_P:
-                <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
-                <br />
-                nombre_P:
-                <asp:Label ID="nombre_PLabel" runat="server" Text='<%# Eval("nombre_P") %>' />
-                <br />
-                apellido_P:
-                <asp:Label ID="apellido_PLabel" runat="server" Text='<%# Eval("apellido_P") %>' />
-                <br />
-                sexo_P:
-                <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Eval("sexo_P") %>' />
-                <br />
-                nacionalidad_P:
-                <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
-                <br />
-                fechaNac_P:
-                <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P") %>' />
-                <br />
-                direccion_P:
-                <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Eval("direccion_P") %>' />
-                <br />
-                nombre_L:
-                <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Eval("nombre_L") %>' />
-                <br />
-                nombre_PROV:
-                <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Eval("nombre_PROV") %>' />
-                <br />
-                email_P:
-                <asp:Label ID="email_PLabel" runat="server" Text='<%# Eval("email_P") %>' />
-                <br />
-                telefono_P:
-                <asp:Label ID="telefono_PLabel" runat="server" Text='<%# Eval("telefono_P") %>' />
-                <br />
-                nombre_E:
-                <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Eval("nombre_E") %>' />
-                <br />
-                username_U:
-                <asp:Label ID="username_ULabel" runat="server" Text='<%# Eval("username_U") %>' />
-                <br />
-                password_U:
-                <asp:Label ID="password_ULabel" runat="server" Text='<%# Eval("password_U") %>' />
-                <br />
-                tipo_U:
-                <asp:Label ID="tipo_ULabel" runat="server" Text='<%# Eval("tipo_U") %>' />
-                <br />
-                <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="false" Text="estado_M" />
-                <br />
-                <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text='Eliminar' />
-                <br />
-                <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Editar" />
-                <br />
-            </td>
-        </ItemTemplate>
         <LayoutTemplate>
             <table runat="server">
                 <tr runat="server">
@@ -378,7 +262,7 @@
             <asp:Parameter Name="TIPO" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
-
+</asp:Panel>
 
     <script>
         $(document).ready(function () {

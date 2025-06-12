@@ -11,7 +11,11 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Tipo"] == null || Session["Tipo"].ToString() != "02")
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+            Response.Write("Pagina no implementada");
         }
     }
 }

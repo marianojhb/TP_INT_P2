@@ -14,18 +14,31 @@ namespace TP_INT_P2
             // Gestión de cookies
             {
                 HttpCookie ckTema = Request.Cookies["Tema"];
+                string tema = Session["Tema"] as string;
 
-                // Si existe la cookie del tema la aplico
-                if (ckTema != null && !string.IsNullOrEmpty(ckTema.Value))
+                if (!string.IsNullOrEmpty(tema))
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarTema", "document.documentElement.setAttribute('data-bs-theme', '" + ckTema.Value + "');", true);
+                    // Poner el tema guardado en sesión
+                    htmlTag.Attributes["data-bs-theme"] = tema;
                 }
-                // Si no existe la cookie, la creo:
+                else if (ckTema != null && !string.IsNullOrEmpty(ckTema.Value))
+                {
+                    // Si hay cookie pero no sesión, uso la cookie
+                    tema = ckTema.Value;
+                    htmlTag.Attributes["data-bs-theme"] = tema;
+                    Session["Tema"] = tema;
+                }
                 else
                 {
-                    ckTema = new HttpCookie("Tema", "light");
+                    // Si no hay nada, default light
+                    tema = "light";
+                    htmlTag.Attributes["data-bs-theme"] = tema;
+
+                    ckTema = new HttpCookie("Tema", tema);
                     ckTema.Expires = DateTime.Now.AddDays(365);
                     this.Response.Cookies.Add(ckTema);
+
+                    Session["Tema"] = tema;
                 }
             }
             if (!IsPostBack)
@@ -67,11 +80,16 @@ namespace TP_INT_P2
             string temaActual = Session["Tema"] as string;
             string nuevoTema = (temaActual == "dark") ? "light" : "dark";
             Session["Tema"] = nuevoTema;
-            htmlTag.Attributes["data-bs-theme"] = nuevoTema;
 
             HttpCookie ckTema = new HttpCookie("Tema", nuevoTema);
             ckTema.Expires = DateTime.Now.AddDays(365);
             this.Response.Cookies.Set(ckTema);
+
+            // Actualizar el atributo html en el servidor para cuando se renderice la página
+            htmlTag.Attributes["data-bs-theme"] = nuevoTema;
+
+            // Registrar script para actualizar el tema en el cliente inmediatamente
+            ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarTema", $"document.documentElement.setAttribute('data-bs-theme', '{nuevoTema}');", true);
         }
 
         public void CambiarTema(string tema)

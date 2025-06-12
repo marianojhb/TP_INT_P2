@@ -11,7 +11,19 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["Tipo"] == null || Session["Tipo"].ToString() != "02")
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
 
+            }
+        }
+
+        protected void btnAgregarPaciente_Click(object sender, EventArgs e)
+        {
+            Response.Write("Agregar Paciente no implementado");
         }
     }
 }

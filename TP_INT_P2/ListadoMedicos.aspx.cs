@@ -17,11 +17,19 @@ namespace TP_INT_P2
         {
             if (!IsPostBack)
             {
-                if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
+                if (Session["Tipo"] == null)
                 {
                     Response.Redirect("~/Login.aspx");
                 }
-                MostrarBotonAgregarMedico();
+                else if (Session["Tipo"].ToString() == "02")
+                {
+                    Response.Write("Sección exclusiva para usuarios Admin");
+                    panelContenidoListadoMedicos.Visible = false;
+                } 
+                else if (Session["Tipo"].ToString() != "01")
+                {
+                    MostrarBotonAgregarMedico();
+                }
             }
         }
         protected void btnAgregarMedico_Click(object sender, EventArgs e)
@@ -123,6 +131,11 @@ namespace TP_INT_P2
         }
 
         protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
 
         }
