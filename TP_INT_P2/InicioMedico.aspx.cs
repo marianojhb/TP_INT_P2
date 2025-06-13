@@ -25,5 +25,10 @@ namespace TP_INT_P2
         {
             Response.Write("Agregar Paciente no implementado");
         }
+
+        protected void btnMisHorarios_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MisHorarios.aspx");
+        }
     }
 }

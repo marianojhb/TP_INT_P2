@@ -11,25 +11,25 @@ namespace TP_INT_P2
 {
 
 
-    public partial class InicioMedico
+    public partial class MisHorarios
     {
 
         /// <summary>
-        /// Control btnAgregarPaciente.
+        /// Control Panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarPaciente;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
-        /// Control btnMisHorarios.
+        /// Control gvHorarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMisHorarios;
+        protected global::System.Web.UI.WebControls.GridView gvHorarios;
     }
 }

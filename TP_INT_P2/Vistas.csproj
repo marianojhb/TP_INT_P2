@@ -76,6 +76,7 @@
     <Content Include="ListadoPacientes.aspx" />
     <Content Include="ListadoTurnos.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MisHorarios.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisHorarios.aspx.cs">
+      <DependentUpon>MisHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisHorarios.aspx.designer.cs">
+      <DependentUpon>MisHorarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

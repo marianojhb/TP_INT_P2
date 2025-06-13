@@ -16,6 +16,11 @@ namespace TP_INT_P2
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            // Chequea variables de sesion para Depurar:
+            //foreach (string key in Session.Keys)
+            //{
+            //    Response.Write($"<p><strong>{key}</strong>: {Session[key]}</p>");
+            //}
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -50,7 +55,8 @@ namespace TP_INT_P2
                     NegocioMedico negocioMedico = new NegocioMedico();
                     Medico medico = new Medico();
                     medico = negocioMedico.getDatos(usuario);
-                    Session["FullName"] = $"{medico.Nombre}";
+                    Session["FullName"] = $"{medico.Nombre} {medico.Apellido}";
+                    Session["Legajo"] = medico.Legajo;
 
                     Response.Redirect("~/InicioMedico.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();

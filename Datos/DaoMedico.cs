@@ -34,6 +34,7 @@ namespace Datos
             SqlDataReader data = comando.ExecuteReader();
             if (data.Read())
             {
+                medico.Legajo = data["legajo_M"].ToString() ;
                 medico.DNI = data["dni_P"].ToString();
                 medico.Nombre = data["nombre_P"].ToString();
                 medico.Apellido = data["apellido_P"].ToString();
@@ -49,6 +50,7 @@ namespace Datos
                 medico.Imagen = data["imagen_M"].ToString();
                 medico.Username = data["username_U"].ToString();
                 medico.Password = data["password_U"].ToString(); // RIESGO SEGURIDAD
+                medico.CodEspecialidad = Convert.ToInt32(data["codEspecialidad_M"]);
                 medico.Especialidad = data["nombre_E"].ToString();
             }
             comando.Connection.Close();
