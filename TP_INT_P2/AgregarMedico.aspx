@@ -10,7 +10,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
             <h2>Agregar Médico</h2>
 
-<div class="container" style="max-width: 700px;"> 
+<div class="container shadow p-4" style="max-width: 700px;"> 
     <div class="form-group row">
 
         <div class="form-group row mb-3">
@@ -29,7 +29,10 @@
                     <asp:Button ID="btnChequearDNI" runat="server" Text="Validar" OnClick="btnChequearDNI_Click" CssClass="btn btn-secondary" CausesValidation="False" />
                 </div>
                 <div class="col-sm-3">
-                    <asp:Label ID="lblChequearDNI" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lblChequearDNI" runat="server" Text="" ForeColor="Red"></asp:Label>
+                    <asp:Label ID="lblChequearDNIValido" runat="server" Text="" ForeColor="Green"></asp:Label>
+                    <small>
+                    <asp:Label ID="lblChequearDNIHint" runat="server" Text="Valide antes de enviar el formulario"></asp:Label></small>
                 </div>
         </div>
 
@@ -153,6 +156,15 @@
                 <small id="passwordHelpBlock" class="form-text text-muted">
                     La contraseña debe tener entre 8 y 20 caracteres, contener letra y números, sin espacios, caracteres especiales o emoji.</small>
             </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label for="txtPasswordReingreso" class="col-sm-4 col-form-label">Reingresar Contraseña</label>
+            <div class="col-sm-4">
+                <asp:TextBox TextMode="Password" ID="txtPasswordReingreso" runat="server" CssClass="form-control" placeholder="Reingresar Contraseña" aria-describedby="passwordHelpBlock" autocomplete="new-password"/>
+            </div>
+            <div class="col-sm-4">
+            <small><asp:CompareValidator ID="cvContrasenas" runat="server" ErrorMessage="Las contraseñas no coinciden" ControlToCompare="txtPassword" ControlToValidate="txtPasswordReingreso" Display="Dynamic" ValueToCompare="txtPasswordReingreso" ForeColor="Red" ></asp:CompareValidator></small> </div>
         </div>
 
         <div class="form-group row mb-3">

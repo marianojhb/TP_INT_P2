@@ -3,6 +3,7 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,6 +14,8 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None; // para los validadores de WebForms
+
             if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
             {
                 Response.Redirect("~/Login.aspx");
@@ -24,7 +27,7 @@ namespace TP_INT_P2
                 CargarProvincias();
                 CargarLocalidades(ddlProvincias.SelectedValue);
                 CargarEspecialidades();
-                //CargarCamposObligatorios();
+                CargarCamposObligatorios();
             }
         }
 
@@ -225,6 +228,9 @@ namespace TP_INT_P2
 
         protected void btnChequearDNI_Click(object sender, EventArgs e)
         {
+            lblChequearDNI.Text = "";
+            lblChequearDNIValido.Text = "";
+            lblChequearDNIHint.Text = "";
             NegocioMedico negMedico = new NegocioMedico();
             bool existeDNI;
             if ( txtDni.Text.Length != 8 || !txtDni.Text.All(char.IsDigit))
@@ -240,7 +246,7 @@ namespace TP_INT_P2
                 } 
                 else
                 {
-                    lblChequearDNI.Text = "Aprobado!";
+                    lblChequearDNIValido.Text = "Validado";
                 }
             }
 

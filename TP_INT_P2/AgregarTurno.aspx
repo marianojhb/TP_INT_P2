@@ -4,7 +4,6 @@
     <style>
         .dropdown-min {
             min-width: 50px;
-            o 200px, ajustá según necesidad max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -16,8 +15,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <h2>Asignar un nuevo turno</h2>
-    <div class="container d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center align-items-center" >
         <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-4 shadow rounded anchopanel">
 
 
@@ -99,4 +99,5 @@
         </asp:Panel>
 
     </div>
+
 </asp:Content>
