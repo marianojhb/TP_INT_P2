@@ -12,12 +12,10 @@
     <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
     
 
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" GroupItemCount="3" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
+    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" GroupItemCount="3">
 
         <ItemTemplate>
             <td runat="server" style="background-color: #E0FFFF; color: #333333;">&nbsp;<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" />
-                <br />
-                <asp:Label ID="imagen_MLabel" runat="server" Text='<%# Eval("imagen_M") %>' />
                 <br />
                 Legajo:
                 <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
@@ -38,7 +36,7 @@
                 <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
                 <br />
                 Fecha de Nacimiento
-                <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P") %>' />
+                <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P", "{0:dd/MM/yyyy}") %>' />
                 <br />
                 Dirección:
                 <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Eval("direccion_P") %>' />
@@ -80,52 +78,52 @@
             <td runat="server" style="background-color: #999999;">imagen_M:
                 <asp:TextBox ID="imagen_MTextBox" runat="server" Text='<%# Bind("imagen_M") %>' />
                 <br />
-                legajo_M:
+                Legajo:
                 <asp:TextBox ID="legajo_MTextBox" runat="server" Text='<%# Bind("legajo_M") %>' />
                 <br />
-                dni_P:
+                DNI:
                 <asp:TextBox ID="dni_PTextBox" runat="server" Text='<%# Bind("dni_P") %>' />
                 <br />
-                nombre_P:
+                Nombre:
                 <asp:TextBox ID="nombre_PTextBox" runat="server" Text='<%# Bind("nombre_P") %>' />
                 <br />
-                apellido_P:
+                Apellido:
                 <asp:TextBox ID="apellido_PTextBox" runat="server" Text='<%# Bind("apellido_P") %>' />
                 <br />
-                sexo_P:
+                Sexo:
                 <asp:TextBox ID="sexo_PTextBox" runat="server" Text='<%# Bind("sexo_P") %>' />
                 <br />
-                nacionalidad_P:
+                Nacionalidad:
                 <asp:TextBox ID="nacionalidad_PTextBox" runat="server" Text='<%# Bind("nacionalidad_P") %>' />
                 <br />
-                fechaNac_P:
+                Fecha de nacimiento:
                 <asp:TextBox ID="fechaNac_PTextBox" runat="server" Text='<%# Bind("fechaNac_P") %>' />
                 <br />
-                direccion_P:
+                Dirección:
                 <asp:TextBox ID="direccion_PTextBox" runat="server" Text='<%# Bind("direccion_P") %>' />
                 <br />
-                nombre_L:
+                Localidad:
                 <asp:TextBox ID="nombre_LTextBox" runat="server" Text='<%# Bind("nombre_L") %>' />
                 <br />
-                nombre_PROV:
+                Provincia:
                 <asp:TextBox ID="nombre_PROVTextBox" runat="server" Text='<%# Bind("nombre_PROV") %>' />
                 <br />
-                email_P:
+                Email:
                 <asp:TextBox ID="email_PTextBox" runat="server" Text='<%# Bind("email_P") %>' />
                 <br />
-                telefono_P:
+                Teléfono:
                 <asp:TextBox ID="telefono_PTextBox" runat="server" Text='<%# Bind("telefono_P") %>' />
                 <br />
-                nombre_E:
+                Especialidad:
                 <asp:TextBox ID="nombre_ETextBox" runat="server" Text='<%# Bind("nombre_E") %>' />
                 <br />
-                username_U:
+                Usuario:
                 <asp:TextBox ID="username_UTextBox" runat="server" Text='<%# Bind("username_U") %>' />
                 <br />
-                password_U:
+                Constraseña:
                 <asp:TextBox ID="password_UTextBox" runat="server" Text='<%# Bind("password_U") %>' />
                 <br />
-                tipo_U:
+                Tipo:
                 <asp:TextBox ID="tipo_UTextBox" runat="server" Text='<%# Bind("tipo_U") %>' />
                 <br />
                 <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Bind("estado_M") %>' Text="estado_M" />

@@ -25,5 +25,12 @@ namespace TP_INT_P2
             Response.Redirect("~/AgregarMedico.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
+
+
+        protected void btnAgregarTurnos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AgregarTurno.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
+        }
     }
 }

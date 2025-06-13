@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -38,7 +39,7 @@ namespace Datos
                 medico.Apellido = data["apellido_P"].ToString();
                 medico.Sexo = data["sexo_P"].ToString()[0];
                 medico.Nacionalidad = data["nacionalidad_P"].ToString();
-                medico.FechaNac = data["fechaNac_P"].ToString();
+                medico.FechaNac = Convert.ToDateTime(data["fechaNac_P"].ToString());
                 medico.IdLocalidad = Convert.ToInt32(data["idLocalidad_P"]);
                 medico.IdProvincia = Convert.ToInt32(data["idProvincia_P"]);
                 medico.Email = data["email_P"].ToString();
@@ -107,6 +108,45 @@ namespace Datos
         }
 
 
+        public List<Medico> GetMedicosPorEspecialidad(string codEspecialidad)
+        {
+            List<Medico> lista = new List<Medico>();
+            string consulta = "SELECT * FROM PERSONAS P INNER JOIN MEDICOS M ON P.dni_P = M.dni_M INNER JOIN ESPECIALIDADES E ON M.codEspecialidad_M = E.codEspecialidad_E INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_L INNER JOIN PROVINCIAS PROV ON L.idProvincia_L=PROV.idProvincia_PROV WHERE M.codEspecialidad_M = @CODESPECIALIDAD ORDER BY P.apellido_P";
+
+            SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
+
+            SqlParameter parametro = new SqlParameter();
+            parametro = cmd.Parameters.Add("@CODESPECIALIDAD", SqlDbType.Int);
+            parametro.Value = Convert.ToInt32(codEspecialidad);
+
+            SqlDataReader data = cmd.ExecuteReader();
+
+            while (data.Read())
+            {
+                Medico medico = new Medico();
+
+                medico.DNI = data["dni_P"].ToString();
+                medico.Nombre = data["nombre_P"].ToString();
+                medico.Apellido = data["apellido_P"].ToString();
+                medico.Sexo = data["sexo_P"].ToString()[0];
+                medico.Nacionalidad = data["nacionalidad_P"].ToString();
+                medico.FechaNac = Convert.ToDateTime(data["fechaNac_P"].ToString());
+                medico.IdLocalidad = Convert.ToInt32(data["idLocalidad_P"]);
+                medico.IdProvincia = Convert.ToInt32(data["idProvincia_P"]);
+                medico.Email = data["email_P"].ToString();
+                medico.Telefono = data["telefono_P"].ToString();
+                medico.Provincia = data["nombre_PROV"].ToString();
+                medico.Localidad = data["nombre_L"].ToString();
+                medico.Imagen = data["imagen_M"].ToString();
+                medico.Especialidad = data["nombre_E"].ToString();
+                medico.setFullName();
+                lista.Add(medico);
+            }
+
+            data.Close();
+            ac.cerrarConexion();
+            return lista;
+        }
 
     }
 }

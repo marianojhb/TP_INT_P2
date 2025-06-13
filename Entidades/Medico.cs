@@ -18,5 +18,6 @@ namespace Entidades
         public string Username { get; set; }
         public string Password { get; set; }
         public string Especialidad { get; set; }
+
     }
 }

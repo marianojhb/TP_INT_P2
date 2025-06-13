@@ -74,7 +74,7 @@ namespace TP_INT_P2
 
                         // Cargar localidades según la provincia seleccionada
                         NegocioLocalidad negocioLocalidad = new NegocioLocalidad();
-                        var localidades = negocioLocalidad.GetLocalidades(idProvinciaActual.ToString());
+                        var localidades = negocioLocalidad.GetLocalidadesPorProvincia(idProvinciaActual.ToString());
 
                         ddlLocalidades.DataSource = localidades;
                         ddlLocalidades.DataTextField = "Nombre";
@@ -111,7 +111,7 @@ namespace TP_INT_P2
                 int idProvincia = int.Parse(ddlProvincias.SelectedValue);
 
                 NegocioLocalidad negocioLocalidad = new NegocioLocalidad();
-                var localidades = negocioLocalidad.GetLocalidades(idProvincia.ToString());
+                var localidades = negocioLocalidad.GetLocalidadesPorProvincia(idProvincia.ToString());
 
                 ddlLocalidades.DataSource = localidades;
                 ddlLocalidades.DataTextField = "Nombre";

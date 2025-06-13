@@ -30,5 +30,10 @@ namespace Negocio
         {
             return daoMedico.AgregarMedico(m);
         }
+        public List<Medico> GetMedicosPorEspecialidad(string codEspecialidad)
+        {
+            DaoMedico dao = new DaoMedico();
+            return dao.GetMedicosPorEspecialidad(codEspecialidad);
+        }
     }
 }

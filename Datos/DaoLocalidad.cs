@@ -12,7 +12,7 @@ namespace Datos
     {
         AccesoDatos ac = new AccesoDatos();
 
-        public List<Localidad> GetLocalidades(string provincia)
+        public List<Localidad> GetLocalidadesPorProvincia(string provincia)
         {
             List<Localidad> lista = new List<Localidad>();
             string consulta = "SELECT idLocalidad_L, nombre_L FROM LOCALIDADES WHERE idProvincia_L = @provincia ORDER BY nombre_L ASC";

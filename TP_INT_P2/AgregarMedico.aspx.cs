@@ -74,7 +74,7 @@ namespace TP_INT_P2
         {
             {
                 NegocioLocalidad negocioLocalidad = new NegocioLocalidad();
-                List<Localidad> localidades = negocioLocalidad.GetLocalidades(provincia);
+                List<Localidad> localidades = negocioLocalidad.GetLocalidadesPorProvincia(provincia);
 
                 ddlLocalidades.DataSource = localidades;
                 ddlLocalidades.DataTextField = "Nombre";
@@ -152,7 +152,7 @@ namespace TP_INT_P2
             }
             m.Email = txtEmail.Text.Trim();
             m.Nacionalidad = txtNacionalidad.Text.Trim();
-            m.FechaNac = txtFechaNac.Text.Trim();
+            m.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
             m.Direccion = txtDireccion.Text.Trim();
             m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
             m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
