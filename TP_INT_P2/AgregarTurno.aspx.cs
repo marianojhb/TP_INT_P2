@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace TP_INT_P2
                 }
                 CargarEspecialidades();
                 CargarMedicos();
+                CargarFechas("3");
             }
         }
         protected void CargarEspecialidades()
@@ -50,5 +52,37 @@ namespace TP_INT_P2
         {
             CargarMedicos();
         }
+
+        protected void CargarFechas(string legajo)
+        {
+            // TODO: GUARDAR EN UN LISTA LOS DIAS QUE ESTA DISPONIBLE EL MEDICO
+            //SELECT
+            //    distinct dia_h
+            //  FROM HORARIOS
+            //  where legajo_h = 1 and disponible_h = 1
+
+            NegocioTurno negocioTurno = new NegocioTurno();
+            List<DateTime> lista = negocioTurno.BuscarFechasDisponibles(legajo);
+            foreach (var item in lista)
+            {
+                Response.Write(item + "<br />");
+                
+            }
+
+            //ddlDias.DataSource = ....
+
+            // TODO CON ESA LISTA HACER OTRA CONSULTA A LA BASE DE DATOS
+            // PARA GENERAR UNA LISTA DE FECHAS 
+            // PAR LOS PROXIMOS 60 DIAS, CUYOS DIAS DE LA SEMANA
+            // COINCIDAN CON LA LISTA DE DISPONBILIDAD DEL MEDICO
+            // ES DECIR, EJ DEL 13/6 AL 13/8 LOS DIAS 1 Y 5 (LUNES Y VIERNES)
+            // ESTO ME DARA UNA NUEVA LISTA PARA POPULAR EL DDL
+
+            // FINALMENTE CON ESA LISTA CRUZARLA NUEVAMENTE CON LA TABLA
+            // TURNOS, Y SI NO COINCIDE: DIA MES AÑO + LEGAJO, ANOTAR
+            // EL TURNO
+        }
+
+
     }
 }

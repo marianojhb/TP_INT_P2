@@ -14,5 +14,6 @@ namespace Entidades
         public string Hora { get; set; }
         public string Legajo { get; set; }
         public DateTime Fecha { get; set; }
+        public string DNI { get; set; }
     }
 }

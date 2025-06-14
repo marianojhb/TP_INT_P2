@@ -48,12 +48,7 @@
                     </div>
                     <div class="col-md-6">
                         <asp:DropDownList ID="ddlDias" runat="server" CssClass="form-select dropdown-min">
-                            <asp:ListItem Value="1">Lunes 21/06/2025</asp:ListItem>
-                            <asp:ListItem Value="2">Lunes 21/06/2025</asp:ListItem>
-                            <asp:ListItem Value="3">Viernes 25/06/2025</asp:ListItem>
-                            <asp:ListItem Value="4">Viernes 25/06/2025</asp:ListItem>
-                            <asp:ListItem Value="5">Lunes 28/06/2025</asp:ListItem>
-                            <asp:ListItem Value="6">Lunes 28/06/2025</asp:ListItem>
+
                         </asp:DropDownList>
                     </div>
                 </div>

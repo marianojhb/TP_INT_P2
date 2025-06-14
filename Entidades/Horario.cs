@@ -8,11 +8,10 @@ namespace Entidades
 {
     public class Horario
     {
-        public string Anio { get; set;}
-        public string Mes { get; set;}
-        public string Dia { get; set;}
-        public string Hora { get; set;}
-        public string Legajo { get; set;}
-        public DateTime Fecha { get; set;}
+        public int Legajo { get; set;}
+        public int Codigo { get; set;}
+        public int Dia { get; set;}
+        public int Hora { get; set;}
+        public bool Disponible { get; set;}
     }
 }
