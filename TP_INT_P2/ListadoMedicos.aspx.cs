@@ -9,6 +9,7 @@ using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace TP_INT_P2
 {
     public partial class ListadoMedicos : System.Web.UI.Page
@@ -30,6 +31,7 @@ namespace TP_INT_P2
                 {
                     MostrarBotonAgregarMedico();
                 }
+
             }
         }
         protected void btnAgregarMedico_Click(object sender, EventArgs e)
@@ -139,6 +141,45 @@ namespace TP_INT_P2
         {
 
         }
+
+        protected void lvMedicos_ItemEditing(object sender, ListViewEditEventArgs e)
+        {
+            lvMedicos.EditIndex = e.NewEditIndex;
+            lvMedicos.DataBind();
+        }
+
+        protected void lvMedicos_ItemCanceling(object sender, ListViewCancelEventArgs e)
+        {
+            lvMedicos.EditIndex = -1;
+            lvMedicos.DataBind();
+        }
+
+        protected void lvMedicos_ItemUpdating(object sender, ListViewUpdateEventArgs e)
+        {
+            // Acá podés acceder a los valores nuevos y actualizarlos manualmente si no usás SqlDataSource
+            // O dejás que el SqlDataSource lo maneje
+            lvMedicos.EditIndex = -1;
+            lvMedicos.DataBind();
+        }
+
+        protected void lvMedicos_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            // Cambiar la página del DataPager asociado
+            DataPager dp = lvMedicos.FindControl("dpMedicos") as DataPager;
+            if (dp != null)
+            {
+                dp.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            }
+
+            // Reasignar los datos
+            lvMedicos.DataBind();
+        }
+
+
+
+
+
     }
+
 
 }
