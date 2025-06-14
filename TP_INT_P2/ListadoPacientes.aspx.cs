@@ -170,6 +170,7 @@ namespace TP_INT_P2
         protected void gvPacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvPacientes.PageIndex = e.NewPageIndex;
+            CargarPacientes();
         }
     }
     

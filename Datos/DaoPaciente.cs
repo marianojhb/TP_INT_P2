@@ -94,5 +94,24 @@ namespace Datos
             ac.ejecutarProcedimientosAlmacenados(comando, "SP_UPDATEPACIENTES");
 
         }
+
+
+
+        public DataTable GetPaciente(string dni)
+        {
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                using (SqlCommand comando = new SqlCommand("SELECT P.dni_P, P.nombre_P, P.apellido_P FROM PERSONAS P INNER JOIN PACIENTES PA ON P.dni_P = PA.dni_PA WHERE P.dni_P = @DNI AND PA.estado_PA = 1", conexion))
+                {
+                    comando.Parameters.AddWithValue("@DNI", dni);
+
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
+                    DataTable tablaPacientes = new DataTable();
+                    sqlDataAdapter.Fill(tablaPacientes);
+
+                    return tablaPacientes;
+                }
+            }
+        }
     }
 }

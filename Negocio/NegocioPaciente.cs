@@ -35,5 +35,11 @@ namespace Negocio
         {
             daoPaciente.ActualizarPaciente(paciente);
         }
+        public DataTable GetPaciente(string dni)
+        {
+            DaoPaciente daoPaciente = new DaoPaciente();
+
+            return daoPaciente.GetPaciente(dni);
+        }
     }
 }

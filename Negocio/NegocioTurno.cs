@@ -135,6 +135,10 @@ namespace Negocio
 
             return turnosLibres;
         }
+        public int AgregarTurno(Turno turno)
+        {
+            return daoTurno.AgregarTurno(turno);
+        }
     }
 }
 

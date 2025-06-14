@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -87,6 +88,23 @@ namespace Datos
             return lista;
 
         }
-
+        public int AgregarTurno(Turno turno)
+        {
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                string consulta = "INSERT INTO Turnos (fecha_T, legajo_T, dni_T) VALUES (@FECHA, @LEGAJO, @DNI)";
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    SqlParameter parametros = new SqlParameter();
+                    parametros = comando.Parameters.Add("@FECHA", SqlDbType.DateTime);
+                    parametros.Value = turno.Fecha;
+                    parametros = comando.Parameters.Add("@LEGAJO", SqlDbType.Int);
+                    parametros.Value = Convert.ToInt32(turno.Legajo);
+                    parametros = comando.Parameters.Add("@DNI", SqlDbType.VarChar);
+                    parametros.Value = turno.DNI;
+                    return comando.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

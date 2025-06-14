@@ -3,7 +3,9 @@ using Negocio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +14,7 @@ namespace TP_INT_P2
 {
     public partial class AgregarTurno : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,12 +24,14 @@ namespace TP_INT_P2
                     Response.Redirect("~/Login.aspx");
                 }
                 CargarEspecialidades();
+                CargarPacientes();
             }
 
         }
         protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarMedicos();
+            ddlMedicos.Items.Insert(0, new ListItem("-- Seleccione un médico --", "0"));
 
             // Limpiar listas dependientes
             ddlFechas.Items.Clear();
@@ -37,16 +42,30 @@ namespace TP_INT_P2
             string legajo = ddlMedicos.SelectedValue;
             
             CargarFechas(legajo);
+            ddlFechas.Items.Insert(0, new ListItem("-- Seleccione una fecha --", "0"));
 
             // Limpiar listas dependientes
             ddlHoras.Items.Clear();
+
+            // Guardo en la instancia de nuevo registro de turno
+            lblLegajo.Text = legajo;
         }
         protected void ddlFechas_SelectedIndexChanged(object sender, EventArgs e)
         {
             string legajo = ddlMedicos.SelectedValue;
             DateTime fecha = Convert.ToDateTime(ddlFechas.SelectedValue);
             CargarHoras(legajo, fecha);
+            ddlHoras.Items.Insert(0, new ListItem("-- Seleccione una hora --", "0"));
 
+            // Guardo en la instancia de nuevo registro de turno
+            lblFecha.Text = fecha.ToString("yyyy-MM-dd");
+        }
+        protected void ddlHoras_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string hora = ddlHoras.SelectedValue;
+
+            // Guardo en la instancia de nuevo registro de turno
+            lblHora.Text = hora.ToString();
         }
         protected void CargarEspecialidades()
         {
@@ -73,7 +92,7 @@ namespace TP_INT_P2
             ddlMedicos.DataTextField = "FullName";
             ddlMedicos.DataBind();
 
-            ddlMedicos.Items.Insert(0, new ListItem("-- Seleccione una médico --", "0"));
+            
         }
 
 
@@ -91,9 +110,6 @@ namespace TP_INT_P2
             ddlFechas.DataTextField = "Fecha";
             ddlFechas.DataValueField = "Fecha";
             ddlFechas.DataBind();
-
-            ddlFechas.Items.Insert(0, new ListItem("-- Seleccione un día --", "0"));
-
 
         }
         protected void CargarHoras(string legajo, DateTime fecha) // fecha: 2025-06-23 10:00
@@ -125,7 +141,130 @@ namespace TP_INT_P2
             ddlHoras.DataTextField = "Hora";
             ddlHoras.DataValueField = "Valor";
             ddlHoras.DataBind();
+
+        }
+        protected void CargarPacientes()
+        {
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
+            gvPaciente.DataSource = negocioPaciente.GetPacientes();
+            gvPaciente.DataBind();
+
+        }
+
+        protected void GetPaciente(string dni)
+        {
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
+            gvPaciente.DataSource = negocioPaciente.GetPaciente(dni);
+            gvPaciente.DataBind();
+        }
+
+        protected void btnBuscarPaciente_Click(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text.Length > 0)
+            {
+                GetPaciente(txtBuscar.Text);
+            }
+            else
+            {
+                CargarPacientes();
+            }
+            txtBuscar.Text = String.Empty;
+        }
+
+        protected void gvPaciente_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            string dni = ((Label)(gvPaciente.Rows[e.NewSelectedIndex].FindControl("lbl_it_DNI"))).Text;
+
+            // Guardo en la instancia de nuevo registro de turno
+            lblDNI.Text = dni.ToString();
+        }
+
+        protected void gvPaciente_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvPaciente.PageIndex = e.NewPageIndex;
+            CargarPacientes();
+        }
+
+        protected void gvPaciente_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow &&
+                    e.Row.RowIndex == gvPaciente.SelectedIndex)
+            {
+                e.Row.CssClass = "table-success"; // clase Bootstrap para fila resaltada en verde
+            }
+        }
+
+        protected void gvPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarPacientes();
+        }
+
+        protected void btnAsignarTurno_Click(object sender, EventArgs e)
+        {
+
+            bool validado = ((lblFecha.Text != null) && (lblHora.Text != null) && (lblLegajo.Text != null) && (lblDNI.Text != null));
+            
+            // Compongo la fecha y hora del turno elegido
+            DateTime fechahora = Convert.ToDateTime(lblFecha.Text + " " + lblHora.Text);
+
+            // Creo la instancia
+            Turno turno = new Turno
+            {
+                Fecha = fechahora,
+                Legajo = lblLegajo.Text,
+                DNI = lblDNI.Text
+            };
+            NegocioTurno negocioTurno = new NegocioTurno();
+            int insercionOK = negocioTurno.AgregarTurno(turno);
+
+
+
+            if (insercionOK > 0)
+            {
+                pnlExito.Visible = true;
+                pnlError.Visible = false;
+
+                // Mostrar toast éxito y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlExito.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
+            }
+            else
+            {
+                pnlExito.Visible = false;
+                pnlError.Visible = true;
+
+                // Mostrar toast error y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
+            }
+
+            // Limpiar listas dependientes
+            ddlEspecialidades.SelectedIndex = -1;
+            ddlMedicos.Items.Clear();
+            ddlFechas.Items.Clear();
+            ddlHoras.Items.Clear();
+
+            // Limpiar selección del GridView
+            gvPaciente.SelectedIndex = -1;
+
+            // Volver a cargar la grilla
+            CargarPacientes();
+
+
         }
 
     }
+
 }

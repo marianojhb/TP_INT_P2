@@ -190,7 +190,7 @@ namespace TP_INT_P2
 
                 int insercionOK = negocioMedico.AgregarMedico(m);
 
-                Response.Write(insercionOK); // true
+                
 
                 if (insercionOK > 0)
                 {

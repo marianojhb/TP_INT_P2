@@ -15,6 +15,12 @@ namespace Entidades
         public string Observacion { get; set; }
         public bool Cancelado { get; set; }
 
-
+        public Turno() { }
+        public Turno (DateTime fecha, string legajo, string dNI)
+        {
+            Fecha = fecha;
+            Legajo = legajo;
+            DNI = dNI;
+        }
     }
 }
