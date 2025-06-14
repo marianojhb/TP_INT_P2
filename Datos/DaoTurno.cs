@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,38 +12,7 @@ namespace Datos
     public class DaoTurno
     {
         AccesoDatos ac = new AccesoDatos();
-        public List<Turno> BuscarFechasDisponibles (string legajo)
-        {
-            List<Turno> lista = new List<Turno>();
 
-            string consulta = "SELECT ";
-
-            SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
-
-            cmd.Parameters.AddWithValue("@LEGAJO", legajo);
-            cmd.Parameters.AddWithValue("@ANIO", legajo);
-            cmd.Parameters.AddWithValue("@MES", legajo);
-            cmd.Parameters.AddWithValue("@DIA", legajo);
-            cmd.Parameters.AddWithValue("@HORA", legajo);
-
-            SqlDataReader data = cmd.ExecuteReader();
-
-            while (data.Read())
-            {
-                Turno turno = new Turno();
-                turno.Anio = "2025";
-                turno.Mes = "5";
-                turno.Dia = "2";
-                turno.Legajo = "1";
-                string fechaString = $"{turno.Anio.ToString()}-{turno.Mes.ToString()}-{turno.Dia.ToString()} 00:00:00";
-                turno.Fecha = Convert.ToDateTime(fechaString);
-                lista.Add(turno);
-                }
-
-            data.Close();
-            ac.cerrarConexion();
-            return lista;
-        }
         public List<int> BuscarDiasAtiende(string legajo)
         {
             List<int> lista = new List<int>();
@@ -88,5 +58,35 @@ namespace Datos
 
             return lista;
         }
+        public List<Turno> GetTurnosReservados(string legajo)
+        {
+            List<Turno> lista = new List<Turno>();
+
+            string consulta = "SELECT fecha_T, legajo_T, asistencia_T, dni_T, observacion_T, cancelado_T FROM TURNOS WHERE legajo_T = @LEGAJO AND cancelado_T = 0";
+
+            SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
+
+            cmd.Parameters.AddWithValue("@LEGAJO", legajo);
+
+            SqlDataReader data = cmd.ExecuteReader();
+
+            while (data.Read())
+            {
+                Turno turno = new Turno()
+                {
+                    Fecha = Convert.ToDateTime(data["fecha_T"]),
+                    Legajo = legajo,
+                    Asistencia = Convert.ToBoolean(data["asistencia_T"]),
+                    DNI = data["dni_T"].ToString(),
+                    Observacion = data["observacion_T"].ToString(),
+                    Cancelado = Convert.ToBoolean(data["cancelado_T"])
+                }; 
+                lista.Add(turno);
+            }
+
+            return lista;
+
+        }
+
     }
 }

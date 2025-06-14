@@ -42,22 +42,22 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.DropDownList ddlMedicos;
 
         /// <summary>
-        /// Control ddlDias.
+        /// Control ddlFechas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDias;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFechas;
 
         /// <summary>
-        /// Control ddlHorarios.
+        /// Control ddlHoras.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHorarios;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHoras;
 
         /// <summary>
         /// Control txtBuscar.

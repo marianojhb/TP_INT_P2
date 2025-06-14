@@ -20,21 +20,35 @@ namespace Negocio
             // para ofrecer reservar turnos
             List<DateTime> rango = RangoDeFechas(60); // rango dentro de los 60 dias
 
-            // Filtro el rango de acuerdo a los dias de atencion
+            // Filtrar el rango de acuerdo a los dias de atencion
             List<DateTime> rangoFiltrado = FiltrarRango(diasDeAtencion, rango);
 
-            // Horarios que atiende completo:
+            // Obtener horarios que atiende médico (todos) de la tabla Horarios:
             List<Horario> horario = daoTurno.HorariosDisponibles(legajo);
 
-            // Agregar a las fechas, los horarios de atencion
-            List<DateTime> rangoConHorarios = CombinarFechasYHorarios(rangoFiltrado, horario);
+            // Agregar a las fechas, los horarios de atencion - Serían todos los turnos para los próximos x dias
+            List<DateTime> turnosTodos = CombinarFechasYHorarios(rangoFiltrado, horario);
 
-            // Filtro el rango eliminando las fechas ya 
+            // Traer las turnos ya reservados
+            List<Turno> turnosReservados = GetTurnosReservados(legajo);
+
+            //List<DateTime> turnosReservadosList = new List<DateTime>();
+            //foreach (Turno dt in turnosReservados)
+            //{
+            //    turnosReservadosList.Add(dt.Fecha);
+            //}
+
+            // A todos los turnos, le resto los turnos reservados, quedan los turnos libres
+            List<DateTime> turnosLibres = ObtenerTurnosLibres(turnosTodos, turnosReservados);
+
+
+            // Filtro el rangoConHorarios eliminando las fechas ya tomadas
+            // Pi
             //List<DateTime> turnosReservados = 
-            
+
             // aca vamos armando la lista de fechas para retornar al codigo detras 
             // y rellenar dos drop downs (fechas y horas)
-            return rangoConHorarios;
+            return turnosLibres;
         }
 
         public List<int> BuscarDiasAtiende(string legajo)
@@ -89,7 +103,38 @@ namespace Negocio
 
             return resultado;
         }
+        public List<Turno> GetTurnosReservados(string legajo)
+        {
+            List<Turno> turnosReservados = new List<Turno>();
+            return turnosReservados = daoTurno.GetTurnosReservados(legajo);
+        }
 
+        public List<DateTime> ObtenerTurnosLibres(List<DateTime> turnosTodos, List<Turno> turnosReservados)
+        {
+            List<DateTime> turnosLibres = new List<DateTime>();
+
+            bool encontrado = false;
+
+            foreach (DateTime turno in turnosTodos)
+            {
+                foreach(Turno turnoReservado in turnosReservados)
+                {
+                    if(turno == turnoReservado.Fecha)
+                    {
+                        encontrado = true;
+                        break;
+                       
+                    }
+
+                }
+                if (!encontrado)
+                    turnosLibres.Add(turno);
+
+                encontrado = false;
+            }
+
+            return turnosLibres;
+        }
     }
 }
 

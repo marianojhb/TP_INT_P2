@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Medico : Persona
     {
-        public string Legajo { get; set; }
+        public int Legajo { get; set; }
         public int CodEspecialidad { get; set; }
         public string Horario { get; set; }
         public bool Estado { get; set; }

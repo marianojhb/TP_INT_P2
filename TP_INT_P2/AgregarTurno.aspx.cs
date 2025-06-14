@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using Negocio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,9 +21,32 @@ namespace TP_INT_P2
                     Response.Redirect("~/Login.aspx");
                 }
                 CargarEspecialidades();
-                CargarMedicos();
-                CargarFechas("3");
             }
+
+        }
+        protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarMedicos();
+
+            // Limpiar listas dependientes
+            ddlFechas.Items.Clear();
+            ddlHoras.Items.Clear();
+        }
+        protected void ddlMedicos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string legajo = ddlMedicos.SelectedValue;
+            
+            CargarFechas(legajo);
+
+            // Limpiar listas dependientes
+            ddlHoras.Items.Clear();
+        }
+        protected void ddlFechas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string legajo = ddlMedicos.SelectedValue;
+            DateTime fecha = Convert.ToDateTime(ddlFechas.SelectedValue);
+            CargarHoras(legajo, fecha);
+
         }
         protected void CargarEspecialidades()
         {
@@ -32,6 +56,8 @@ namespace TP_INT_P2
             ddlEspecialidades.DataValueField = "CodEspecialidad"; // Getter de la clase Especialidad
             ddlEspecialidades.DataTextField = "Nombre"; // Getter de la clase Especialidad
             ddlEspecialidades.DataBind();
+
+            ddlEspecialidades.Items.Insert(0, new ListItem("-- Seleccione una especialidad --", "0"));
         }
 
         protected void CargarMedicos()
@@ -41,48 +67,65 @@ namespace TP_INT_P2
 
             // Buscar los médicos con esa especialidad
             NegocioMedico negocioMedico = new NegocioMedico();
-            ddlMedicos.DataSource = negocioMedico.GetMedicosPorEspecialidad(codEspecialidad);
+            List<Medico> medicos = negocioMedico.GetMedicosPorEspecialidad(codEspecialidad);
+            ddlMedicos.DataSource = medicos;
             ddlMedicos.DataValueField = "Legajo";
             ddlMedicos.DataTextField = "FullName";
             ddlMedicos.DataBind();
 
+            ddlMedicos.Items.Insert(0, new ListItem("-- Seleccione una médico --", "0"));
         }
 
-        protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CargarMedicos();
-        }
 
         protected void CargarFechas(string legajo)
         {
-            // TODO: GUARDAR EN UN LISTA LOS DIAS QUE ESTA DISPONIBLE EL MEDICO
-            //SELECT
-            //    distinct dia_h
-            //  FROM HORARIOS
-            //  where legajo_h = 1 and disponible_h = 1
 
             NegocioTurno negocioTurno = new NegocioTurno();
             List<DateTime> lista = negocioTurno.BuscarFechasDisponibles(legajo);
-            foreach (var item in lista)
-            {
-                Response.Write(item + "<br />");
-                
-            }
+            ddlFechas.DataSource = lista
+                .Select(f => new
+                {
+                    Fecha = f.ToString("yyyy-MM-dd")
+                })
+                .ToList();
+            ddlFechas.DataTextField = "Fecha";
+            ddlFechas.DataValueField = "Fecha";
+            ddlFechas.DataBind();
 
-            //ddlDias.DataSource = ....
+            ddlFechas.Items.Insert(0, new ListItem("-- Seleccione un día --", "0"));
 
-            // TODO CON ESA LISTA HACER OTRA CONSULTA A LA BASE DE DATOS
-            // PARA GENERAR UNA LISTA DE FECHAS 
-            // PAR LOS PROXIMOS 60 DIAS, CUYOS DIAS DE LA SEMANA
-            // COINCIDAN CON LA LISTA DE DISPONBILIDAD DEL MEDICO
-            // ES DECIR, EJ DEL 13/6 AL 13/8 LOS DIAS 1 Y 5 (LUNES Y VIERNES)
-            // ESTO ME DARA UNA NUEVA LISTA PARA POPULAR EL DDL
 
-            // FINALMENTE CON ESA LISTA CRUZARLA NUEVAMENTE CON LA TABLA
-            // TURNOS, Y SI NO COINCIDE: DIA MES AÑO + LEGAJO, ANOTAR
-            // EL TURNO
         }
+        protected void CargarHoras(string legajo, DateTime fecha) // fecha: 2025-06-23 10:00
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            fecha = Convert.ToDateTime(ddlFechas.SelectedValue);// fecha: 2025-06-23 10:00
+            List<DateTime> lista = negocioTurno.BuscarFechasDisponibles(legajo); // 2025-06-23 10:00 2025-06-23 11:00 2025-06-23 10:00
+            List<DateTime> horas = new List<DateTime>(); // vacio
 
+            foreach (DateTime dateTime in lista) // para cada una de las fechas en {2025-06-23 10:00 2025-06-23 11:00 }
+                
+                if (dateTime.Date.Equals(fecha.Date))
+                // si una fecha en particular 2025-06-23 10:00 coincide con 2025-06-23 10:00
+                {
+                    horas.Add(dateTime); 
+
+                }
+                        // entonces agrego 2025-06-23 10:00, PERO YO NECESITABA LOS DIAS PARA LUEGO CARGAR LAS HORAS
+                        // O SEA QUE DEBO COMPARAR DIAS CON DIAS, NO FECHAS COMPLETAS
+
+
+            ddlHoras.DataSource = horas
+                .Select(h => new {
+                    Hora = h.ToString("HH:mm tt"),
+                    Valor = h.ToString("HH:mm") // o .ToString("yyyy-MM-dd HH:mm") si necesitás la fecha completa como valor
+                })
+                .ToList();
+
+            ddlHoras.DataTextField = "Hora";
+            ddlHoras.DataValueField = "Valor";
+            ddlHoras.DataBind();
+        }
 
     }
 }

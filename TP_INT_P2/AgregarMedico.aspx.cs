@@ -162,7 +162,7 @@ namespace TP_INT_P2
             m.Telefono = txtTelefono.Text.Trim();
 
             // TABLA MEDICOS
-            m.Legajo = txtLegajo.Text;
+            m.Legajo = Convert.ToInt32(txtLegajo.Text);
             m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
             m.Horario = txtHorario.Text.Trim();
             m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble

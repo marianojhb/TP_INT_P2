@@ -23,49 +23,41 @@
 
             <div class="container mt-4">
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="ddlEspecialidades" class="form-label me-2 mb-0">Especialidad:</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <asp:DropDownList ID="ddlEspecialidades" runat="server"
                             CssClass="form-select dropdown-min" AutoPostBack="True"
                             OnSelectedIndexChanged="ddlEspecialidades_SelectedIndexChanged">
                         </asp:DropDownList>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                <div class="row mb-4">
+                    <div class="col-md-4">
                         <label for="ddlMedicos" class="form-label me-2 mb-0">Profesional:</label>
                     </div>
-                    <div class="col-md-6">
-                        <asp:DropDownList ID="ddlMedicos" runat="server" CssClass="form-select dropdown-min">
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="ddlMedicos" runat="server" CssClass="form-select dropdown-min"  OnSelectedIndexChanged="ddlMedicos_SelectedIndexChanged" AutoPostBack="True">
                         </asp:DropDownList>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="ddlDias" class="form-label me-2 mb-0">Día:</label>
+                    <div class="col-md-4">
+                        <label for="ddlFechas" class="form-label me-2 mb-0">Fecha:</label>
                     </div>
-                    <div class="col-md-6">
-                        <asp:DropDownList ID="ddlDias" runat="server" CssClass="form-select dropdown-min">
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="ddlFechas" runat="server" CssClass="form-select dropdown-min" AutoPostBack="True" OnSelectedIndexChanged="ddlFechas_SelectedIndexChanged">
 
                         </asp:DropDownList>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="ddlHorarios" class="form-label me-2 mb-0">Horario:</label>
+                    <div class="col-md-4">
+                        <label for="ddlHoras" class="form-label me-2 mb-0">Hora:</label>
                     </div>
-                    <div class="col-md-6">
-                        <asp:DropDownList ID="ddlHorarios" runat="server" CssClass="form-select dropdown-min">
-                            <asp:ListItem Value="10">10:00</asp:ListItem>
-                            <asp:ListItem Value="11">11:00</asp:ListItem>
-                            <asp:ListItem Value="12">12:00</asp:ListItem>
-                            <asp:ListItem Value="13">13:00</asp:ListItem>
-                            <asp:ListItem Value="14">14:00</asp:ListItem>
-                            <asp:ListItem Value="15">15:00</asp:ListItem>
-                            <asp:ListItem Value="16">16:00</asp:ListItem>
-                            <asp:ListItem Value="17">17:00</asp:ListItem>
+                    <div class="col-md-8">
+                        <asp:DropDownList ID="ddlHoras" runat="server" CssClass="form-select dropdown-min">
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -77,7 +69,7 @@
                 <!-- Aquí va el buscador o lo que necesites abajo -->
                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control" Placeholder="Buscar paciente..."></asp:TextBox>
                 <p style="text-align: right;">
-                    <asp:Button ID="btnBuscarPaciente" runat="server" Text="Buscar" CssClass="btn btn-primary" />
+                    <asp:Button ID="btnBuscarPaciente" runat="server" Text="Buscar" CssClass="btn btn-primary mt-2" />
                 </p>
             </div>
 
@@ -87,7 +79,7 @@
                     <asp:GridView ID="gvPaciente" runat="server"></asp:GridView>
                 </div>
                 <p style="text-align: right;">
-                    <asp:Button ID="btnAsignarTurno" runat="server" Text="Asignar Turno" CssClass="btn btn-primary" />
+                    <asp:Button ID="btnAsignarTurno" runat="server" Text="Asignar Turno" CssClass="btn btn-primary mt-2" />
                 </p>
             </div>
 

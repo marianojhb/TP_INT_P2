@@ -8,12 +8,13 @@ namespace Entidades
 {
     public class Turno
     {
-        public string Anio { get; set; }
-        public string Mes { get; set; }
-        public string Dia { get; set; }
-        public string Hora { get; set; }
-        public string Legajo { get; set; }
         public DateTime Fecha { get; set; }
+        public string Legajo { get; set; }
+        public bool Asistencia { get; set; }
         public string DNI { get; set; }
+        public string Observacion { get; set; }
+        public bool Cancelado { get; set; }
+
+
     }
 }
