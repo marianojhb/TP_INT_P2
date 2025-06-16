@@ -108,7 +108,7 @@ namespace TP_INT_P2
         }
 
         protected void gvPacientes_DataBound(object sender, EventArgs e)
-        { 
+        {
 
         }
 
@@ -138,6 +138,8 @@ namespace TP_INT_P2
 
                 string idLocalidadActual = DataBinder.Eval(e.Row.DataItem, "idLocalidad_P").ToString();
                 ddlLocalidades.SelectedValue = idLocalidadActual;
+
+
             }
         }
 

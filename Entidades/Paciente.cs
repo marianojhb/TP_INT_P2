@@ -16,6 +16,8 @@ namespace Entidades
         {
             this.DNI = dni;
         }
+        
+        public Paciente() { }
         public Paciente(string dni, string nombre, string apellido, char sexo, string nacionalidad, DateTime fechaNac, string direccion, int idLocalidad, int idProvincia, string telefono, string email)
         {
             this.DNI = dni;

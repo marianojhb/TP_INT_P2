@@ -41,11 +41,6 @@ namespace Negocio
             // A todos los turnos, le resto los turnos reservados, quedan los turnos libres
             List<DateTime> turnosLibres = ObtenerTurnosLibres(turnosTodos, turnosReservados);
 
-
-            // Filtro el rangoConHorarios eliminando las fechas ya tomadas
-            // Pi
-            //List<DateTime> turnosReservados = 
-
             // aca vamos armando la lista de fechas para retornar al codigo detras 
             // y rellenar dos drop downs (fechas y horas)
             return turnosLibres;

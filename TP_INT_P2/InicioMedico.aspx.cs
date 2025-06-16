@@ -23,7 +23,7 @@ namespace TP_INT_P2
 
         protected void btnAgregarPaciente_Click(object sender, EventArgs e)
         {
-            Response.Write("Agregar Paciente no implementado");
+            Response.Redirect("~/AgregarPaciente.aspx");
         }
 
         protected void btnMisHorarios_Click(object sender, EventArgs e)

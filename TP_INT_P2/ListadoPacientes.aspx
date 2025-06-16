@@ -21,7 +21,9 @@
             OnRowUpdating="gvPacientes_RowUpdating" 
             AllowPaging="True" 
             OnPageIndexChanging="gvPacientes_PageIndexChanging"
-            Width="100%">
+            Width="100%"
+            
+            >
             <EmptyDataTemplate>
                 <div class="container mt-3">
                     <div class="alert alert-warning text-center" role="alert">
@@ -145,7 +147,7 @@
                         <asp:HiddenField ID="hf_idLocalidad" Value='<%# Eval("idLocalidad_P") %>' runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
-
+              
             </Columns>
             </asp:GridView>
         <%--<asp:Label ID="lblMensaje" runat="server" Text="" CssClass="mx-auto"></asp:Label>--%>

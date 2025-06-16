@@ -43,7 +43,7 @@
 <body>
     <form id="form1" runat="server">
         <!-- Navbar Bootstrap -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="#">
@@ -55,20 +55,20 @@
                 <div class="collapse navbar-collapse" id="navbarContenido">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
-                        <li class="nav-item">
-                                <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("Inicio") ? "active" : "") %>' href="Inicio.aspx">Inicio</a>
+                        <li class="nav-item mx-3">
+                                <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Inicio") ? "active" : "") %>' href="Inicio.aspx">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("ListadoMedicos") ? "active" : "") %>' href="ListadoMedicos.aspx">Médicos</a>
+                        <li class="nav-item mx-3">
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoMedicos") ? "active" : "") %>' href="ListadoMedicos.aspx">Médicos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("ListadoPacientes") ? "active" : "") %>' href="ListadoPacientes.aspx">Pacientes</a>
+                        <li class="nav-item mx-3">
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoPacientes") ? "active" : "") %>' href="ListadoPacientes.aspx">Pacientes</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>' href="ListadoTurnos.aspx">Turnos</a>
+                        <li class="nav-item mx-3">
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>' href="ListadoTurnos.aspx">Turnos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="Informes.aspx">Informes</a>
+                        <li class="nav-item mx-3">
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="Informes.aspx">Informes</a>
                         </li>
 
                     </ul>

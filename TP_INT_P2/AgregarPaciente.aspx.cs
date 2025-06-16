@@ -3,14 +3,13 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace TP_INT_P2
 {
-    public partial class AgregarMedico : System.Web.UI.Page
+    public partial class AgregarPaciente : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,19 +22,12 @@ namespace TP_INT_P2
 
             if (!IsPostBack)
             {
-                CargarLegajoNuevo();
                 CargarProvincias();
                 CargarLocalidades(ddlProvincias.SelectedValue);
-                CargarEspecialidades();
                 CargarCamposObligatorios();
             }
         }
 
-        protected void CargarLegajoNuevo()
-        {
-            NegocioMedico negMedico = new NegocioMedico();
-            txtLegajo.Text = negMedico.ProximoLegajo().ToString(); ;
-        }
         protected void CargarCamposObligatorios()
         {
             txtTelefono.Attributes.Add("required", "true");
@@ -48,15 +40,8 @@ namespace TP_INT_P2
             txtTelefono.Attributes.Add("required", "true");
             txtNacionalidad.Attributes.Add("required", "true");
             txtFechaNac.Attributes.Add("required", "true");
-            txtHorario.Attributes.Add("required", "true");
-            //ddlEspecialidades.SelectedValue = "0";
-            //rbMasculino.Checked = false;
-            //rbFemenino.Checked = false;
             txtDireccion.Attributes.Add("required", "true");
-            //ddlProvincias.SelectedValue = "0";
-            //ddlLocalidades.SelectedValue = "0";
-            txtUsername.Attributes.Add("required", "true");
-            txtPassword.Attributes.Add("required", "true");
+
 
         }
         protected void CargarProvincias()
@@ -95,11 +80,11 @@ namespace TP_INT_P2
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            LimpiarFormularioAgregarMedico();
+            LimpiarFormularioAgregarPaciente();
 
         }
 
-        protected void LimpiarFormularioAgregarMedico()
+        protected void LimpiarFormularioAgregarPaciente()
         {
             txtDni.Text = String.Empty;
             txtNombre.Text = String.Empty;
@@ -108,42 +93,24 @@ namespace TP_INT_P2
             txtTelefono.Text = String.Empty;
             txtNacionalidad.Text = String.Empty;
             txtFechaNac.Text = String.Empty;
-            txtHorario.Text = String.Empty;
-            ddlEspecialidades.SelectedValue = "0";
             rbMasculino.Checked = false;
             rbFemenino.Checked = false;
             txtDireccion.Text = String.Empty;
             ddlProvincias.SelectedValue = "0";
             ddlLocalidades.SelectedValue = "0";
-            txtUsername.Text = String.Empty;
-            txtPassword.Text = String.Empty;
         }
 
-        protected void CargarEspecialidades()
-        {
-            {
-                NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
-                List<Especialidad> especialidades = negocioEspecialidad.GetEspecialidades();
-
-                ddlEspecialidades.DataSource = especialidades;
-                ddlEspecialidades.DataTextField = "Nombre";
-                ddlEspecialidades.DataValueField = "codEspecialidad";
-                ddlEspecialidades.DataBind();
-
-                ddlEspecialidades.Items.Insert(0, new ListItem("-- Seleccione una especialidad --", "0"));
-            }
-        }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
 
-            Medico m = new Medico();
+            Paciente paciente = new Paciente();
 
             // TABLA PERSONA
-            m.DNI = txtDni.Text.Trim();
-            m.Nombre = txtNombre.Text.Trim();
-            m.Apellido = txtApellido.Text.Trim();
+            paciente.DNI = txtDni.Text.Trim();
+            paciente.Nombre = txtNombre.Text.Trim();
+            paciente.Apellido = txtApellido.Text.Trim();
 
             // Radio button de Sexo:
             {
@@ -152,46 +119,38 @@ namespace TP_INT_P2
                     sexoSeleccionado = "M";
                 else if (rbFemenino.Checked)
                     sexoSeleccionado = "F";
-                m.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
+                paciente.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
             }
-            m.Email = txtEmail.Text.Trim();
-            m.Nacionalidad = txtNacionalidad.Text.Trim();
-            m.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
-            m.Direccion = txtDireccion.Text.Trim();
-            m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
-            m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
-            m.Telefono = txtTelefono.Text.Trim();
-
-            // TABLA MEDICOS
-            m.Legajo = Convert.ToInt32(txtLegajo.Text);
-            m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
-            m.Horario = txtHorario.Text.Trim();
-            m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble
-
-            // TABLA USUARIOS
-            m.Username = txtUsername.Text.Trim();
-            m.Password = txtPassword.Text.Trim();
-
+            paciente.Email = txtEmail.Text.Trim();
+            paciente.Nacionalidad = txtNacionalidad.Text.Trim();
+            paciente.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
+            paciente.Direccion = txtDireccion.Text.Trim();
+            paciente.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
+            paciente.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
+            paciente.Telefono = txtTelefono.Text.Trim();
+            
+            // TABLA PACIENTE
+            // PK DNI ya preparado en PERSONA
 
             // PREPARAMOS PARA CHEQUEAR LA BBDD PARA VALIDACIONES
 
-            NegocioMedico negocioMedico = new NegocioMedico();
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
             bool ingresoValidado = false;
 
 
             // VALIDACION 1. CHEQUEAMOS SI EXISTE EL DNI
 
-            ingresoValidado = !negocioMedico.ExisteDNI(m.DNI); //si no existe dni se valida
-            
+            ingresoValidado = !negocioPaciente.ExisteDNI(paciente.DNI); //si no existe dni se valida
+
 
             //TODO: CARGAR EN LA BASE DE DATOS
             if (ingresoValidado)
             {
-                
 
-                int insercionOK = negocioMedico.AgregarMedico(m);
 
-                
+                int insercionOK = negocioPaciente.AgregarPaciente(paciente);
+
+
 
                 if (insercionOK > 0)
                 {
@@ -224,7 +183,7 @@ namespace TP_INT_P2
                     ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
                 }
             }
-            LimpiarFormularioAgregarMedico();
+            LimpiarFormularioAgregarPaciente();
         }
 
         protected void btnChequearDNI_Click(object sender, EventArgs e)
@@ -232,19 +191,19 @@ namespace TP_INT_P2
             lblChequearDNI.Text = "";
             lblChequearDNIValido.Text = "";
             lblChequearDNIHint.Text = "";
-            NegocioMedico negMedico = new NegocioMedico();
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
             bool existeDNI;
-            if ( txtDni.Text.Length != 8 || !txtDni.Text.All(char.IsDigit))
+            if (txtDni.Text.Length != 8 || !txtDni.Text.All(char.IsDigit))
             {
                 lblChequearDNI.Text = "Nro inválido";
             }
             else
-            { 
-                if (existeDNI = negMedico.ExisteDNI(txtDni.Text)) 
-                
-                {           
+            {
+                if (existeDNI = negocioPaciente.ExisteDNI(txtDni.Text))
+
+                {
                     lblChequearDNI.Text = "DNI ya existe";
-                } 
+                }
                 else
                 {
                     lblChequearDNIValido.Text = "Validado";

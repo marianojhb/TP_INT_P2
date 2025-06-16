@@ -2,9 +2,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div style ="min-width: 576px; margin: 50px auto; max-width: 1100px">
-    <h2>Home Médicos</h2>
+    <h2>Inicio</h2>
+    <div style ="min-width: 576px; margin: 50px auto">
+        <div class="mx-auto p-3 text-center">
+            <div class="mt-4">
+
     <asp:Button ID="btnAgregarPaciente" runat="server" Text="Agregar Paciente" OnClick="btnAgregarPaciente_Click" CssClass="btn btn-primary"/>
-    <asp:Button ID="btnMisHorarios" runat="server" Text="MisHorarios" OnClick="btnMisHorarios_Click" CssClass="btn btn-primary"/>
+                      </div>
+            <div class="mx-auto p-3 text-center">
+    <asp:Button ID="btnMisHorarios" runat="server" Text="Mis Horarios" OnClick="btnMisHorarios_Click" CssClass="btn btn-primary"/>
         </div>
+            </div>
 </asp:Content>

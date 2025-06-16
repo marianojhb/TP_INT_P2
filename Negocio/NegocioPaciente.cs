@@ -13,10 +13,10 @@ namespace Negocio
     {
         DaoPaciente daoPaciente = new DaoPaciente();
 
-        //public int AgregarPaciente(Paciente paciente)
-        //{
-        //    return daoPaciente.AgregarPaciente(paciente);
-        //}
+        public int AgregarPaciente(Paciente paciente)
+        {
+            return daoPaciente.AgregarPaciente(paciente);
+        }
 
         public DataTable GetPacientes()
         {
@@ -40,6 +40,10 @@ namespace Negocio
             DaoPaciente daoPaciente = new DaoPaciente();
 
             return daoPaciente.GetPaciente(dni);
+        }
+        public bool ExisteDNI(string dni)
+        {
+            return daoPaciente.ExisteDNI(dni);
         }
     }
 }

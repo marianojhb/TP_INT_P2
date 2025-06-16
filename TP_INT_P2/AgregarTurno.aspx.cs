@@ -106,6 +106,7 @@ namespace TP_INT_P2
                 {
                     Fecha = f.ToString("yyyy-MM-dd")
                 })
+                .Distinct()
                 .ToList();
             ddlFechas.DataTextField = "Fecha";
             ddlFechas.DataValueField = "Fecha";
@@ -201,6 +202,7 @@ namespace TP_INT_P2
 
         protected void btnAsignarTurno_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
 
             bool validado = ((lblFecha.Text != null) && (lblHora.Text != null) && (lblLegajo.Text != null) && (lblDNI.Text != null));
             
