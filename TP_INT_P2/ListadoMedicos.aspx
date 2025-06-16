@@ -7,6 +7,7 @@
         .imagenMedico {
               border-radius: 50% !important;
               width: 150px !important;
+              height: 150px !important;
             }
         .profilepicDiv
         {
@@ -15,85 +16,32 @@
     </style>
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>LISTADO MÉDICOS</h2>
-<asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-50 border p-3">
+    <h2>Listado de Médicos</h2>
+<asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-75 border p-3">
     <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
 
-        <asp:ListView ID="lvMedicos" runat="server" DataSourceID="SqlDataSource1" OnPagePropertiesChanging="lvMedicos_PagePropertiesChanging"     OnItemEditing="lvMedicos_ItemEditing"
+        <asp:ListView ID="lvMedicos" runat="server" 
+            DataSourceID="SqlDataSource1" 
+            OnPagePropertiesChanging="lvMedicos_PagePropertiesChanging"     
+            OnItemEditing="lvMedicos_ItemEditing"
             OnItemUpdating="lvMedicos_ItemUpdating"
-            OnItemCanceling="lvMedicos_ItemCanceling"
-                >
-
-        <%--        <SelectedItemTemplate>
-            <td runat="server" style="background-color: #E2DED6;font-weight: bold;color: #333333;">imagen_M:
-                <asp:Label ID="imagen_MLabel" runat="server" Text='<%# Eval("imagen_M") %>' />
-                <br />
-                legajo_M:
-                <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
-                <br />
-                dni_P:
-                <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
-                <br />
-                nombre_P:
-                <asp:Label ID="nombre_PLabel" runat="server" Text='<%# Eval("nombre_P") %>' />
-                <br />
-                apellido_P:
-                <asp:Label ID="apellido_PLabel" runat="server" Text='<%# Eval("apellido_P") %>' />
-                <br />
-                sexo_P:
-                <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Eval("sexo_P") %>' />
-                <br />
-                nacionalidad_P:
-                <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
-                <br />
-                fechaNac_P:
-                <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P") %>' />
-                <br />
-                direccion_P:
-                <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Eval("direccion_P") %>' />
-                <br />
-                nombre_L:
-                <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Eval("nombre_L") %>' />
-                <br />
-                nombre_PROV:
-                <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Eval("nombre_PROV") %>' />
-                <br />
-                email_P:
-                <asp:Label ID="email_PLabel" runat="server" Text='<%# Eval("email_P") %>' />
-                <br />
-                telefono_P:
-                <asp:Label ID="telefono_PLabel" runat="server" Text='<%# Eval("telefono_P") %>' />
-                <br />
-                nombre_E:
-                <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Eval("nombre_E") %>' />
-                <br />
-                username_U:
-                <asp:Label ID="username_ULabel" runat="server" Text='<%# Eval("username_U") %>' />
-                <br />
-                password_U:
-                <asp:Label ID="password_ULabel" runat="server" Text='<%# Eval("password_U") %>' />
-                <br />
-                tipo_U:
-                <asp:Label ID="tipo_ULabel" runat="server" Text='<%# Eval("tipo_U") %>' />
-                <br />
-                <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="false" Text="estado_M" />
-                <br />
-                <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Eliminar" />
-                <br />
-                <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Editar" />
-                <br />
-            </td>
-        </SelectedItemTemplate>--%>
+            OnItemCanceling="lvMedicos_ItemCanceling" 
+            OnItemDeleting="lvMedicos_ItemDeleting"
+            OnItemDeleted="lvMedicos_ItemDeleted"
+            DataKeyNames="dni_P" 
+            OnItemUpdated="lvMedicos_ItemUpdated"
+            >
+            <%--DataKeyNames="dni_P"--%>
         <ItemTemplate>
             <div class="col-md-4 mb-4">
                 <div class="card-deck">
 
                 <div class="card">
                     <div class="profilepicDiv">
-                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" CssClass="card-img-top imagenMedico shadow" AlternateText="Imagen de perfil" />
+                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" CssClass="card-img-top imagenMedico shadow mt-3" AlternateText="Imagen de perfil" />
                     </div>
                         <div class="card-body">
                         <h5 class="card-title">
@@ -106,14 +54,14 @@
                             <br />
                             DNI:
                             <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
-   
+                            <br />
                             Sexo:
                             <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Eval("sexo_P") %>' />
                             <br />
                             Nacionalidad:
                             <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
                             <br />
-                            Fecha de Nacimiento
+                            Fecha de Nacimiento:
                             <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P", "{0:dd/MM/yyyy}") %>' />
                             <br />
                             Dirección:
@@ -121,9 +69,11 @@
                             <br />
                             Localidad:
                             <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Eval("nombre_L") %>' />
+                             <asp:HiddenField ID="hfIdLocalidad" runat="server" Value='<%# Eval("idLocalidad_P") %>' />
                             <br />
                             Provincia:
                             <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Eval("nombre_PROV") %>' />
+                             <asp:HiddenField ID="hfIdProvincia" runat="server" Value='<%# Eval("idProvincia_P") %>' />
                             <br />
                             Email:
                             <asp:Label ID="email_PLabel" runat="server" Text='<%# Eval("email_P") %>' />
@@ -133,23 +83,19 @@
                             <br />
                             Especialidad:
                             <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Eval("nombre_E") %>' />
-                            <br />
-                            Usuario:
-                            <asp:Label ID="username_ULabel" runat="server" Text='<%# Eval("username_U") %>' />
-                            <br />
-                            Contraseña:
-                            <asp:Label ID="password_ULabel" runat="server" Text='<%# Eval("password_U") %>' />
-                            <br />
-                            Tipo:
-                            <asp:Label ID="tipo_ULabel" runat="server" Text='<%# Eval("tipo_U") %>' />
-                            <br />
-                            <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="False" Text="estado_M" />
+                            <asp:HiddenField ID="hfCodEspecialidad" runat="server" Value='<%# Eval("codEspecialidad_M") %>' />
                         </p>
                     </div>
-                    <div class="card-footer">
-                        <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Eliminar" />
-                        <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Editar" />
+                    <div class="card-footer text-center">
+                        <asp:Button ID="DeleteButton" runat="server" 
+                            Text="Eliminar" CommandName="Delete"
+                            OnClientClick="return confirm('¿Está seguro que desea eliminar?');"
+                            CssClass="btn btn-danger me-2" />
+                        <asp:Button ID="EditButton" runat="server" 
+                            Text="Editar" CommandName="Edit" 
+                            CssClass="btn btn-primary" />
                     </div>
+
                 </div>
 
             </div>
@@ -160,53 +106,140 @@
                 <div class="card-deck">
 
                 <div class="card">
-                    <asp:TextBox ID="imagen_PLabel" runat="server" Text='<%# Bind("imagen_M") %>' />
                     <div class="card-body">
                         <h5 class="card-title">
-                            <asp:Label ID="nombre_PLabel" runat="server" Text='<%# Bind("nombre_P") %>' />
-                            <asp:Label ID="apellido_PLabel" runat="server" Text='<%# Bind("apellido_P") %>' />
-                        </h5>
+                            <div class="profilepicDiv">
+                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" CssClass="card-img-top imagenMedico shadow" AlternateText="Imagen de perfil" />
+                            </div>
+                    </div>
+                    <div class="card-body">
                         <p class="card-text">
-                            Legajo:
-                            <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
-                            <br />
-                            DNI:
-                            <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
-   
+
+                            <div class="mb-3">
+                                <label for="fuImagenURL" class="form-label">
+                                    Imagen:
+                                </label>
+                                <asp:FileUpload ID="fuImagenURL" runat="server" CssClass="form-control" />
+                            </div>
+                            
+
+                            <div class="mb-3">
+                                <label for="nombre_PTextBox" class="form-label">
+                            Nombre:
+                                </label>
+                            <asp:TextBox ID="nombre_PTextBox" runat="server" Text='<%# Bind("nombre_P") %>'  CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nombre_PTextBox" class="form-label">
+                                    Apellido:
+                               </label>
+                                <asp:TextBox ID="apellido_PTextBox" runat="server" Text='<%# Bind("apellido_P") %>'  CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="legajo_MLabel" class="form-label">
+                                Legajo:
+                               </label>
+                            <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>'  CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="legajo_MLabel" class="form-label">
+                                    DNI:
+                                </label>
+                                <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>'  CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sexo_PTextBox" class="form-label">
                             Sexo:
-                            <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Bind("sexo_P") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="sexo_PTextBox" runat="server" Text='<%# Bind("sexo_P") %>' CssClass="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nacionalidad_PTextBox" class="form-label">
                             Nacionalidad:
-                            <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Bind("nacionalidad_P") %>' />
-                            <br />
-                            Fecha de Nacimiento
-                            <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Bind("fechaNac_P", "{0:dd/MM/yyyy}") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="nacionalidad_PTextBox" runat="server" Text='<%# Bind("nacionalidad_P") %>'  CssClass="form-control"/>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="fechaNac_PTextBox" class="form-label">
+                            Fecha de Nacimiento:
+                                    
+                                </label>
+                            <asp:TextBox ID="fechaNac_PTextBox" runat="server" Text='<%# Bind("fechaNac_P", "{0:dd/MM/yyyy}") %>'  CssClass="form-control"/>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="direccion_PTextBox" class="form-label">
+                                    
                             Dirección:
-                            <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Bind("direccion_P") %>' />
-                            <br />
+                                </label>
+                            <asp:TextBox ID="direccion_PTextBox" runat="server" Text='<%# Bind("direccion_P") %>'  CssClass="form-control"/>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="idLocalidad_PTextBox" class="form-label">
                             Localidad:
-                            <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Bind("nombre_L") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="idLocalidad_PTextBox" runat="server" Text='<%# Bind("idLocalidad_P") %>'  CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idProvincia_PTextBox" class="form-label">
                             Provincia:
-                            <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Bind("nombre_PROV") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="idProvincia_PTextBox" runat="server" Text='<%# Bind("idProvincia_P") %>' CssClass="form-control"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email_PTextBox" class="form-label">
                             Email:
-                            <asp:Label ID="email_PLabel" runat="server" Text='<%# Bind("email_P") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="email_PTextBox" runat="server" Text='<%# Bind("email_P") %>'  CssClass="form-control"/>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="telefono_PTextBox" class="form-label">
                             Teléfono:
-                            <asp:Label ID="telefono_PLabel" runat="server" Text='<%# Bind("telefono_P") %>' />
-                            <br />
+                                    
+                                </label>
+                            <asp:TextBox ID="telefono_PTextBox" runat="server" Text='<%# Bind("telefono_P") %>'  CssClass="form-control"/>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="codEspecialidad_MTextBox" class="form-label">
                             Especialidad:
-                            <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Bind("nombre_E") %>' />
-                            <br />
-                            <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("estado_M") %>' True="False" Text="estado_M" />
+                                    
+                                </label>
+                            <asp:TextBox ID="codEspecialidad_MTextBox" runat="server" Text='<%# Bind("codEspecialidad_M") %>'  CssClass="form-control"/>
+                            </div>
+
+
                         </p>
                     </div>
-                    <div class="card-footer">
-                            <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Actualizar" />
-                            <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancelar" />
+                    <div class="card-footer text-center">
+                        <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" 
+                            Text="Cancelar" CssClass="btn btn-secondary" />
+                        <asp:Button ID="UpdateButton" runat="server" CommandName="Update" 
+                            Text="Actualizar" CssClass="btn btn-primary me-2" />
                     </div>
+
                 </div>
 
             </div>
@@ -233,107 +266,91 @@
                     <div class="d-flex justify-content-center mt-3">
                     </div>
                 </div>                            
-                <div>
-                    <asp:DataPager ID="DataPager1" runat="server" PageSize="12">
+                <div class="d-flex justify-content-center mt-3">
+                    <asp:DataPager ID="DataPager1" runat="server" PageSize="3">
                         <Fields>
-                           <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                           <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" LastPageText="Última" FirstPageText="Primera" NextPageText="Siguiente" PreviousPageText="Anterior" />
                         </Fields>
                     </asp:DataPager>
 
                 </div>
 
             </LayoutTemplate>
-            <SelectedItemTemplate>
-                <td runat="server" style="background-color: #E2DED6;font-weight: bold;color: #333333;">imagen_M:
-                    <asp:Label ID="imagen_MLabel" runat="server" Text='<%# Eval("imagen_M") %>' />
-                    <br />
-                    legajo_M:
-                    <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>' />
-                    <br />
-                    dni_P:
-                    <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>' />
-                    <br />
-                    nombre_P:
-                    <asp:Label ID="nombre_PLabel" runat="server" Text='<%# Eval("nombre_P") %>' />
-                    <br />
-                    apellido_P:
-                    <asp:Label ID="apellido_PLabel" runat="server" Text='<%# Eval("apellido_P") %>' />
-                    <br />
-                    sexo_P:
-                    <asp:Label ID="sexo_PLabel" runat="server" Text='<%# Eval("sexo_P") %>' />
-                    <br />
-                    nacionalidad_P:
-                    <asp:Label ID="nacionalidad_PLabel" runat="server" Text='<%# Eval("nacionalidad_P") %>' />
-                    <br />
-                    fechaNac_P:
-                    <asp:Label ID="fechaNac_PLabel" runat="server" Text='<%# Eval("fechaNac_P") %>' />
-                    <br />
-                    direccion_P:
-                    <asp:Label ID="direccion_PLabel" runat="server" Text='<%# Eval("direccion_P") %>' />
-                    <br />
-                    nombre_L:
-                    <asp:Label ID="nombre_LLabel" runat="server" Text='<%# Eval("nombre_L") %>' />
-                    <br />
-                    nombre_PROV:
-                    <asp:Label ID="nombre_PROVLabel" runat="server" Text='<%# Eval("nombre_PROV") %>' />
-                    <br />
-                    email_P:
-                    <asp:Label ID="email_PLabel" runat="server" Text='<%# Eval("email_P") %>' />
-                    <br />
-                    telefono_P:
-                    <asp:Label ID="telefono_PLabel" runat="server" Text='<%# Eval("telefono_P") %>' />
-                    <br />
-                    nombre_E:
-                    <asp:Label ID="nombre_ELabel" runat="server" Text='<%# Eval("nombre_E") %>' />
-                    <br />
-                    username_U:
-                    <asp:Label ID="username_ULabel" runat="server" Text='<%# Eval("username_U") %>' />
-                    <br />
-                    password_U:
-                    <asp:Label ID="password_ULabel" runat="server" Text='<%# Eval("password_U") %>' />
-                    <br />
-                    tipo_U:
-                    <asp:Label ID="tipo_ULabel" runat="server" Text='<%# Eval("tipo_U") %>' />
-                    <br />
-                    <asp:CheckBox ID="estado_MCheckBox" runat="server" Checked='<%# Eval("estado_M") %>' Enabled="false" Text="estado_M" />
-                    <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Eliminar" />
-                    <br />
-                    <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Editar" />
-                    <br />
-                </td>
-            </SelectedItemTemplate>
+
     </asp:ListView>
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:BDClinicaConnectionString %>" DeleteCommand="SP_INACTIVARMEDICO" DeleteCommandType="StoredProcedure" SelectCommand="SP_SELECCIONARMEDICO" SelectCommandType="StoredProcedure" UpdateCommand="SP_UPDATEMEDICO" UpdateCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:BDClinicaConnectionString %>" 
+        DeleteCommand="SP_INACTIVARMEDICO" 
+        DeleteCommandType="StoredProcedure" 
+        SelectCommand="SP_SELECCIONARMEDICO" 
+        SelectCommandType="StoredProcedure" 
+        UpdateCommand="SP_UPDATEMEDICO" 
+        UpdateCommandType="StoredProcedure"
+        >
         <DeleteParameters>
-            <asp:Parameter Name="DNI" Type="String" />
-            <asp:Parameter Name="ESTADO" Type="Boolean" />
+            <asp:Parameter Name="dni_P" Type="String" />
         </DeleteParameters>
         <UpdateParameters>
-            <asp:Parameter Name="DNI" Type="String" />
-            <asp:Parameter Name="NOMBRE" Type="String" />
-            <asp:Parameter Name="APELLIDO" Type="String" />
-            <asp:Parameter Name="SEXO" Type="String" />
-            <asp:Parameter Name="NACIONALIDAD" Type="String" />
-            <asp:Parameter DbType="Date" Name="FECHANAC" />
-            <asp:Parameter Name="DIRECCION" Type="String" />
-            <asp:Parameter Name="IDPROVINCIA" Type="Int32" />
-            <asp:Parameter Name="IDLOCALIDAD" Type="Int32" />
-            <asp:Parameter Name="EMAIL" Type="String" />
-            <asp:Parameter Name="TELEFONO" Type="String" />
-            <asp:Parameter Name="LEGAJO" Type="Int32" />
-            <asp:Parameter Name="CODESPECIALIDAD" Type="Int32" />
-            <asp:Parameter Name="HORARIO" Type="String" />
-            <asp:Parameter Name="IMAGEN" Type="String" />
-            <asp:Parameter Name="ESTADO" Type="Boolean" />
-            <asp:Parameter Name="USERNAME" Type="String" />
-            <asp:Parameter Name="PASSWORD" Type="String" />
-            <asp:Parameter Name="TIPO" Type="String" />
+            <asp:Parameter Name="dni_P" Type="String" />
+            <asp:Parameter Name="nombre_P" Type="String" />
+            <asp:Parameter Name="apellido_P" Type="String" />
+            <asp:Parameter Name="sexo_P" Type="Char" />
+            <asp:Parameter Name="nacionalidad_P" Type="String" />
+            <asp:Parameter Name="fechaNac_P" DbType="Date" />
+            <asp:Parameter Name="direccion_P" Type="String" />
+            <asp:Parameter Name="idProvincia_P" Type="Int32" />
+            <asp:Parameter Name="idLocalidad_P" Type="Int32" />
+            <asp:Parameter Name="email_P" Type="String" />
+            <asp:Parameter Name="telefono_P" Type="String" />
+            <asp:Parameter Name="codEspecialidad_M" Type="Int32" />
+            <asp:Parameter Name="horario_M" Type="String" />
+            <asp:Parameter Name="imagen_M" Type="String" />
         </UpdateParameters>
     </asp:SqlDataSource>
 </asp:Panel>
+
+    <!-- Toast de Exito -->
+    <asp:Panel ID="pnlExito" runat="server" Visible="false">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+            <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>¡Éxito!</strong> El registro se eliminó correctamente.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+    <!-- Toast de Exito actualizacion-->
+    <asp:Panel ID="pnlExitoUpdate" runat="server" Visible="false">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+            <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>¡Éxito!</strong> El registro se actualizó correctamente.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+
+    <!-- Toast de Error -->
+    <asp:Panel ID="pnlError" runat="server" Visible="false">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+            <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>¡Error!</strong> Ocurrió un problema.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
 
     <script>
         $(document).ready(function () {

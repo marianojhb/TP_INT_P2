@@ -62,6 +62,11 @@ namespace TP_INT_P2
                     Context.ApplicationInstance.CompleteRequest();
                 }
             }
+            else
+            {
+                lblError.Visible = true;
+                lblError.Text = "Usuario y contraseña inválidos";
+            }
         }
     }
 }

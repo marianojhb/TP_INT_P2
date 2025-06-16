@@ -156,6 +156,17 @@ namespace TP_INT_P2
 
         protected void lvMedicos_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
+            var item = lvMedicos.Items[e.ItemIndex];
+            var fu = item.FindControl("fuImagenURL") as FileUpload;
+            var txt = item.FindControl("imagen_PTextBox") as TextBox;
+
+            if (fu != null && fu.HasFile)
+                e.NewValues["imagen_M"] = "~/imagenes/perfiles/" + fu.FileName;
+            else if (txt != null)
+                e.NewValues["imagen_M"] = txt.Text;
+
+
+
             // Acá podés acceder a los valores nuevos y actualizarlos manualmente si no usás SqlDataSource
             // O dejás que el SqlDataSource lo maneje
             lvMedicos.EditIndex = -1;
@@ -178,7 +189,76 @@ namespace TP_INT_P2
 
 
 
+        protected void lvMedicos_ItemDeleting(object sender, ListViewDeleteEventArgs e)
+        {
+            
+        }
 
+        protected void lvMedicos_ItemDeleted(object sender, ListViewDeletedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                pnlExito.Visible = true;
+                pnlError.Visible = false;
+
+                // Mostrar toast éxito y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlExito.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
+            }
+            else
+            {
+                pnlExito.Visible = false;
+                pnlError.Visible = true;
+
+                // Mostrar toast error y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
+                e.ExceptionHandled = true;
+            }
+        }
+
+        protected void lvMedicos_ItemUpdated(object sender, ListViewUpdatedEventArgs e)
+        {
+            if (e.Exception == null)
+            {
+                pnlExitoUpdate.Visible = true;
+                pnlError.Visible = false;
+
+                // Mostrar toast éxito y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlExitoUpdate.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
+            }
+            else
+            {
+                pnlExitoUpdate.Visible = false;
+                pnlError.Visible = true;
+
+                // Mostrar toast error y ocultarlo luego
+                string script = @"
+                            var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
+                            if (toastEl) {
+                                var bsToast = new bootstrap.Toast(toastEl);
+                                bsToast.show();
+                            }";
+                ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
+                e.ExceptionHandled = true;
+            }
+        }
     }
 
 

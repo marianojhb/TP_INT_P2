@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -35,11 +36,13 @@ namespace TP_INT_P2
                 gvPacientes.DataSource = dt;
                 gvPacientes.DataBind();
             }
-            else
+            else if (dt == null || dt.Rows.Count == 0)
             {
-                // Mensaje de prueba en consola o log
-                lblMensaje.Text = "No se encontraron pacientes.";
+                dt = new DataTable();
+                gvPacientes.DataSource = dt;
+                gvPacientes.DataBind();
             }
+
         }
 
         protected void gvPacientes_RowDeleting(object sender, GridViewDeleteEventArgs e)

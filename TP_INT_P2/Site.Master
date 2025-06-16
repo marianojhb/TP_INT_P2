@@ -67,6 +67,9 @@
                         <li class="nav-item">
                             <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>' href="ListadoTurnos.aspx">Turnos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class='<%: "nav-link "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="Informes.aspx">Informes</a>
+                        </li>
 
                     </ul>
                     <!-- Usuario logueado -->
