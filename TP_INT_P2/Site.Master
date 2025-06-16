@@ -68,7 +68,7 @@
                             <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>' href="ListadoTurnos.aspx">Turnos</a>
                         </li>
                         <li class="nav-item mx-3">
-                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="Informes.aspx">Informes</a>
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="InicioInformes.aspx">Informes</a>
                         </li>
 
                     </ul>

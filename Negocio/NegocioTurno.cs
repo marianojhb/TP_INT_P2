@@ -2,6 +2,7 @@
 using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +134,18 @@ namespace Negocio
         public int AgregarTurno(Turno turno)
         {
             return daoTurno.AgregarTurno(turno);
+        }
+        public DataTable GetListadoTurnosReservados(string legajo)
+        {
+            return daoTurno.GetListadoTurnosReservados(legajo);
+        }
+        public void EliminarTurno(Turno turno)
+        {
+            daoTurno.EliminarTurno(turno);
+        }
+        public void ActualizarTurno(Turno turno)
+        {
+            daoTurno.ActualizarTurno(turno);
         }
     }
 }

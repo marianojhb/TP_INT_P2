@@ -20,16 +20,12 @@ namespace Negocio
 
         public DataTable GetPacientes()
         {
-            DaoPaciente daoPaciente = new DaoPaciente();
-
             return daoPaciente.GetPacientes();
         }
 
         public void EliminarPaciente(Paciente paciente)
         {
-            
             daoPaciente.EliminarPaciente(paciente);
-
         }
         public void ActualizarPaciente(Paciente paciente)
         {
@@ -37,8 +33,6 @@ namespace Negocio
         }
         public DataTable GetPaciente(string dni)
         {
-            DaoPaciente daoPaciente = new DaoPaciente();
-
             return daoPaciente.GetPaciente(dni);
         }
         public bool ExisteDNI(string dni)

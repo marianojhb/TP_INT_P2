@@ -16,11 +16,11 @@ namespace Entidades
         public bool Cancelado { get; set; }
 
         public Turno() { }
-        public Turno (DateTime fecha, string legajo, string dNI)
+        public Turno (DateTime fecha, string legajo, string dni)
         {
             Fecha = fecha;
             Legajo = legajo;
-            DNI = dNI;
+            DNI = dni;
         }
     }
 }

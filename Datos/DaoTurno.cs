@@ -106,5 +106,79 @@ namespace Datos
                 }
             }
         }
+
+
+
+
+
+
+
+        public DataTable GetListadoTurnosReservados(string legajo)
+        {
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                string consultaAll = "SELECT * FROM TURNOS T  INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA  INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV ORDER BY T.fecha_T ASC";
+                string consultaLegajo = "SELECT * FROM TURNOS T  INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA  INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV WHERE M.legajo_M = @legajo_T ORDER BY T.fecha_T ASC";
+
+                using (SqlCommand comando = new SqlCommand())
+                {
+                    comando.Connection = conexion;
+
+
+                    if (!string.IsNullOrEmpty(legajo))
+                    {
+                        comando.CommandText = consultaLegajo;
+                        comando.Parameters.AddWithValue("@legajo_T", legajo);
+                    }
+                    else
+                    {
+                        comando.CommandText = consultaAll;
+                    }
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(comando);
+                    DataTable tabla = new DataTable();
+                    adapter.Fill(tabla);
+                    return tabla;
+                }
+            }
+        }
+
+        public void EliminarTurno(Turno turno)
+        {
+            string consulta = "UPDATE TURNOS SET cancelado_T = 0 WHERE fecha_T = @fecha_T AND legajo_T = @legajo_T";
+
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    comando.Parameters.AddWithValue("@fecha_T", turno.Fecha);
+                    comando.Parameters.AddWithValue("@legajo_T", turno.Legajo);
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+        public void ActualizarTurno(Turno turno)
+        {
+            string consulta = "UPDATE TURNOS SET asistencia_T = @asistencia_T, observacion_T = @observacion_T, cancelado_T = @cancelado_T WHERE fecha_T = @fecha_T AND legajo_T = @legajo_T";
+
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    SqlParameter parametros = new SqlParameter();
+                    parametros = comando.Parameters.Add("@fecha_T", SqlDbType.DateTime);
+                    parametros.Value = turno.Fecha;
+                    parametros = comando.Parameters.Add("@legajo_T", SqlDbType.Int);
+                    parametros.Value = Convert.ToInt32(turno.Legajo);
+                    parametros = comando.Parameters.Add("@asistencia_T", SqlDbType.Bit);
+                    parametros.Value = turno.Asistencia;
+                    parametros = comando.Parameters.Add("@observacion_T", SqlDbType.VarChar);
+                    parametros.Value = turno.Observacion;
+                    parametros = comando.Parameters.Add("@cancelado_T", SqlDbType.Bit);
+                    parametros.Value = turno.Cancelado;
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
