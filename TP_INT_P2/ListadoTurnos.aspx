@@ -42,12 +42,12 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Legajo">
+                <asp:TemplateField HeaderText="Médico">
                     <EditItemTemplate>
-                        <asp:Label ID="lbl_eit_Legajo" runat="server" Text='<%# Eval("legajo_T") %>'></asp:Label>
+                        <asp:Label ID="lbl_eit_FullNameMedico" runat="server" Text='<%# Eval("fullNameMedico") %>'></asp:Label>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lbl_it_Legajo" runat="server" Text='<%# Eval("legajo_T") %>'></asp:Label>
+                        <asp:Label ID="lbl_it_FullNameMedico" runat="server" Text='<%# Eval("fullNameMedico") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 

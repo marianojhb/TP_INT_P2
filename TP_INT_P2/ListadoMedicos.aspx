@@ -303,7 +303,7 @@
             <asp:Parameter Name="direccion_P" Type="String" />
             <asp:Parameter Name="idProvincia_P" Type="Int32" />
             <asp:Parameter Name="idLocalidad_P" Type="Int32" />
-            <asp:Parameter Name="email_P" Type="String" />
+            <%--<asp:Parameter Name="email_P" Type="String" />--%>
             <asp:Parameter Name="telefono_P" Type="String" />
             <asp:Parameter Name="codEspecialidad_M" Type="Int32" />
             <asp:Parameter Name="horario_M" Type="String" />

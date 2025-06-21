@@ -71,6 +71,8 @@ namespace TP_INT_P2
         protected void cerrarSesion_Click(object sender, EventArgs e)
         {
             Session["Usuario"] = String.Empty;
+            Session["FullName"] = String.Empty;
+            Session["Legajo"] = String.Empty;
             cerrarSesion.Visible = true;
             Response.Redirect("~/Inicio.aspx");
         }

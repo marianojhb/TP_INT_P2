@@ -117,8 +117,8 @@ namespace Datos
         {
             using (SqlConnection conexion = ac.obtenerConexion())
             {
-                string consultaAll = "SELECT * FROM TURNOS T  INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA  INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV ORDER BY T.fecha_T ASC";
-                string consultaLegajo = "SELECT * FROM TURNOS T  INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA  INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV WHERE M.legajo_M = @legajo_T ORDER BY T.fecha_T ASC";
+                string consultaAll = "SELECT T.*, PA.*, P.*, M.*, (PM.nombre_P + ' ' + PM.apellido_P) AS fullNameMedico, L.*, PROV.*  FROM TURNOS T  INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA  INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M INNER JOIN PERSONAS PM ON M.dni_M = PM.dni_P  INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV ORDER BY T.fecha_T ASC";
+                string consultaLegajo = "SELECT T.*, PA.*, P.*, M.*, (PM.nombre_P + ' ' + PM.apellido_P) AS fullNameMedico, L.*, PROV.* FROM TURNOS T INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA INNER JOIN PERSONAS P ON T.dni_T = P.dni_P  INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M INNER JOIN PERSONAS PM ON M.dni_M = PM.dni_P INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV WHERE M.legajo_M = 3 ORDER BY T.fecha_T ASC";
 
                 using (SqlCommand comando = new SqlCommand())
                 {
