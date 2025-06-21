@@ -11,6 +11,9 @@
             <div class="mt-4">
                 <asp:Button ID="btnAgregarTurno" runat="server" Text="Agregar Turnos" OnClick="btnAgregarTurnos_Click" CssClass="btn btn-primary" />
             </div>
+            <div class="mt-4">
+                <asp:Button ID="btnAgregarPaciente" runat="server" Text="Agregar Paciente" OnClick="btnAgregarPaciente_Click" CssClass="btn btn-primary"/>
+            </div>
         </div>
     </div>
 </asp:Content>

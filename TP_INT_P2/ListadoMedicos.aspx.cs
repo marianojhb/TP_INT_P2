@@ -24,7 +24,7 @@ namespace TP_INT_P2
                 }
                 else if (Session["Tipo"].ToString() == "02")
                 {
-                    Response.Write("Sección exclusiva para usuarios Admin");
+                    paginaBloqueada.Text = "Sección exclusiva para usuarios Admin";
                     panelContenidoListadoMedicos.Visible = false;
                 } 
                 else if (Session["Tipo"].ToString() != "01")

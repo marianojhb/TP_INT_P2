@@ -124,12 +124,13 @@ namespace Datos
                 {
                     comando.Connection = conexion;
 
-
+                    // Listado de Turnos de médico
                     if (!string.IsNullOrEmpty(legajo))
                     {
                         comando.CommandText = consultaLegajo;
                         comando.Parameters.AddWithValue("@legajo_T", legajo);
                     }
+                    // Listado de todos los turnos
                     else
                     {
                         comando.CommandText = consultaAll;

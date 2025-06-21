@@ -31,11 +31,19 @@
         }
     </script>
     <style>
+        html {
+            overflow-y: scroll;
+        }
         #cambiarTema {
             text-decoration: none;
         }
         #cambiarTemaText:hover {
             text-decoration: underline;
+        }
+
+        .nav-item .active
+        {
+            border-bottom: 2px solid white !important;
         }
     </style>
 
@@ -58,17 +66,17 @@
                         <li class="nav-item mx-3">
                                 <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Inicio") ? "active" : "") %>' href="Inicio.aspx">Inicio</a>
                         </li>
-                        <li class="nav-item mx-3">
+                        <li class='<%:  "nav-item mx-3 " + (Request.Url.AbsolutePath.Contains("ListadoMedicos") ? "active" : "") %>' >
                             <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoMedicos") ? "active" : "") %>' href="ListadoMedicos.aspx">Médicos</a>
                         </li>
-                        <li class="nav-item mx-3">
+                        <li class='<%: "nav-item mx-3 "   + (Request.Url.AbsolutePath.Contains("ListadoPacientes") ? "active" : "") %>'>
                             <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoPacientes") ? "active" : "") %>' href="ListadoPacientes.aspx">Pacientes</a>
                         </li>
-                        <li class="nav-item mx-3">
+                        <li class='<%: "nav-item mx-3 "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>'>
                             <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("ListadoTurnos") ? "active" : "") %>' href="ListadoTurnos.aspx">Turnos</a>
                         </li>
-                        <li class="nav-item mx-3">
-                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="InicioInformes.aspx">Informes</a>
+                        <li class='<%: "nav-item mx-3 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>'>
+                            <a class='<%: "nav-link fs-4 "  + (Request.Url.AbsolutePath.Contains("Informes") ? "active" : "") %>' href="Informes.aspx">Informes</a>
                         </li>
 
                     </ul>

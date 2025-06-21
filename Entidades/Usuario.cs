@@ -12,6 +12,7 @@ namespace Entidades
         public string Password { get; set; }
         public string Email { get; set; }
         public string Tipo  { get; set; }
+        public bool Estado { get; set; }
         public Usuario() {}
         public Usuario(string username, string password)
         {
@@ -24,6 +25,14 @@ namespace Entidades
             Password = password;
             Email = email;
             Tipo = tipo;
+        }
+        public Usuario(string username, string password, string email, string tipo, bool estado)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+            Tipo = tipo;
+            Estado = estado;
         }
     }
 }

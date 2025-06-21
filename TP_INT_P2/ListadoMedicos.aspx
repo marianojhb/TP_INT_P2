@@ -17,6 +17,7 @@
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Listado de Médicos</h2>
+    <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-75 border p-3">
     <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
     
@@ -208,7 +209,7 @@
                             Email:
                                     
                                 </label>
-                            <asp:TextBox ID="email_PTextBox" runat="server" Text='<%# Bind("email_P") %>'  CssClass="form-control"/>
+                            <asp:Label ID="email_PTextBox" runat="server" Text='<%# Eval("email_P") %>'  CssClass="form-control"/>
                             </div>
 
 

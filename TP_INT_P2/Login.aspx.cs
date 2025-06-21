@@ -45,6 +45,8 @@ namespace TP_INT_P2
 
                 if (usuario.Tipo == "01")
                 {
+                    Session["FullName"] = String.Empty;
+                    Session["Legajo"] = String.Empty;
                     Response.Redirect("~/InicioAdministrador.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
 

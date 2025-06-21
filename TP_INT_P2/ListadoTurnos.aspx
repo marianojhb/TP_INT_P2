@@ -101,7 +101,7 @@
                         <asp:CheckBox ID="chb_eit_Asistencia" runat="server" Checked='<%# Bind("asistencia_T") %>'></asp:CheckBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:CheckBox ID="chb_it_Asistencia" runat="server" Checked='<%# Convert.ToBoolean(Eval("asistencia_T")) %>'></asp:CheckBox>
+                        <asp:CheckBox ID="chb_it_Asistencia" runat="server"  Enabled="false" Checked='<%# Convert.ToBoolean(Eval("asistencia_T")) %>'></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -121,7 +121,7 @@
                         <asp:CheckBox ID="chb_eit_Cancelado" runat="server" Checked='<%# Bind("cancelado_T") %>'></asp:CheckBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:CheckBox ID="lbl_it_Cancelado" runat="server" Checked='<%# Convert.ToBoolean(Eval("cancelado_T")) %>'></asp:CheckBox>
+                        <asp:CheckBox ID="lbl_it_Cancelado" runat="server"  Enabled="false" Checked='<%# Convert.ToBoolean(Eval("cancelado_T")) %>'></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>
 
