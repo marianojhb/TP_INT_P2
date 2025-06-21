@@ -30,6 +30,7 @@
             OnItemEditing="lvMedicos_ItemEditing"
             OnItemUpdating="lvMedicos_ItemUpdating"
             OnItemCanceling="lvMedicos_ItemCanceling" 
+            OnItemDataBound="lvMedicos_ItemDataBound"
             OnItemDeleting="lvMedicos_ItemDeleting"
             OnItemDeleted="lvMedicos_ItemDeleted"
             DataKeyNames="dni_P" 
@@ -189,19 +190,22 @@
 
 
                             <div class="mb-3">
-                                <label for="idLocalidad_PTextBox" class="form-label">
-                            Localidad:
-                                    
-                                </label>
-                            <asp:TextBox ID="idLocalidad_PTextBox" runat="server" Text='<%# Bind("idLocalidad_P") %>'  CssClass="form-control"/>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="idProvincia_PTextBox" class="form-label">
+                                <label for="ddlProvincia" class="form-label">
                             Provincia:
                                     
                                 </label>
-                            <asp:TextBox ID="idProvincia_PTextBox" runat="server" Text='<%# Bind("idProvincia_P") %>' CssClass="form-control"/>
+                            <%--<asp:TextBox ID="idProvincia_PTextBox" runat="server" Text='<%# Bind("idProvincia_P") %>' CssClass="form-control"/>--%>
+                                <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" ></asp:DropDownList>
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ddlLocalidad" class="form-label">
+                            Localidad:
+                                    
+                                </label>
+                            <%--<asp:TextBox ID="idLocalidad_PTextBox" runat="server" Text='<%# Bind("idLocalidad_P") %>'  CssClass="form-control"/>--%>
+                                <asp:DropDownList ID="ddlLocalidades" runat="server" CssClass="form-select" ></asp:DropDownList>
                             </div>
 
                             <div class="mb-3">
@@ -224,11 +228,12 @@
 
 
                             <div class="mb-3">
-                                <label for="codEspecialidad_MTextBox" class="form-label">
+                                <label for="ddlEspecialidades" class="form-label">
                             Especialidad:
                                     
                                 </label>
-                            <asp:TextBox ID="codEspecialidad_MTextBox" runat="server" Text='<%# Bind("codEspecialidad_M") %>'  CssClass="form-control"/>
+                            <%--<asp:TextBox ID="codEspecialidad_MTextBox" runat="server" Text='<%# Bind("codEspecialidad_M") %>'  CssClass="form-control"/>--%>
+                                <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" ></asp:DropDownList>
                             </div>
 
 

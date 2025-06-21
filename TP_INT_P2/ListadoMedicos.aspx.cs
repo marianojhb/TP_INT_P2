@@ -40,12 +40,7 @@ namespace TP_INT_P2
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        protected void lvListadoMedicos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lvListadoMedicos_ItemDataBound(object sender, ListViewItemEventArgs e)
+        protected void lvMedicos_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.ItemType == ListViewItemType.DataItem)
             {
@@ -53,6 +48,7 @@ namespace TP_INT_P2
 
                 DropDownList ddlProvincias = (DropDownList)e.Item.FindControl("ddlProvincias");
                 DropDownList ddlLocalidades = (DropDownList)e.Item.FindControl("ddlLocalidades");
+                DropDownList ddlEspecialidades = (DropDownList)e.Item.FindControl("ddlEspecialidades");
 
                 if (ddlProvincias != null && ddlLocalidades != null)
                 {
@@ -67,7 +63,7 @@ namespace TP_INT_P2
                     ddlProvincias.Items.Insert(0, new ListItem("-- Seleccione una provincia --", "0"));
 
                     // Seleccionar la provincia que tenga el dato actual
-                    int idProvinciaActual = Convert.ToInt32(dataItem["idProvincia_U"]);
+                    int idProvinciaActual = Convert.ToInt32(dataItem["idProvincia_P"]);
                     ListItem provinciaSeleccionada = ddlProvincias.Items.FindByValue(idProvinciaActual.ToString());
                     if (provinciaSeleccionada != null)
                     {
@@ -86,7 +82,7 @@ namespace TP_INT_P2
                         ddlLocalidades.Items.Insert(0, new ListItem("-- Seleccione una localidad --", "0"));
 
                         // Seleccionar la localidad que tenga el dato actual
-                        int idLocalidadActual = Convert.ToInt32(dataItem["idLocalidad_U"]);
+                        int idLocalidadActual = Convert.ToInt32(dataItem["idLocalidad_P"]);
                         ListItem localidadSeleccionada = ddlLocalidades.Items.FindByValue(idLocalidadActual.ToString());
                         if (localidadSeleccionada != null)
                         {
@@ -94,6 +90,16 @@ namespace TP_INT_P2
                             localidadSeleccionada.Selected = true;
                         }
                     }
+                }
+                if (ddlEspecialidades != null)
+                {
+                    NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
+                    var especialidades = negocioEspecialidad.GetEspecialidades();
+
+                    ddlEspecialidades.DataSource = especialidades;
+                    ddlEspecialidades.DataTextField = "Nombre";
+                    ddlEspecialidades.DataValueField = "CodEspecialidad";
+                    ddlEspecialidades.DataBind();
                 }
             }
         }
@@ -164,6 +170,26 @@ namespace TP_INT_P2
                 e.NewValues["imagen_M"] = "~/imagenes/perfiles/" + fu.FileName;
             else if (txt != null)
                 e.NewValues["imagen_M"] = txt.Text;
+
+
+
+            // actualizo provincia y localidad:
+
+            DropDownList ddlProvincias = (DropDownList)item.FindControl("ddlProvincias");
+            DropDownList ddlLocalidades = (DropDownList)item.FindControl("ddlLocalidades");
+
+            if (ddlProvincias != null)
+                e.NewValues["idProvincia_P"] = ddlProvincias.SelectedValue;
+
+            if (ddlLocalidades != null)
+                e.NewValues["idLocalidad_P"] = ddlLocalidades.SelectedValue;
+
+
+            // actualizo especialidades:
+
+            DropDownList ddlEspecialidades = (DropDownList)item.FindControl("ddlEspecialidades");
+            if (ddlEspecialidades != null)
+                e.NewValues["codEspecialidad_M"] = ddlEspecialidades.SelectedValue;
 
 
 
