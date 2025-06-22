@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Agregar médico | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMedico.aspx.cs" Inherits="TP_INT_P2.AgregarMedico" %>
+﻿<%@ Page Title="Mi perfil | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="TP_INT_P2.MiPerfil" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <style>
 .form-check-input {
@@ -8,7 +8,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-     <h2 class="w-75 mx-auto">Agregar Médico</h2>
+     <h2 class="w-75 mx-auto">Mi Perfil</h2>
 <div class="container shadow p-4" style="max-width: 700px;"> 
     <div class="form-group row">
 
@@ -22,17 +22,9 @@
         <div class="form-group row mb-3">
                 <label for="txtDni" class="col-sm-4 col-form-label">DNI</label>
                 <div class="col-sm-3">
-                    <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="DNI" />
+                    <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" Enabled="False"  />
                 </div>
-                <div class="col-sm-2">
-                    <asp:Button ID="btnChequearDNI" runat="server" Text="Validar" OnClick="btnChequearDNI_Click" CssClass="btn btn-secondary" CausesValidation="False" />
-                </div>
-                <div class="col-sm-3">
-                    <asp:Label ID="lblChequearDNI" runat="server" Text="" ForeColor="Red"></asp:Label>
-                    <asp:Label ID="lblChequearDNIValido" runat="server" Text="" ForeColor="Green"></asp:Label>
-                    <small>
-                    <asp:Label ID="lblChequearDNIHint" runat="server" Text="Valide antes de enviar el formulario"></asp:Label></small>
-                </div>
+
         </div>
 
         <div class="form-group row mb-3">

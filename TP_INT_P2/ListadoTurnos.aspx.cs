@@ -24,7 +24,7 @@ namespace TP_INT_P2
             {
                 legajo = Session["legajo"]?.ToString()?? "";
                 CargarTurnos(legajo);
-                lblLegajo.Text = legajo;
+                CargarMedicos();
             }
         }
         protected void CargarTurnos(string legajo)
@@ -121,7 +121,109 @@ namespace TP_INT_P2
             legajo = Session["legajo"]?.ToString() ?? "";
             CargarTurnos(legajo);
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+
+            // 1. Fecha desde
+            DateTime? turnosDesde = null;
+            if (DateTime.TryParse(txtTurnosDesde.Text, out DateTime fechaDesde))
+                turnosDesde = fechaDesde;
+
+            // 2. Fecha hasta
+            DateTime? turnosHasta = null;
+            if (DateTime.TryParse(txtTurnosHasta.Text, out DateTime fechaHasta))
+                turnosHasta = fechaHasta;
+
+            // 3. Legajo (médico)
+            int? legajo = null;
+            if (!string.IsNullOrWhiteSpace(ddlMedicos.SelectedValue) && ddlMedicos.SelectedValue != "0")
+            {
+                if (int.TryParse(ddlMedicos.SelectedValue, out int parsedLegajo))
+                    legajo = parsedLegajo;
+            }
+
+            // 4. Palabra clave (nombre, apellido, DNI)
+            string palabraClave = string.IsNullOrWhiteSpace(txtBuscarPorPalabraClave.Text)
+                                  ? null
+                                  : txtBuscarPorPalabraClave.Text.Trim();
+
+            // Buscar en la base de datos
+            gvTurnos.DataSource = negocioTurno.Buscar(turnosDesde, turnosHasta, legajo, palabraClave);
+            gvTurnos.DataBind();
+        }
+
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetearFormulario();
+        }
+        protected void CargarMedicos()
+        {
+            // Buscar los médicos con esa especialidad
+            NegocioMedico negocioMedico = new NegocioMedico();
+            List<Medico> medicos = negocioMedico.GetMedicosPorEspecialidad("");
+            ddlMedicos.DataSource = medicos;
+            ddlMedicos.DataValueField = "Legajo";
+            ddlMedicos.DataTextField = "FullName";
+            ddlMedicos.DataBind();
+            ddlMedicos.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+
+        }
+
+        //protected void ddlMedicos_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    txtBuscarPorPalabraClave.Text = String.Empty;
+        //    NegocioTurno negocioTurno = new NegocioTurno();
+        //    if (ddlMedicos.SelectedValue != "0")
+        //    { 
+        //        gvTurnos.DataSource = negocioTurno.BuscarPorMedico(ddlMedicos.SelectedValue);
+        //        gvTurnos.DataBind();
+        //    }
+        //    else
+        //    {
+        //        ResetearFormulario();
+        //    }
+        //}
+        protected void ResetearFormulario()
+        {
+            txtTurnosDesde.Text = String.Empty;
+            txtTurnosHasta.Text = String.Empty;
+            ddlMedicos.SelectedValue = "0";
+            txtBuscarPorPalabraClave.Text = String.Empty;
+            NegocioTurno negocioTurno = new NegocioTurno();
+            legajo = Session["legajo"]?.ToString() ?? "";
+            CargarTurnos(legajo);
+            gvTurnos.DataBind();
+        }
+
+        protected void lbPasados_Click(object sender, EventArgs e)
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            DateTime ayer = DateTime.Today.AddDays(-1);
+
+            BuscarPorFecha(null, ayer);
+        }
+
+        protected void lbFuturos_Click(object sender, EventArgs e)
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            DateTime hoy = DateTime.Today;
+
+            BuscarPorFecha(hoy, null);
+
+        }
+        protected void BuscarPorFecha (DateTime? inicio, DateTime? fin )
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            //gvTurnos.DataSource = negocioTurno.BuscarPorFecha(inicio, fin);
+            gvTurnos.DataBind();
+        }
+
     }
+
+
 
 }
 

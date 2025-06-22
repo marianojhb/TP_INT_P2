@@ -8,7 +8,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-                <h2>Agregar Paciente</h2>
+    <h2 class="w-75 mx-auto">Agregar Paciente</h2>
 
 <div class="container shadow p-4" style="max-width: 700px;"> 
     <div class="form-group row">

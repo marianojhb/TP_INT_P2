@@ -47,11 +47,11 @@ namespace TP_INT_P2
 
                 // Gestión de usuario:
                 {
-                    string usuario = Session["Usuario"] as string;
+                    string username = Session["Username"] as string;
 
-                    if (!string.IsNullOrEmpty(usuario))
+                    if (!string.IsNullOrEmpty(username))
                     {
-                        lblUsuario.Text = "Usuario: " + usuario;
+                        lblUsuario.Text = "Usuario: " + username;
                         lblFullName.Text = Session["FullName"] as string;
                         cerrarSesion.Visible = true;
                     }
@@ -70,7 +70,7 @@ namespace TP_INT_P2
 
         protected void cerrarSesion_Click(object sender, EventArgs e)
         {
-            Session["Usuario"] = String.Empty;
+            Session["Username"] = String.Empty;
             Session["FullName"] = String.Empty;
             Session["Legajo"] = String.Empty;
             cerrarSesion.Visible = true;

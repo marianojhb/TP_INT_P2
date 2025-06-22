@@ -35,5 +35,9 @@ namespace Negocio
             DaoMedico dao = new DaoMedico();
             return dao.GetMedicosPorEspecialidad(codEspecialidad);
         }
+        public int ActualizarMedico(Medico m)
+        {
+            return daoMedico.ActualizarMedico(m);
+        }
     }
 }

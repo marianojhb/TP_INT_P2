@@ -15,6 +15,24 @@ namespace TP_INT_P2
     {
 
         /// <summary>
+        /// Control txtBuscarPorNombreOApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarPorNombreOApellido;
+
+        /// <summary>
+        /// Control btnBuscarPorNombreOApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarPorNombreOApellido;
+
+        /// <summary>
         /// Control Panel1.
         /// </summary>
         /// <remarks>

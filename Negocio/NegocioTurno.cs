@@ -147,6 +147,11 @@ namespace Negocio
         {
             daoTurno.ActualizarTurno(turno);
         }
+
+        public DataTable Buscar(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
+        {
+            return daoTurno.Buscar(turnosDesde, turnosHasta, legajo, palabraClave);
+        }
     }
 }
 

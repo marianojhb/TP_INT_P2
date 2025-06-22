@@ -16,7 +16,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Asignar un nuevo turno</h2>
+    <h2 class="w-75 mx-auto">Asignar un nuevo turno</h2>
     <div class="container d-flex justify-content-center align-items-center" >
         <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-4 shadow rounded anchopanel">
 

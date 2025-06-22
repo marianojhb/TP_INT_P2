@@ -3,6 +3,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Listado de Pacientes</h2>
+    <div class="form-group row mx-auto p-3 mb-3 col-9">
+        <div class="form-group row">
+            <div class="col-3">
+            <asp:TextBox ID="txtBuscarPorNombreOApellido" runat="server" CssClass="form-control " Placeholder="Buscar por nombre o apellido ..."></asp:TextBox></div>
+            <div class="col-3" >
+            <asp:Button ID="btnBuscarPorNombreOApellido" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscarPorNombreOApellido_Click" /></div>
+            
+        </div>
+    </div>
         <%--<asp:Panel ID="Panel1" runat="server" CssClass="col-md-8 mx-auto card p-3">--%>
         <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-3">
         <asp:GridView ID="gvPacientes" runat="server" 

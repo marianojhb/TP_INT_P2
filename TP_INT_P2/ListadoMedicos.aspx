@@ -12,13 +12,27 @@
         .profilepicDiv
         {
             text-align: center;
+            transition: transform 0.3s ease;
         }
+        .card {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+
+        .card:hover .profilepicDiv {
+          transform: scale(1.1);      /* agranda la imagen 10% */
+          transition: transform 0.6s ease;
+        }
+
     </style>
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Listado de Médicos</h2>
+     <h2>Listado de Médicos</h2>
     <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
-<asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-75 border p-3">
+<asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
     <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />

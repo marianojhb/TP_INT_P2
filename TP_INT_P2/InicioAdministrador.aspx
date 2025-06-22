@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Inicio</h2>
+    <h2 class="w-75 mx-auto">Inicio</h2>
     <div style ="min-width: 576px; margin: 50px auto">
         <div class="mx-auto p-3 text-center">
             <div class="mt-4">

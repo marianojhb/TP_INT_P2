@@ -177,6 +177,11 @@ namespace TP_INT_P2
             gvPacientes.PageIndex = e.NewPageIndex;
             CargarPacientes();
         }
+
+        protected void btnBuscarPorNombreOApellido_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }

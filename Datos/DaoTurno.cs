@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -181,5 +183,60 @@ namespace Datos
                 }
             }
         }
+
+
+        /// //////////////////////////////////////////////////////////////////////////////////////
+
+        public DataTable Buscar(DateTime? turnosDesde, DateTime? turnosHasta, int? _legajo, string palabraClave)
+        {
+            using (SqlConnection conexion = ac.obtenerConexion())
+            {
+                string consulta =
+                "SELECT T.*, PA.*, P.*, M.*, (PM.nombre_P + ' ' + PM.apellido_P) AS fullNameMedico, L.*, PROV.* " +
+                "FROM TURNOS T " +
+                "INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA " +
+                "INNER JOIN PERSONAS P ON T.dni_T = P.dni_P " +
+                "INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M " +
+                "INNER JOIN PERSONAS PM ON M.dni_M = PM.dni_P " +
+                "INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l " +
+                "INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV " +
+                "WHERE " +
+                "(@palabraClave IS NULL OR (" +
+                    "P.nombre_P LIKE @palabraClave " +
+                    "OR P.apellido_P LIKE @palabraClave " +
+                    "OR P.dni_P LIKE @palabraClave " +
+                    "OR P.email_P LIKE @palabraClave)) " +
+                "AND(" +
+                    "@legajo IS NULL " +
+                    "OR M.legajo_M = @legajo) " +
+                "AND(" +
+                    "@turnosDesde IS NULL " +
+                    "OR(T.fecha_T >= @turnosDesde)) " +
+                "AND(@turnosHasta IS NULL " +
+                    "OR(T.fecha_T <= @turnosHasta)) " +
+                "ORDER BY T.fecha_T ASC";
+
+                using (SqlCommand comando = new SqlCommand())
+                {
+                    comando.Connection = conexion;
+
+                    // Listado de Turnos con palabra clave
+
+                    int? legajo = _legajo;
+                    comando.Parameters.AddWithValue("@palabraClave", string.IsNullOrEmpty(palabraClave) ? (object)DBNull.Value : "%" + palabraClave + "%");
+                    comando.Parameters.AddWithValue("@legajo", legajo.HasValue ? legajo.Value : (object)DBNull.Value);
+                    comando.Parameters.AddWithValue("@turnosDesde", turnosDesde == null ? (object)DBNull.Value : turnosDesde);
+                    comando.Parameters.AddWithValue("@turnosHasta", turnosHasta == null ? (object)DBNull.Value : turnosHasta);
+
+                    comando.CommandText = consulta;
+                    SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+                    DataTable dt = new DataTable();
+                    adaptador.Fill(dt);
+                    return dt;
+                }
+            }
+            
+        }
+
     }
 }

@@ -2,8 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Mis Horarios</h2>
-
+     <h2 class="w-75 mx-auto">Mis Horarios</h2>
     <div class="container d-flex justify-content-center align-items-center" >
     <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-4 shadow rounded anchopanel">
     <asp:GridView ID="gvHorarios" runat="server" AutoGenerateColumns="False"  DataKeyNames="hora_H"

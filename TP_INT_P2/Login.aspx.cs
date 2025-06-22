@@ -35,7 +35,7 @@ namespace TP_INT_P2
                 Master.FindControl("cerrarSesion").Visible = true;
 
                 // Guardo el nombre de usuario logueado en una variable de sesión para usar en toda la app
-                Session["Usuario"] = txtUsername.Text;
+                Session["Username"] = txtUsername.Text;
 
 
                 // Busco el rol de la persona logueada para ver a donde la redirijo
@@ -45,7 +45,7 @@ namespace TP_INT_P2
 
                 if (usuario.Tipo == "01")
                 {
-                    Session["FullName"] = String.Empty;
+                    Session["FullName"] = "Administrador";
                     Session["Legajo"] = String.Empty;
                     Response.Redirect("~/InicioAdministrador.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
