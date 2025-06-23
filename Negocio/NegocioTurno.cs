@@ -33,12 +33,6 @@ namespace Negocio
             // Traer las turnos ya reservados
             List<Turno> turnosReservados = GetTurnosReservados(legajo);
 
-            //List<DateTime> turnosReservadosList = new List<DateTime>();
-            //foreach (Turno dt in turnosReservados)
-            //{
-            //    turnosReservadosList.Add(dt.Fecha);
-            //}
-
             // A todos los turnos, le resto los turnos reservados, quedan los turnos libres
             List<DateTime> turnosLibres = ObtenerTurnosLibres(turnosTodos, turnosReservados);
 

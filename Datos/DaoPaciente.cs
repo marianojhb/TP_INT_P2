@@ -45,7 +45,7 @@ namespace Datos
             SqlCommand comando = new SqlCommand();
             ArmarParametrosAgregarPaciente(ref comando, paciente);
             comando.CommandType = CommandType.StoredProcedure;
-            return ac.ejecutarProcedimientosAlmacenados(comando, "SP_AGREGARPACIENTE");
+            return ac.ejecutarProcedimientosAlmacenados(comando, "SP_AGREGARPACIENTE");  // retorna cuantas lineas modifico.... 2
         }
 
 

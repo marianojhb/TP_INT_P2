@@ -217,7 +217,7 @@
             </asp:GridView>
     </div>
  </asp:Panel>
-            <script>
+<script>
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
@@ -225,7 +225,7 @@
                 todayHighlight: true
             });
         });
-            </script>
+</script>
     </asp:Content>
 
 

@@ -73,7 +73,7 @@ namespace TP_INT_P2
             Session["Username"] = String.Empty;
             Session["FullName"] = String.Empty;
             Session["Legajo"] = String.Empty;
-            cerrarSesion.Visible = true;
+            //cerrarSesion.Visible = true;
             Response.Redirect("~/Inicio.aspx");
         }
 
