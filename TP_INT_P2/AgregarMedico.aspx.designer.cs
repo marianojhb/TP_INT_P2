@@ -69,6 +69,24 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.Label lblChequearDNIHint;
 
         /// <summary>
+        /// Control rvfDNI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfDNI;
+
+        /// <summary>
+        /// Control revDNI.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDNI;
+
+        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -78,6 +96,24 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
+        /// Control rfvNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombre;
+
+        /// <summary>
+        /// Control revNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revNombre;
+
+        /// <summary>
         /// Control txtApellido.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,24 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
+
+        /// <summary>
+        /// Control rfvApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvApellido;
+
+        /// <summary>
+        /// Control revApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revApellido;
 
         /// <summary>
         /// Control rbMasculino.
@@ -105,6 +159,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.RadioButton rbFemenino;
 
         /// <summary>
+        /// Control cvSexo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvSexo;
+
+        /// <summary>
         /// Control txtNacionalidad.
         /// </summary>
         /// <remarks>
@@ -112,6 +175,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNacionalidad;
+
+        /// <summary>
+        /// Control rfvNacionalidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNacionalidad;
 
         /// <summary>
         /// Control ddlProvincias.
@@ -123,6 +195,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.DropDownList ddlProvincias;
 
         /// <summary>
+        /// Control rfvProvincias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProvincias;
+
+        /// <summary>
         /// Control ddlLocalidades.
         /// </summary>
         /// <remarks>
@@ -130,6 +211,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLocalidades;
+
+        /// <summary>
+        /// Control rfvLocalidades.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLocalidades;
 
         /// <summary>
         /// Control txtFechaNac.
@@ -141,6 +231,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtFechaNac;
 
         /// <summary>
+        /// Control rfvFechaNac.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaNac;
+
+        /// <summary>
         /// Control txtDireccion.
         /// </summary>
         /// <remarks>
@@ -148,6 +247,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+
+        /// <summary>
+        /// Control rfvDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDireccion;
 
         /// <summary>
         /// Control txtEmail.
@@ -159,6 +267,24 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// Control revEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
+
+        /// <summary>
+        /// Control rfvEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmail;
+
+        /// <summary>
         /// Control txtTelefono.
         /// </summary>
         /// <remarks>
@@ -166,6 +292,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+
+        /// <summary>
+        /// Control rfvTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTelefono;
 
         /// <summary>
         /// Control txtHorario.
@@ -177,6 +312,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtHorario;
 
         /// <summary>
+        /// Control rfvHorario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHorario;
+
+        /// <summary>
         /// Control ddlEspecialidades.
         /// </summary>
         /// <remarks>
@@ -184,6 +328,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEspecialidades;
+
+        /// <summary>
+        /// Control rfvEspecialidades.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEspecialidades;
 
         /// <summary>
         /// Control txtUsername.
@@ -195,6 +348,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtUsername;
 
         /// <summary>
+        /// Control revUsername.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revUsername;
+
+        /// <summary>
         /// Control txtPassword.
         /// </summary>
         /// <remarks>
@@ -202,6 +364,15 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+
+        /// <summary>
+        /// Control revPassword.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPassword;
 
         /// <summary>
         /// Control txtPasswordReingreso.

@@ -12,7 +12,7 @@ namespace TP_INT_P2
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null || string.IsNullOrEmpty(Session["Usuario"].ToString()))
+            if (Session["Username"] == null || string.IsNullOrEmpty(Session["Username"].ToString()))
             {
                 Response.Redirect("~/Login.aspx", false);
                 Context.ApplicationInstance.CompleteRequest();

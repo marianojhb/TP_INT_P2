@@ -8,157 +8,149 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2 class="w-75 mx-auto">Agregar Paciente</h2>
+<div class="container py-5">
+    <!-- Título -->
+    <div class="text-center mb-4">
+        <i class="fa-solid fa-user-plus fa-3x text-primary mb-2"></i>
+        <h2 class="fw-bold">Agregar Paciente</h2>
+        <p class="text-muted">Completá el formulario con los datos del paciente.</p>
+    </div>
 
-<div class="container shadow p-4" style="max-width: 700px;"> 
-    <div class="form-group row">
+    <!-- Formulario -->
+    <div class="card shadow mx-auto" style="max-width: 800px;">
+        <div class="card-body p-4">
 
-        <div class="form-group row mb-3">
-                <label for="txtDni" class="col-sm-4 col-form-label">DNI</label>
+            <!-- DNI -->
+            <div class="row mb-3 align-items-center">
+                <label for="txtDni" class="col-sm-3 col-form-label">DNI</label>
                 <div class="col-sm-3">
                     <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="DNI" />
                 </div>
                 <div class="col-sm-2">
-                    <asp:Button ID="btnChequearDNI" runat="server" Text="Validar" OnClick="btnChequearDNI_Click" CssClass="btn btn-secondary" CausesValidation="False" />
+                    <asp:Button ID="btnChequearDNI" runat="server" Text="Validar" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnChequearDNI_Click" CausesValidation="False" />
                 </div>
-                <div class="col-sm-3">
-                    <asp:Label ID="lblChequearDNI" runat="server" Text="" ForeColor="Red"></asp:Label>
-                    <asp:Label ID="lblChequearDNIValido" runat="server" Text="" ForeColor="Green"></asp:Label>
-                    <small>
-                    <asp:Label ID="lblChequearDNIHint" runat="server" Text="Valide antes de enviar el formulario"></asp:Label></small>
+                <div class="col-sm-4">
+                    <asp:Label ID="lblChequearDNI" runat="server" ForeColor="Red" />
+                    <asp:Label ID="lblChequearDNIValido" runat="server" ForeColor="Green" />
+                    <small class="text-muted d-block"><asp:Label ID="lblChequearDNIHint" runat="server" /></small>
                 </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            <label for="txtNombre" class="col-sm-4 col-form-label">Nombre</label>
-            <div class="col-sm-8">
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" />
             </div>
-        </div>
 
-        <div class="form-group row mb-3">
-            <label for="txtApellido" class="col-sm-4 col-form-label">Apellido</label>
-            <div class="col-sm-8">
-                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido" />
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-          <fieldset class="form-group">
-            <div class="row">
-              <label class="col-form-label col-sm-4 pt-0">Sexo</label>
-              <div class="col-sm-8">
-                <div class="form-check form-check-inline">
-                    <asp:RadioButton ID="rbMasculino" CssClass="form-check-input" GroupName="Sexo" value="M" runat="server" />
-                  <label class="form-check-label" for="<%= rbMasculino.ClientID %>">
-                    Masculino
-                  </label>
+            <!-- Nombre y Apellido -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" />
                 </div>
-                <div class="form-check form-check-inline">
-                    <asp:RadioButton ID="rbFemenino" CssClass="form-check-input" GroupName="Sexo" value="F" runat="server" />
-                    <label class="form-check-label" for="<%= rbFemenino.ClientID %>">
-                    Femenino
-                  </label>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Apellido</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido" />
                 </div>
-              </div>
             </div>
-          </fieldset>
-        </div>
 
-        <div class="form-group row mb-3">
-            <label for="txtNacionalidad" class="col-sm-4 col-form-label">Nacionalidad</label>
-            <div class="col-sm-8">
-                <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Nacionalidad" />
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            <label for="ddlProvincias" class="col-sm-4 col-form-label">Provincia</label>
-    
-            <div class="col-sm-8">
-                <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" >
-            </asp:DropDownList>
-              </div>   
-        </div>
-
-        <div class="form-group row mb-3">
-            <label for="ddlLocalidades" class="col-sm-4 col-form-label">Localidad</label>
-                <div class="col-sm-8">
-                <asp:DropDownList ID="ddlLocalidades" runat="server" CssClass="form-select" AutoPostBack="true" >
-                    </asp:DropDownList>
+            <!-- Sexo -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Sexo</label>
+                <div class="col-sm-9">
+                    <div class="form-check form-check-inline">
+                        <asp:RadioButton ID="rbMasculino" runat="server" GroupName="Sexo" CssClass="form-check-input" value="M" />
+                        <label class="form-check-label" for="<%= rbMasculino.ClientID %>">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <asp:RadioButton ID="rbFemenino" runat="server" GroupName="Sexo" CssClass="form-check-input" value="F" />
+                        <label class="form-check-label" for="<%= rbFemenino.ClientID %>">Femenino</label>
+                    </div>
                 </div>
-        </div>
-   
-        <div class="form-group row mb-3">
-                    <label for="txtFechaNac"  class="col-sm-4 col-form-label">Fecha de Nacimiento</label>
-                <div class="col-sm-8">
-                    <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control datepicker" placeholder="Fecha de Nacimiento" style="padding: 7px 12px;"/>
-            
+            </div>
+
+            <!-- Nacionalidad -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nacionalidad</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Nacionalidad" />
                 </div>
-        </div>
-   
-        <div class="form-group row mb-3">
-            <label for="txtDireccion" class="col-sm-4 col-form-label">Dirección</label>
-            <div class="col-sm-8">
-                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Calle número y departamento" />
             </div>
-       </div>
 
-        <div class="form-group row mb-3">
-            <label for="txtEmail" class="col-sm-4 col-form-label">Email</label>
-            <div class="col-sm-8">
-                <asp:TextBox TextMode="Email" ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" />
-
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            <label for="txtTelefono" class="col-sm-4 col-form-label">Telefono</label>
-            <div class="col-sm-8">
-                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" placeholder="Telefono" />
-            </div>
-        </div>
-
-        <%--botones limpiar y guardar--%>
-        <div class="form-group row">
-      <div class="col-sm-12 text-center mt-3">
-        <asp:Button ID="btnReset" runat="server" CssClass="btn btn-secondary mx-2" Text="Limpiar" OnClick="btnReset_Click" />
-        <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary mx-2" Text="Guardar" OnClick="btnGuardar_Click" />
-      </div>
-    </div>
-    </div>
-
-<!-- Toast de Exito -->
-<asp:Panel ID="pnlExito" runat="server" Visible="false">
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-        <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <strong>¡Éxito!</strong> El registro se guardó correctamente.
+            <!-- Provincia y Localidad -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Provincia</label>
+                <div class="col-sm-9">
+                    <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" />
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Localidad</label>
+                <div class="col-sm-9">
+                    <asp:DropDownList ID="ddlLocalidades" runat="server" CssClass="form-select" AutoPostBack="True" />
+                </div>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control datepicker" placeholder="YYYY-MM-DD" />
+                </div>
+            </div>
+
+            <!-- Dirección, Email y Teléfono -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Dirección</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Ej: Calle 123, depto" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="ejemplo@mail.com" />
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label class="col-sm-3 col-form-label">Teléfono</label>
+                <div class="col-sm-9">
+                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" placeholder="Ej: 1134567890" />
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="text-center">
+                <asp:Button ID="btnReset" runat="server" CssClass="btn btn-outline-secondary mx-2" Text="Limpiar" OnClick="btnReset_Click" />
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary mx-2" Text="Guardar" OnClick="btnGuardar_Click" />
             </div>
         </div>
     </div>
-</asp:Panel>
 
-<!-- Toast de Error -->
-<asp:Panel ID="pnlError" runat="server" Visible="false">
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-        <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <strong>¡Error!</strong> Ocurrió un problema al guardar el registro.
+    <!-- Toasts -->
+    <asp:Panel ID="pnlExito" runat="server" Visible="false">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div class="toast text-bg-success" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>¡Éxito!</strong> El registro se guardó correctamente.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white m-auto me-2" data-bs-dismiss="toast"></button>
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
             </div>
         </div>
-    </div>
-</asp:Panel>
+    </asp:Panel>
 
-
-
-</div> <%--endform --%>
+    <asp:Panel ID="pnlError" runat="server" Visible="false">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div class="toast text-bg-danger" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>¡Error!</strong> Hubo un problema al guardar el registro.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white m-auto me-2" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
+</div>
+    <%--endform --%>
 
 <%-- Script que genera un mini calendario para elegir la fecha --%>
 <script type="text/javascript">

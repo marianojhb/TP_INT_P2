@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,9 @@ namespace TP_INT_P2
                 {
                     Response.Redirect("~/Login.aspx");
                 }
-
+                Medico medico = Session["Medico"] as Medico;
+                lblName.Text = Session["Name"].ToString();
+                imgMedico.ImageUrl = medico.Imagen;
             }
         }
 

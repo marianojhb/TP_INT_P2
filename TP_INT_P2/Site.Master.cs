@@ -41,6 +41,35 @@ namespace TP_INT_P2
                     Session["Tema"] = tema;
                 }
             }
+
+            // Gestión de visibilidad de páginas
+            string tipo = Session["Tipo"] as string;
+            if (tipo == "01")
+            {
+                li_Inicio.Style["display"] = "block";
+                li_ListadoMedicos.Style["display"] = "block";
+                li_ListadoPacientes.Style["display"] = "block";
+                li_ListadoTurnos.Style["display"] = "block";
+                li_Informes.Style["display"] = "block";
+            } 
+            else if (tipo == "02")
+            {
+                li_Inicio.Style["display"] = "block";
+                li_ListadoMedicos.Style["display"] = "none";
+                li_ListadoPacientes.Style["display"] = "block";
+                li_ListadoTurnos.Style["display"] = "block";
+                li_Informes.Style["display"] = "block";
+            }
+            else if (string.IsNullOrEmpty(tipo))
+            {
+                li_Inicio.Style["display"] = "none";
+                li_ListadoMedicos.Style["display"] = "none";
+                li_ListadoPacientes.Style["display"] = "none";
+                li_ListadoTurnos.Style["display"] = "none";
+                li_Informes.Style["display"] = "none";
+            }
+
+
             if (!IsPostBack)
             {
 
@@ -73,7 +102,8 @@ namespace TP_INT_P2
             Session["Username"] = String.Empty;
             Session["FullName"] = String.Empty;
             Session["Legajo"] = String.Empty;
-            //cerrarSesion.Visible = true;
+            Session["Tipo"] = String.Empty;
+            cerrarSesion.Visible = true;
             Response.Redirect("~/Inicio.aspx");
         }
 

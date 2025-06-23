@@ -58,7 +58,9 @@ namespace TP_INT_P2
                     Medico medico = new Medico();
                     medico = negocioMedico.getDatos(usuario);
                     Session["FullName"] = $"{medico.Nombre} {medico.Apellido}";
+                    Session["Name"] = $"{medico.Nombre}";
                     Session["Legajo"] = medico.Legajo;
+                    Session["Medico"] = medico;
 
                     Response.Redirect("~/InicioMedico.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();

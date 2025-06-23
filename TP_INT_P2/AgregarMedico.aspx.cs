@@ -38,26 +38,32 @@ namespace TP_INT_P2
         }
         protected void CargarCamposObligatorios()
         {
-            txtTelefono.Attributes.Add("required", "true");
 
-            txtDni.Attributes.Add("required", "true");
+            // SE PASARON A FRONTEND CON LOS VALIDADORES DE ASP.NET
+
+            //txtDni.Attributes.Add("required", "true");
             btnChequearDNI.Attributes.Add("formnovalidate", "true");
-            txtNombre.Attributes.Add("required", "true");
-            txtApellido.Attributes.Add("required", "true");
-            txtEmail.Attributes.Add("required", "true");
-            txtTelefono.Attributes.Add("required", "true");
-            txtNacionalidad.Attributes.Add("required", "true");
-            txtFechaNac.Attributes.Add("required", "true");
-            txtHorario.Attributes.Add("required", "true");
+            //txtNombre.Attributes.Add("required", "true");
+            //txtApellido.Attributes.Add("required", "true");
+            //txtEmail.Attributes.Add("required", "true");
+            //txtTelefono.Attributes.Add("required", "true");
+            //txtNacionalidad.Attributes.Add("required", "true");
+            //txtFechaNac.Attributes.Add("required", "true");
+            //txtHorario.Attributes.Add("required", "true");
             //ddlEspecialidades.SelectedValue = "0";
             //rbMasculino.Checked = false;
             //rbFemenino.Checked = false;
-            txtDireccion.Attributes.Add("required", "true");
+            //txtDireccion.Attributes.Add("required", "true");
             //ddlProvincias.SelectedValue = "0";
             //ddlLocalidades.SelectedValue = "0";
-            txtUsername.Attributes.Add("required", "true");
-            txtPassword.Attributes.Add("required", "true");
+            //txtUsername.Attributes.Add("required", "true");
+            //txtPassword.Attributes.Add("required", "true");
 
+        }
+
+        protected void cvSexo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = rbMasculino.Checked || rbFemenino.Checked;
         }
         protected void CargarProvincias()
         {
@@ -136,95 +142,109 @@ namespace TP_INT_P2
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!Page.IsValid) return;
-
-            Medico m = new Medico();
-
-            // TABLA PERSONA
-            m.DNI = txtDni.Text.Trim();
-            m.Nombre = txtNombre.Text.Trim();
-            m.Apellido = txtApellido.Text.Trim();
-
-            // Radio button de Sexo:
+            if (!Page.IsValid)
             {
-                string sexoSeleccionado = "";
-                if (rbMasculino.Checked)
-                    sexoSeleccionado = "M";
-                else if (rbFemenino.Checked)
-                    sexoSeleccionado = "F";
-                m.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
+                return;
             }
-            m.Email = txtEmail.Text.Trim();
-            m.Nacionalidad = txtNacionalidad.Text.Trim();
-            m.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
-            m.Direccion = txtDireccion.Text.Trim();
-            m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
-            m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
-            m.Telefono = txtTelefono.Text.Trim();
-
-            // TABLA MEDICOS
-            m.Legajo = Convert.ToInt32(txtLegajo.Text);
-            m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
-            m.Horario = txtHorario.Text.Trim();
-            m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble
-
-            // TABLA USUARIOS
-            m.Username = txtUsername.Text.Trim();
-            m.Password = txtPassword.Text.Trim();
-
-
-            // PREPARAMOS PARA CHEQUEAR LA BBDD PARA VALIDACIONES
-
-            NegocioMedico negocioMedico = new NegocioMedico();
-            bool ingresoValidado = false;
-
-
-            // VALIDACION 1. CHEQUEAMOS SI EXISTE EL DNI
-
-            ingresoValidado = !negocioMedico.ExisteDNI(m.DNI); //si no existe dni se valida
+            else
+            {
+                Response.Write("ok");
             
 
-            //TODO: CARGAR EN LA BASE DE DATOS
-            if (ingresoValidado)
-            {
-                
+                Medico m = new Medico();
 
-                int insercionOK = negocioMedico.AgregarMedico(m);
+                // TABLA PERSONA
+                m.DNI = txtDni.Text.Trim();
+                m.Nombre = txtNombre.Text.Trim();
+                m.Apellido = txtApellido.Text.Trim();
 
-                
-
-                if (insercionOK > 0)
+                // Radio button de Sexo:
                 {
-                    pnlExito.Visible = true;
-                    pnlError.Visible = false;
-
-                    // Mostrar toast éxito y ocultarlo luego
-                    string script = @"
-                            var toastEl = document.querySelector('#" + pnlExito.ClientID + @" .toast');
-                            if (toastEl) {
-                                var bsToast = new bootstrap.Toast(toastEl);
-                                bsToast.show();
-                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
-                            }";
-                    ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
+                    string sexoSeleccionado = "";
+                    if (rbMasculino.Checked)
+                        sexoSeleccionado = "M";
+                    else if (rbFemenino.Checked)
+                        sexoSeleccionado = "F";
+                    m.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
                 }
-                else
+                m.Email = txtEmail.Text.Trim();
+                m.Nacionalidad = txtNacionalidad.Text.Trim();
+                if (string.IsNullOrWhiteSpace(txtFechaNac.Text))
                 {
-                    pnlExito.Visible = false;
-                    pnlError.Visible = true;
-
-                    // Mostrar toast error y ocultarlo luego
-                    string script = @"
-                            var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
-                            if (toastEl) {
-                                var bsToast = new bootstrap.Toast(toastEl);
-                                bsToast.show();
-                                setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
-                            }";
-                    ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
+                    rfvFechaNac.IsValid = false;
+                    return;
                 }
+                m.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
+                m.Direccion = txtDireccion.Text.Trim();
+                m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
+                m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
+                m.Telefono = txtTelefono.Text.Trim();
+
+                // TABLA MEDICOS
+                m.Legajo = Convert.ToInt32(txtLegajo.Text);
+                m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
+                m.Horario = txtHorario.Text.Trim();
+                m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble
+
+                // TABLA USUARIOS
+                m.Username = txtUsername.Text.Trim();
+                m.Password = txtPassword.Text.Trim();
+
+
+                // PREPARAMOS PARA CHEQUEAR LA BBDD PARA VALIDACIONES
+
+                NegocioMedico negocioMedico = new NegocioMedico();
+                bool ingresoValidado = false;
+
+
+                // VALIDACION 1. CHEQUEAMOS SI EXISTE EL DNI
+
+                ingresoValidado = !negocioMedico.ExisteDNI(m.DNI); //si no existe dni se valida
+
+
+                
+                if (ingresoValidado)
+                {
+
+
+                    // SI TODO ESTA OK: AGREGA EL NUEVO REGISTRO:
+                    int insercionOK = negocioMedico.AgregarMedico(m);
+
+
+
+                    if (insercionOK > 0)
+                    {
+                        pnlExito.Visible = true;
+                        pnlError.Visible = false;
+
+                        // Mostrar toast éxito y ocultarlo luego
+                        string script = @"
+                                var toastEl = document.querySelector('#" + pnlExito.ClientID + @" .toast');
+                                if (toastEl) {
+                                    var bsToast = new bootstrap.Toast(toastEl);
+                                    bsToast.show();
+                                    setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                                }";
+                        ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastExito", script, true);
+                    }
+                    else
+                    {
+                        pnlExito.Visible = false;
+                        pnlError.Visible = true;
+
+                        // Mostrar toast error y ocultarlo luego
+                        string script = @"
+                                var toastEl = document.querySelector('#" + pnlError.ClientID + @" .toast');
+                                if (toastEl) {
+                                    var bsToast = new bootstrap.Toast(toastEl);
+                                    bsToast.show();
+                                    setTimeout(function(){ toastEl.classList.remove('show'); }, 10000);
+                                }";
+                        ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
+                    }
+                }
+                LimpiarFormularioAgregarMedico();
             }
-            LimpiarFormularioAgregarMedico();
         }
 
         protected void btnChequearDNI_Click(object sender, EventArgs e)
