@@ -5,7 +5,7 @@
     <h2>Listado de Pacientes</h2>
     <div class="form-group row mx-auto p-3 mb-3 col-9">
         <div class="form-group row">
-            <div class="col-3">
+            <div class="col-4">
             <asp:TextBox ID="txtBuscarPorNombreOApellido" runat="server" CssClass="form-control " Placeholder="Buscar por nombre o apellido ..."></asp:TextBox></div>
             <div class="col-3" >
             <asp:Button ID="btnBuscarPorNombreOApellido" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscarPorNombreOApellido_Click" /></div>
@@ -31,7 +31,8 @@
             AllowPaging="True" 
             OnPageIndexChanging="gvPacientes_PageIndexChanging"
             Width="100%"
-            
+            CssClass="table table-hover table-bordered align-middle w-100"
+            HeaderStyle-CssClass="text-center table-primary"
             >
             <EmptyDataTemplate>
                 <div class="container mt-3">

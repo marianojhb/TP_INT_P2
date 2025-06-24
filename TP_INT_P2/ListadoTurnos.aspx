@@ -104,7 +104,8 @@
             AllowPaging="True" 
             OnPageIndexChanging="gvTurnos_PageIndexChanging"
             Width="100%"
-        
+            CssClass="table table-hover table-bordered align-middle w-100"
+            HeaderStyle-CssClass="text-center table-primary"
         >
             <EmptyDataTemplate>
                 <div class="container mt-3">

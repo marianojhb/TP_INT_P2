@@ -19,7 +19,7 @@ namespace TP_INT_P2
                     Response.Redirect("~/Login.aspx");
                 }
                 Medico medico = Session["Medico"] as Medico;
-                lblName.Text = Session["Name"].ToString();
+                lblName.Text = Session["FullName"].ToString();
                 imgMedico.ImageUrl = medico.Imagen;
             }
         }
