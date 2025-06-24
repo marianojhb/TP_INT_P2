@@ -30,19 +30,7 @@ namespace TP_INT_P2
 
         protected void CargarCamposObligatorios()
         {
-            txtTelefono.Attributes.Add("required", "true");
-
-            txtDni.Attributes.Add("required", "true");
             btnChequearDNI.Attributes.Add("formnovalidate", "true");
-            txtNombre.Attributes.Add("required", "true");
-            txtApellido.Attributes.Add("required", "true");
-            txtEmail.Attributes.Add("required", "true");
-            txtTelefono.Attributes.Add("required", "true");
-            txtNacionalidad.Attributes.Add("required", "true");
-            txtFechaNac.Attributes.Add("required", "true");
-            txtDireccion.Attributes.Add("required", "true");
-
-
         }
         protected void CargarProvincias()
         {
@@ -100,7 +88,11 @@ namespace TP_INT_P2
             ddlLocalidades.SelectedValue = "0";
         }
 
-
+        // Valida que el RadioButton sexo esté chequeado con alguna alternativa
+        protected void cvSexo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = rbMasculino.Checked || rbFemenino.Checked;
+        }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
@@ -123,6 +115,11 @@ namespace TP_INT_P2
             }
             paciente.Email = txtEmail.Text.Trim();
             paciente.Nacionalidad = txtNacionalidad.Text.Trim();
+            if (string.IsNullOrWhiteSpace(txtFechaNac.Text))
+            {
+                rfvFechaNac.IsValid = false;
+                return;
+            }
             paciente.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
             paciente.Direccion = txtDireccion.Text.Trim();
             paciente.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);

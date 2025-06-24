@@ -10,7 +10,7 @@ namespace Entidades
 {
     public class Paciente : Persona
     {
-        public string DNI { get; set; }
+        
         public bool Estado { get; set; }
         public Paciente (string dni)
         {

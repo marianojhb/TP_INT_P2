@@ -17,7 +17,7 @@ namespace Datos
         {
             SqlParameter parametros = new SqlParameter();
             parametros = comando.Parameters.Add("@DNI", SqlDbType.VarChar);
-            parametros.Value = paciente.Nombre;
+            parametros.Value = paciente.DNI;
             parametros = comando.Parameters.Add("@NOMBRE", SqlDbType.VarChar);
             parametros.Value = paciente.Nombre;
             parametros = comando.Parameters.Add("@APELLIDO", SqlDbType.VarChar);

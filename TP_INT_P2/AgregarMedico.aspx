@@ -306,9 +306,6 @@
 </asp:Panel>
 
 
-
-</div> <%--endform --%>
-
 <%-- Script que genera un mini calendario para elegir la fecha --%>
 <script type="text/javascript">
     $(document).ready(function () {

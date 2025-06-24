@@ -27,7 +27,7 @@ namespace TP_INT_P2
                     paginaBloqueada.Text = "Sección exclusiva para usuarios Admin";
                     panelContenidoListadoMedicos.Visible = false;
                 } 
-                else if (Session["Tipo"].ToString() != "01")
+                else if (Session["Tipo"].ToString() == "01")
                 {
                     MostrarBotonAgregarMedico();
                 }

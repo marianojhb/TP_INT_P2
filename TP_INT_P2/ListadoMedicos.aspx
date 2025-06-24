@@ -33,7 +33,9 @@
      <h2>Listado de Médicos</h2>
     <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
-    <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" />
+    <div class="p-3 mb-3 text-center">
+        <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" CssClass="btn btn-primary" />
+    </div>
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
@@ -50,7 +52,7 @@
             DataKeyNames="dni_P" 
             OnItemUpdated="lvMedicos_ItemUpdated"
             >
-            <%--DataKeyNames="dni_P"--%>
+            
         <ItemTemplate>
             <div class="col-md-4 mb-4">
                 <div class="card-deck">
@@ -138,7 +140,6 @@
                                 <asp:FileUpload ID="fuImagenURL" runat="server" CssClass="form-control" />
                             </div>
                             
-
                             <div class="mb-3">
                                 <label for="nombre_PTextBox" class="form-label">
                             Nombre:
@@ -183,7 +184,6 @@
                             <asp:TextBox ID="nacionalidad_PTextBox" runat="server" Text='<%# Bind("nacionalidad_P") %>'  CssClass="form-control"/>
                             </div>
 
-
                             <div class="mb-3">
                                 <label for="fechaNac_PTextBox" class="form-label">
                             Fecha de Nacimiento:
@@ -193,7 +193,6 @@
                             </div>
 
 
-
                             <div class="mb-3">
                                 <label for="direccion_PTextBox" class="form-label">
                                     
@@ -201,7 +200,6 @@
                                 </label>
                             <asp:TextBox ID="direccion_PTextBox" runat="server" Text='<%# Bind("direccion_P") %>'  CssClass="form-control"/>
                             </div>
-
 
                             <div class="mb-3">
                                 <label for="ddlProvincia" class="form-label">
@@ -239,8 +237,6 @@
                             <asp:TextBox ID="telefono_PTextBox" runat="server" Text='<%# Bind("telefono_P") %>'  CssClass="form-control"/>
                             </div>
 
-
-
                             <div class="mb-3">
                                 <label for="ddlEspecialidades" class="form-label">
                             Especialidad:
@@ -249,7 +245,6 @@
                             <%--<asp:TextBox ID="codEspecialidad_MTextBox" runat="server" Text='<%# Bind("codEspecialidad_M") %>'  CssClass="form-control"/>--%>
                                 <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" ></asp:DropDownList>
                             </div>
-
 
                         </p>
                     </div>

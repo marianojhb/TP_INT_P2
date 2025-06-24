@@ -16,7 +16,7 @@ namespace TP_INT_P2
         {
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None; // para los validadores de WebForms
 
-            if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
+            if (Session["Tipo"] == null || Session["Tipo"].ToString() != "01")
             {
                 Response.Redirect("~/Login.aspx");
             }
@@ -38,33 +38,17 @@ namespace TP_INT_P2
         }
         protected void CargarCamposObligatorios()
         {
-
-            // SE PASARON A FRONTEND CON LOS VALIDADORES DE ASP.NET
-
-            //txtDni.Attributes.Add("required", "true");
+            // Permite al botón de chequear DNI se ejecute antes del postback de todo el formulario.
             btnChequearDNI.Attributes.Add("formnovalidate", "true");
-            //txtNombre.Attributes.Add("required", "true");
-            //txtApellido.Attributes.Add("required", "true");
-            //txtEmail.Attributes.Add("required", "true");
-            //txtTelefono.Attributes.Add("required", "true");
-            //txtNacionalidad.Attributes.Add("required", "true");
-            //txtFechaNac.Attributes.Add("required", "true");
-            //txtHorario.Attributes.Add("required", "true");
-            //ddlEspecialidades.SelectedValue = "0";
-            //rbMasculino.Checked = false;
-            //rbFemenino.Checked = false;
-            //txtDireccion.Attributes.Add("required", "true");
-            //ddlProvincias.SelectedValue = "0";
-            //ddlLocalidades.SelectedValue = "0";
-            //txtUsername.Attributes.Add("required", "true");
-            //txtPassword.Attributes.Add("required", "true");
 
         }
 
+        // Valida que el RadioButton sexo esté chequeado con alguna alternativa
         protected void cvSexo_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = rbMasculino.Checked || rbFemenino.Checked;
         }
+        
         protected void CargarProvincias()
         {
             {
@@ -105,6 +89,7 @@ namespace TP_INT_P2
 
         }
 
+        // Función que limpia el formulario con el botón Limpiar
         protected void LimpiarFormularioAgregarMedico()
         {
             txtDni.Text = String.Empty;
@@ -148,9 +133,6 @@ namespace TP_INT_P2
             }
             else
             {
-                Response.Write("ok");
-            
-
                 Medico m = new Medico();
 
                 // TABLA PERSONA
@@ -197,7 +179,7 @@ namespace TP_INT_P2
                 bool ingresoValidado = false;
 
 
-                // VALIDACION 1. CHEQUEAMOS SI EXISTE EL DNI
+                // CHEQUEAMOS SI EXISTE EL DNI
 
                 ingresoValidado = !negocioMedico.ExisteDNI(m.DNI); //si no existe dni se valida
 

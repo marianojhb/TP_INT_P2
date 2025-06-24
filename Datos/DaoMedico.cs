@@ -64,7 +64,7 @@ namespace Datos
         public int ProximoLegajo()
         {
             string consulta = "SELECT MAX(legajo_M) FROM MEDICOS";
-            using (SqlCommand command = new SqlCommand(consulta, ac.obtenerConexion())) // Asegurate de tener una conexión válida
+            using (SqlCommand command = new SqlCommand(consulta, ac.obtenerConexion())) // Me aseguro de tener una conexión válida
             {
                 object result = command.ExecuteScalar();
                 if (result == DBNull.Value || result == null)
@@ -203,50 +203,6 @@ namespace Datos
                 }
             }
 
-
-
-
-
-
-
-            //List<Medico> lista = new List<Medico>();
-            //string consulta = "SELECT * FROM PERSONAS P INNER JOIN MEDICOS M ON P.dni_P = M.dni_M INNER JOIN ESPECIALIDADES E ON M.codEspecialidad_M = E.codEspecialidad_E INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_L INNER JOIN PROVINCIAS PROV ON L.idProvincia_L=PROV.idProvincia_PROV WHERE M.codEspecialidad_M = @CODESPECIALIDAD ORDER BY P.apellido_P";
-
-            //SqlCommand cmd = new SqlCommand(consulta, ac.obtenerConexion());
-
-            //SqlParameter parametro = new SqlParameter();
-            //parametro = cmd.Parameters.Add("@CODESPECIALIDAD", SqlDbType.Int);
-            //parametro.Value = Convert.ToInt32(codEspecialidad);
-
-            //SqlDataReader data = cmd.ExecuteReader();
-
-            //while (data.Read())
-            //{
-            //    Medico medico = new Medico();
-
-            //    medico.Legajo = Convert.ToInt32(data["legajo_M"]);
-            //    medico.DNI = data["dni_P"].ToString();
-            //    medico.Nombre = data["nombre_P"].ToString();
-            //    medico.Apellido = data["apellido_P"].ToString();
-            //    medico.Sexo = data["sexo_P"].ToString()[0];
-            //    medico.Nacionalidad = data["nacionalidad_P"].ToString();
-            //    medico.FechaNac = Convert.ToDateTime(data["fechaNac_P"].ToString());
-            //    medico.IdLocalidad = Convert.ToInt32(data["idLocalidad_P"]);
-            //    medico.IdProvincia = Convert.ToInt32(data["idProvincia_P"]);
-            //    medico.Email = data["email_P"].ToString();
-            //    medico.Telefono = data["telefono_P"].ToString();
-            //    medico.Provincia = data["nombre_PROV"].ToString();
-            //    medico.Localidad = data["nombre_L"].ToString();
-            //    medico.Imagen = data["imagen_M"].ToString();
-            //    medico.CodEspecialidad = Convert.ToInt32(data["codEspecialidad_M"]);
-            //    medico.Especialidad = data["nombre_E"].ToString();
-            //    medico.setFullName();
-            //    lista.Add(medico);
-            //}
-
-            //data.Close();
-            //ac.cerrarConexion();
-            //return lista;
         }
 
     }

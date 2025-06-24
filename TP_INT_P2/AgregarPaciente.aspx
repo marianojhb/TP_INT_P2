@@ -35,6 +35,18 @@
                     <small class="text-muted d-block"><asp:Label ID="lblChequearDNIHint" runat="server" /></small>
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rvfDNI" runat="server"
+                ControlToValidate="txtDni"
+                ErrorMessage="El DNI es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+            <asp:RegularExpressionValidator 
+                ID="revDNI" runat="server" 
+                ErrorMessage="Ingrese un DNI válido" 
+                ControlToValidate="txtDni" 
+                CssClass="text-danger" 
+                Display="Dynamic" 
+                ValidationExpression="^[0-9]{8}$" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Nombre y Apellido -->
             <div class="row mb-3">
@@ -43,12 +55,37 @@
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" />
                 </div>
             </div>
+                <asp:RequiredFieldValidator ID="rfvNombre" runat="server"
+                ControlToValidate="txtNombre"
+                ErrorMessage="El nombre es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+                <asp:RegularExpressionValidator 
+                ID="revNombre" runat="server" 
+                ErrorMessage="Ingrese un nombre válido" 
+                ControlToValidate="txtNombre" 
+                CssClass="text-danger" 
+                Display="Dynamic" 
+                ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s.]+$" ValidationGroup="vgAgregarPaciente" />
+
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Apellido</label>
                 <div class="col-sm-9">
                     <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido" />
                 </div>
             </div>
+                <asp:RequiredFieldValidator ID="rfvApellido" runat="server"
+                ControlToValidate="txtApellido"
+                ErrorMessage="El apellido es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+                <asp:RegularExpressionValidator 
+                ID="revApellido" runat="server" 
+                ErrorMessage="Ingrese un apellido válido" 
+                ControlToValidate="txtApellido" 
+                CssClass="text-danger" 
+                Display="Dynamic" 
+                ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s.]+$" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Sexo -->
             <div class="row mb-3">
@@ -64,6 +101,16 @@
                     </div>
                 </div>
             </div>
+                <asp:CustomValidator ID="cvSexo"
+                runat="server"
+        
+                ErrorMessage="El sexo es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" 
+                OnServerValidate="cvSexo_ServerValidate"
+                ClientValidationFunction="ValidarSexo"
+                ValidateEmptyText="true" ValidationGroup="vgAgregarPaciente" />
+
 
             <!-- Nacionalidad -->
             <div class="row mb-3">
@@ -72,6 +119,11 @@
                     <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Nacionalidad" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server"
+                ControlToValidate="txtNacionalidad"
+                ErrorMessage="La nacionalidad es obligatoria"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Provincia y Localidad -->
             <div class="row mb-3">
@@ -80,12 +132,25 @@
                     <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvProvincias" runat="server"
+                ControlToValidate="ddlProvincias"
+                InitialValue="0"
+                ErrorMessage="Debe seleccionar una provincia"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Localidad</label>
                 <div class="col-sm-9">
                     <asp:DropDownList ID="ddlLocalidades" runat="server" CssClass="form-select" AutoPostBack="True" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvLocalidades" runat="server"
+                ControlToValidate="ddlLocalidades"
+                InitialValue="0"
+                ErrorMessage="Debe seleccionar una localidad"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Fecha de Nacimiento -->
             <div class="row mb-3">
@@ -94,6 +159,12 @@
                     <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control datepicker" placeholder="YYYY-MM-DD" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server"
+                ControlToValidate="txtFechaNac"
+                ErrorMessage="La fecha de nacimiento es obligatoria"
+                CssClass="text-danger"
+                Display="Dynamic" 
+                EnableClientScript="true" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Dirección, Email y Teléfono -->
             <div class="row mb-3">
@@ -102,23 +173,48 @@
                     <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" placeholder="Ej: Calle 123, depto" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvDireccion" runat="server"
+                ControlToValidate="txtDireccion"
+                ErrorMessage="La dirección es obligatoria"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="ejemplo@mail.com" />
                 </div>
             </div>
+            <asp:RegularExpressionValidator 
+                ID="revEmail" 
+                runat="server"
+                ControlToValidate="txtEmail"
+                ErrorMessage="Ingrese un email válido"
+                CssClass="text-danger"
+                Display="Dynamic"
+                ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$" ValidationGroup="vgAgregarPaciente" />
+            <asp:RequiredFieldValidator ID="rfvEmail" runat="server"
+                ControlToValidate="txtEmail"
+                ErrorMessage="El email es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
+
             <div class="row mb-4">
                 <label class="col-sm-3 col-form-label">Teléfono</label>
                 <div class="col-sm-9">
                     <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" placeholder="Ej: 1134567890" />
                 </div>
             </div>
+            <asp:RequiredFieldValidator ID="rfvTelefono" runat="server"
+                ControlToValidate="txtTelefono"
+                ErrorMessage="El teléfono es obligatorio"
+                CssClass="text-danger"
+                Display="Dynamic" ValidationGroup="vgAgregarPaciente" />
 
             <!-- Botones -->
             <div class="text-center">
                 <asp:Button ID="btnReset" runat="server" CssClass="btn btn-outline-secondary mx-2" Text="Limpiar" OnClick="btnReset_Click" />
-                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary mx-2" Text="Guardar" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary mx-2" Text="Guardar" OnClick="btnGuardar_Click" CausesValidation="True" ValidationGroup="vgAgregarPaciente" />
             </div>
         </div>
     </div>
