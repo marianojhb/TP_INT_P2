@@ -1,11 +1,22 @@
 ﻿<%@ Page Title="Login | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TP_INT_P2.Login" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .imagenPerfil {
+            border-radius: 50% !important;
+            width: 150px !important;
+            height: 150px !important;
+            text-align: center;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
         <h2 style="text-align:center;">Bienvenido a la Clínica TUP - Sistema de Gestión</h2>
 
         <div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
             <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+                <div class="mb-3 text-center">
+                    <asp:Image ID="imgPerfilUrl" runat="server" class="imagenPerfil p-3"/>
+                    </div>
                 <h3 class="text-center mb-4">Iniciar Sesión</h3>
 
                 <div class="mb-3">

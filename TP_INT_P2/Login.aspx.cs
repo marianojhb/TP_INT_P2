@@ -21,6 +21,42 @@ namespace TP_INT_P2
             //{
             //    Response.Write($"<p><strong>{key}</strong>: {Session[key]}</p>");
             //}
+
+            // Gestion de cookies para la imagen del login
+            {
+                HttpCookie ckPerfilImageUrl = Request.Cookies["ckPerfilImageUrl"];
+                HttpCookie ckUsername = Request.Cookies["ckUsername"];
+
+                Response.Write(ckPerfilImageUrl.Value + "<br>");
+
+                string perfilImageUrl = Session["ImgPerfilUrl"] as string;
+                if (!string.IsNullOrEmpty(perfilImageUrl))
+                {
+                    // Poner la imagen guardada en sesión
+                    imgPerfilUrl.ImageUrl = perfilImageUrl;
+                }
+
+                else if (ckPerfilImageUrl != null && !string.IsNullOrEmpty(ckPerfilImageUrl.Value))
+                {
+                    // Si hay cookie pero no sesión, uso la cookie
+                    perfilImageUrl = ckPerfilImageUrl.Value;
+                    imgPerfilUrl.ImageUrl = perfilImageUrl;
+                    Session["ImgPerfilUrl"] = perfilImageUrl;
+                }
+
+                else
+                {
+                    // Si no hay nada, default light
+                    perfilImageUrl = "~/imagenes/perfiles/00.png";
+                    imgPerfilUrl.ImageUrl = perfilImageUrl;
+
+                    ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", perfilImageUrl);
+                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
+                    this.Response.Cookies.Add(ckPerfilImageUrl);
+
+                    Session["ImgPerfilUrl"] = perfilImageUrl;
+                }
+            }
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -61,7 +97,12 @@ namespace TP_INT_P2
                     Session["Name"] = medico.Nombre;
                     Session["Legajo"] = medico.Legajo;
                     Session["Medico"] = medico;
-                    Session["imgMedicoImageUrl"] = medico.Imagen;
+                    Session["ImgPerfilUrl"] = medico.Imagen;
+
+                    
+                    HttpCookie ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", Session["ImgPerfilUrl"].ToString());
+                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
+                    this.Response.Cookies.Add(ckPerfilImageUrl);
 
                     Response.Redirect("~/InicioMedico.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();

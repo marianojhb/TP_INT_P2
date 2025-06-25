@@ -12,7 +12,7 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Gestión de cookies
+            // Gestión de cookies para los Temas Light y Dark
             {
                 HttpCookie ckTema = Request.Cookies["Tema"];
                 string tema = Session["Tema"] as string;
@@ -43,6 +43,8 @@ namespace TP_INT_P2
                 }
             }
 
+
+
             // Gestión de visibilidad de páginas
             string tipo = Session["Tipo"] as string;
             if (tipo == "01")
@@ -52,7 +54,10 @@ namespace TP_INT_P2
                 li_ListadoPacientes.Style["display"] = "block";
                 li_ListadoTurnos.Style["display"] = "block";
                 li_Informes.Style["display"] = "block";
-            } 
+                li_MiPerfil.Style["display"] = "none";
+                li_MisHorarios.Style["display"] = "none";
+                imgPerfilUrl.Style["display"] = "inline";
+            }
             else if (tipo == "02")
             {
                 li_Inicio.Style["display"] = "block";
@@ -60,6 +65,9 @@ namespace TP_INT_P2
                 li_ListadoPacientes.Style["display"] = "block";
                 li_ListadoTurnos.Style["display"] = "block";
                 li_Informes.Style["display"] = "block";
+                li_MiPerfil.Style["display"] = "block";
+                li_MisHorarios.Style["display"] = "block";
+                imgPerfilUrl.Style["display"] = "inline";
             }
             else if (string.IsNullOrEmpty(tipo))
             {
@@ -68,6 +76,9 @@ namespace TP_INT_P2
                 li_ListadoPacientes.Style["display"] = "none";
                 li_ListadoTurnos.Style["display"] = "none";
                 li_Informes.Style["display"] = "none";
+                li_MiPerfil.Style["display"] = "none";
+                li_MisHorarios.Style["display"] = "none";
+                imgPerfilUrl.Style["display"] = "none";
             }
 
 
@@ -84,13 +95,13 @@ namespace TP_INT_P2
                         lblUsuario.Text = "Usuario: " + username;
                         lblFullName.Text = Session["FullName"] as string;
                         cerrarSesion.Visible = true;
-                        if (Session["Tipo"].ToString() == "02") imgMedico.ImageUrl = Session["imgMedicoImageUrl"].ToString();
+                        imgPerfilUrl.ImageUrl = Session["ImgPerfilUrl"].ToString();
                     }
                     else
                     {
-                        imgMedico.ImageUrl = "~/imagenes/perfiles/00.png";
                         lblUsuario.Text = "Usuario: Invitado";
                         cerrarSesion.Visible = false;
+                        imgPerfilUrl.ImageUrl = "~/imagenes/perfiles/00.png";
                     }
                     string tema = Session["Tema"] as string ?? "light";
                     htmlTag.Attributes["data-bs-theme"] = tema;

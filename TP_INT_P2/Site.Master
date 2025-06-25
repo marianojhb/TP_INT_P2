@@ -113,7 +113,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle fs-5" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-             <asp:Image ID="imgMedico" runat="server" CssClass="img-fluid imagenPerfilNav" ImageUrl="~/imagenes/perfiles/00.png" />
+             <asp:Image ID="imgPerfilUrl" runat="server" CssClass="img-fluid imagenPerfilNav" ImageUrl="~/imagenes/perfiles/00.png" />
               <asp:Label ID="lblFullName" runat="server" Text="Invitado" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end bg-primary text-white">
@@ -122,8 +122,8 @@
                 <i class="fa-solid fa-circle-half-stroke"></i> Cambiar Tema
               </asp:LinkButton>
             </li>
-            <li class="nav-item mx-3"><a class="dropdown-item text-white" href="MiPerfil.aspx">Mi Perfil</a></li>
-            <li class="nav-item mx-3"><a class="dropdown-item text-white" href="MisHorarios.aspx">Mis Horarios</a></li>
+            <li  runat="server" style="display:none" class="nav-item mx-3" id="li_MiPerfil"><a class="dropdown-item text-white" href="MiPerfil.aspx">Mi Perfil</a></li>
+            <li  runat="server" style="display:none" class="nav-item mx-3" id="li_MisHorarios"><a class="dropdown-item text-white" href="MisHorarios.aspx">Mis Horarios</a></li>
             <li class="nav-item mx-3"><hr class="dropdown-divider bg-white"></li>
             <li class="nav-item mx-3">
               <asp:Label ID="lblUsuario" runat="server" Text="Usuario: Invitado" CssClass="dropdown-item text-white" />

@@ -87,13 +87,13 @@ namespace TP_INT_P2
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_Informes;
 
         /// <summary>
-        /// Control imgMedico.
+        /// Control imgPerfilUrl.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgMedico;
+        protected global::System.Web.UI.WebControls.Image imgPerfilUrl;
 
         /// <summary>
         /// Control lblFullName.
@@ -112,6 +112,24 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton cambiarTema;
+
+        /// <summary>
+        /// Control li_MiPerfil.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_MiPerfil;
+
+        /// <summary>
+        /// Control li_MisHorarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li_MisHorarios;
 
         /// <summary>
         /// Control lblUsuario.
