@@ -5,6 +5,10 @@
         border-radius: 50% !important;
         width: 150px !important;
         height: 150px !important;
+         transition: transform 0.3s ease;
+    }
+    .imagenMedico:hover {
+         transform: translateY(-4px);
     }
     </style>
 </asp:Content>
@@ -16,8 +20,13 @@
             <h1 class="display-5 fw-bold text-primary">¡Bienvenido, <asp:Label ID="lblName" runat="server"></asp:Label></h1>
             <p class="lead">Gestioná tus pacientes, horarios y tareas de manera ágil desde tu panel personal.</p>
         </div>
+
+
         <div class="col-md-6 text-center">
-            <asp:Image ID="imgMedico" runat="server" AlternateText="Imagen de médico" CssClass="img-fluid imagenMedico" style="max-height: 250px;"/>
+
+            <asp:HyperLink ID="hlMiPerfil" runat="server" NavigateUrl="~/MiPerfil.aspx">
+            <asp:Image ID="imgMedico" runat="server" AlternateText="Imagen de médico" CssClass="img-fluid imagenMedico" style="max-height: 250px;"/><br />Mi Perfil
+             </asp:HyperLink>
         </div>
     </div>
 

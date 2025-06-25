@@ -24,17 +24,17 @@
 
             <div class="col-md-4">
                 <div class="card admin-card shadow text-center p-4">
-                    <i class="fa-solid fa-calendar-plus text-success mb-3"></i>
-                    <h5 class="card-title">Agregar Turno</h5>
-                    <asp:Button ID="btnAgregarTurno" runat="server" Text="Ingresar" OnClick="btnAgregarTurnos_Click" CssClass="btn btn-outline-success mt-2" />
+                    <i class="fa-solid fa-user-injured text-danger mb-3"></i>
+                    <h5 class="card-title">Agregar Paciente</h5>
+                    <asp:Button ID="btnAgregarPaciente" runat="server" Text="Ingresar" OnClick="btnAgregarPaciente_Click" CssClass="btn btn-outline-danger mt-2" />
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="card admin-card shadow text-center p-4">
-                    <i class="fa-solid fa-user-injured text-danger mb-3"></i>
-                    <h5 class="card-title">Agregar Paciente</h5>
-                    <asp:Button ID="btnAgregarPaciente" runat="server" Text="Ingresar" OnClick="btnAgregarPaciente_Click" CssClass="btn btn-outline-danger mt-2" />
+                    <i class="fa-solid fa-calendar-plus text-success mb-3"></i>
+                    <h5 class="card-title">Agregar Turno</h5>
+                    <asp:Button ID="btnAgregarTurno" runat="server" Text="Ingresar" OnClick="btnAgregarTurnos_Click" CssClass="btn btn-outline-success mt-2" />
                 </div>
             </div>
 

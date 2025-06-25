@@ -39,5 +39,9 @@ namespace Negocio
         {
             return daoMedico.ActualizarMedico(m);
         }
+        public int ActualizarMedicoConEmailUsuarioContrasena(Medico m)
+        {
+            return daoMedico.ActualizarMedicoConEmailUsuarioContrasena(m);
+        }
     }
 }

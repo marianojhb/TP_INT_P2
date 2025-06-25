@@ -23,37 +23,15 @@ namespace TP_INT_P2
             if (!IsPostBack)
             {
                 // CARGAR EL USUARIO ACTUAL
-                CargarPerfil(Session["Username"].ToString());
+                Medico medico = Session["Medico"] as Medico;
+                CargarPerfil(medico);
 
                 CargarProvincias();
                 CargarLocalidades(ddlProvincias.SelectedValue);
                 CargarEspecialidades();
-                CargarCamposObligatorios();
             }
         }
 
-        protected void CargarCamposObligatorios()
-        {
-            txtTelefono.Attributes.Add("required", "true");
-
-            txtDni.Attributes.Add("required", "true");
-            txtNombre.Attributes.Add("required", "true");
-            txtApellido.Attributes.Add("required", "true");
-            txtEmail.Attributes.Add("required", "true");
-            txtTelefono.Attributes.Add("required", "true");
-            txtNacionalidad.Attributes.Add("required", "true");
-            txtFechaNac.Attributes.Add("required", "true");
-            txtHorario.Attributes.Add("required", "true");
-            //ddlEspecialidades.SelectedValue = "0";
-            //rbMasculino.Checked = false;
-            //rbFemenino.Checked = false;
-            txtDireccion.Attributes.Add("required", "true");
-            //ddlProvincias.SelectedValue = "0";
-            //ddlLocalidades.SelectedValue = "0";
-            txtUsername.Attributes.Add("required", "true");
-            txtPassword.Attributes.Add("required", "true");
-
-        }
         protected void CargarProvincias()
         {
             {
@@ -132,12 +110,19 @@ namespace TP_INT_P2
         {
             if (!Page.IsValid) return;
 
-            Medico m = new Medico();
+            // Medico actual:
+            Medico medicoActual = Session["Medico"] as Medico;
+
+
+
+            // Medico actualizado:
+            Medico medicoActualizado = new Medico();
+
 
             // TABLA PERSONA
-            m.DNI = txtDni.Text.Trim();
-            m.Nombre = txtNombre.Text.Trim();
-            m.Apellido = txtApellido.Text.Trim();
+            medicoActualizado.DNI = txtDni.Text.Trim();
+            medicoActualizado.Nombre = txtNombre.Text.Trim();
+            medicoActualizado.Apellido = txtApellido.Text.Trim();
 
             // Radio button de Sexo:
             {
@@ -146,37 +131,53 @@ namespace TP_INT_P2
                     sexoSeleccionado = "M";
                 else if (rbFemenino.Checked)
                     sexoSeleccionado = "F";
-                m.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
+                medicoActualizado.Sexo = string.IsNullOrEmpty(sexoSeleccionado) ? 'M' : sexoSeleccionado[0];
             }
-            m.Email = txtEmail.Text.Trim();
-            m.Nacionalidad = txtNacionalidad.Text.Trim();
-            m.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
-            m.Direccion = txtDireccion.Text.Trim();
-            m.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
-            m.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
-            m.Telefono = txtTelefono.Text.Trim();
+            medicoActualizado.Email = medicoActual.Email;
+            medicoActualizado.EmailNuevo = txtEmail.Text.Trim();
+            medicoActualizado.Nacionalidad = txtNacionalidad.Text.Trim();
+            medicoActualizado.FechaNac = Convert.ToDateTime(txtFechaNac.Text.Trim());
+            medicoActualizado.Direccion = txtDireccion.Text.Trim();
+            medicoActualizado.IdLocalidad = Convert.ToInt32(ddlLocalidades.SelectedValue);
+            medicoActualizado.IdProvincia = Convert.ToInt32(ddlProvincias.SelectedValue);
+            medicoActualizado.Telefono = txtTelefono.Text.Trim();
 
             // TABLA MEDICOS
-            m.Legajo = Convert.ToInt32(txtLegajo.Text);
-            m.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
-            m.Horario = txtHorario.Text.Trim();
-            m.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : m.Imagen; // operador ternario doble
+            medicoActualizado.Legajo = Convert.ToInt32(txtLegajo.Text);
+            medicoActualizado.CodEspecialidad = Convert.ToInt32(ddlEspecialidades.SelectedValue);
+            medicoActualizado.Horario = txtHorario.Text.Trim();
+            medicoActualizado.Imagen = fuImagenURL?.HasFile == true ? "~/imagenes/perfiles/" + fuImagenURL.FileName : medicoActual.Imagen; // operador ternario doble
 
             // TABLA USUARIOS
-            m.Username = txtUsername.Text.Trim();
-            m.Password = txtPassword.Text.Trim();
+            if (txtUsername.Text != medicoActual.Username)
+            {
+                medicoActualizado.Username = txtUsername.Text;
+            }
+            else
+            {
+                medicoActualizado.Username = medicoActual.Username;
+            }
+
+            if (string.IsNullOrEmpty(txtPassword.Text))
+            {
+                medicoActualizado.Password = medicoActual.Password;
+            }
+            else
+            {
+                medicoActualizado.Password = txtPassword.Text;
+            }
 
 
             // PREPARAMOS PARA CHEQUEAR LA BBDD PARA VALIDACIONES
 
             NegocioMedico negocioMedico = new NegocioMedico();
 
-            //TODO: CARGAR EN LA BASE DE DATOS
+            // CARGAR EN LA BASE DE DATOS
             if (Page.IsValid)
             {
 
 
-                int actualizarOK = negocioMedico.ActualizarMedico(m);
+                int actualizarOK = negocioMedico.ActualizarMedicoConEmailUsuarioContrasena(medicoActualizado);
                 
 
 
@@ -212,44 +213,43 @@ namespace TP_INT_P2
                     ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
                 }
             }
-            LimpiarFormularioMiPerfil();
+            
         }
 
-        protected void CargarPerfil(string usuario)
+        protected void CargarPerfil(Medico medico)
         {
-            NegocioMedico negocioMedico = new NegocioMedico();
-            NegocioUsuario negocioUsuario = new NegocioUsuario();
-            Medico m = new Medico();
-            Usuario u = new Usuario();
-            u.Username = Session["Username"].ToString();
-
-
-            u = negocioUsuario.GetData(u); // completa los datos
-            m = negocioMedico.getDatos(u); // con el atributo email de la instancia usuario, consigo los datos del medico actual.
-            txtLegajo.Text = m.Legajo.ToString();
-            txtDni.Text = m.DNI.ToString();
-            txtNombre.Text = m.Nombre.ToString();
-            txtApellido.Text = m.Apellido.ToString();
-            if (m.Sexo == 'M')
+            txtLegajo.Text = medico.Legajo.ToString();
+            txtDni.Text = medico.DNI;
+            txtNombre.Text = medico.Nombre;
+            txtApellido.Text = medico.Apellido;
+            if (medico.Sexo.ToString() == "M")
             {
                 rbMasculino.Checked = true;
             }
-            else if (m.Sexo == 'F')
+            else if (medico.Sexo.ToString() == "F")
             {
                 rbFemenino.Checked = true;
             }
             
-            txtNacionalidad.Text = m.Nacionalidad.ToString();
-            ddlProvincias.DataValueField = m.Provincia.ToString();
-            ddlLocalidades.DataValueField = m.Localidad.ToString() ;
-            txtFechaNac.Text = m.FechaNac.ToString();
-            txtDireccion.Text = m.Direccion.ToString();
-            txtEmail.Text = m.Email.ToString();
-            txtTelefono.Text = m.Telefono.ToString();
-            txtHorario.Text = m.Horario.ToString();
-            ddlEspecialidades.SelectedValue = m.CodEspecialidad.ToString();
-            txtUsername.Text = m.Username.ToString();
-            txtPassword.Text = m.Password.ToString();
+            txtNacionalidad.Text = medico.Nacionalidad;
+            ddlProvincias.SelectedValue = medico.IdProvincia.ToString();
+            ddlLocalidades.SelectedValue = medico.IdLocalidad.ToString();
+            txtFechaNac.Text = (medico.FechaNac).ToString("yyyy-MM-dd");
+            txtDireccion.Text = medico.Direccion;
+            txtEmail.Text = medico.Email;
+            txtTelefono.Text = medico.Telefono;
+            txtHorario.Text = medico.Horario;
+            ddlEspecialidades.SelectedValue = medico.CodEspecialidad.ToString();
+            txtUsername.Text = medico.Username;
+            txtPassword.Text = medico.Password;
+            
+            
+        }
+
+        // Valida que el RadioButton sexo esté chequeado con alguna alternativa
+        protected void cvSexo_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = rbMasculino.Checked || rbFemenino.Checked;
         }
     }
 }

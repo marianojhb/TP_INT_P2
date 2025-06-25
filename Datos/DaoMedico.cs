@@ -127,6 +127,38 @@ namespace Datos
             comando.Parameters.AddWithValue("@DIRECCION", m.Direccion);
             comando.Parameters.AddWithValue("@IDPROVINCIA", m.IdProvincia);
             comando.Parameters.AddWithValue("@IDLOCALIDAD", m.IdLocalidad);
+            //comando.Parameters.AddWithValue("@EMAIL", m.Email);
+
+            // TABLA MEDICOS:
+            comando.Parameters.AddWithValue("@LEGAJO", m.Legajo);
+            comando.Parameters.AddWithValue("@CODESPECIALIDAD", m.CodEspecialidad);
+            comando.Parameters.AddWithValue("@HORARIO", m.Horario);
+            comando.Parameters.AddWithValue("@IMAGEN", m.Imagen);
+            comando.Parameters.AddWithValue("@TELEFONO", m.Telefono);
+
+            // TABLA USUARIOS:
+            //comando.Parameters.AddWithValue("@USERNAME", m.Username);
+            //comando.Parameters.AddWithValue("@PASSWORD", m.Password);
+
+            string nombreSP = "SP_ACTUALIZARMEDICO";
+
+            return ac.ejecutarProcedimientosAlmacenados(comando, nombreSP);
+        }
+
+        public int ActualizarMedicoConEmailUsuarioContrasena(Medico m)
+        {
+            SqlCommand comando = new SqlCommand();
+
+            // TABLA PERSONAS
+            comando.Parameters.AddWithValue("@DNI", m.DNI);
+            comando.Parameters.AddWithValue("@NOMBRE", m.Nombre);
+            comando.Parameters.AddWithValue("@APELLIDO", m.Apellido);
+            comando.Parameters.AddWithValue("@SEXO", m.Sexo);
+            comando.Parameters.AddWithValue("@NACIONALIDAD", m.Nacionalidad);
+            comando.Parameters.AddWithValue("@FECHANAC", m.FechaNac);
+            comando.Parameters.AddWithValue("@DIRECCION", m.Direccion);
+            comando.Parameters.AddWithValue("@IDPROVINCIA", m.IdProvincia);
+            comando.Parameters.AddWithValue("@IDLOCALIDAD", m.IdLocalidad);
             comando.Parameters.AddWithValue("@EMAIL", m.Email);
             comando.Parameters.AddWithValue("@EMAIL_NUEVO", m.EmailNuevo);
 
@@ -141,7 +173,7 @@ namespace Datos
             comando.Parameters.AddWithValue("@USERNAME", m.Username);
             comando.Parameters.AddWithValue("@PASSWORD", m.Password);
 
-            string nombreSP = "SP_ACTUALIZARMEDICO";
+            string nombreSP = "SP_ACTUALIZARMEDICOEMAILUSUARIOCONTRASENA";
 
             return ac.ejecutarProcedimientosAlmacenados(comando, nombreSP);
         }

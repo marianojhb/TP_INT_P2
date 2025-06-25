@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -72,7 +73,7 @@ namespace TP_INT_P2
 
             if (!IsPostBack)
             {
-
+                
 
                 // Gestión de usuario:
                 {
@@ -83,9 +84,11 @@ namespace TP_INT_P2
                         lblUsuario.Text = "Usuario: " + username;
                         lblFullName.Text = Session["FullName"] as string;
                         cerrarSesion.Visible = true;
+                        if (Session["Tipo"].ToString() == "02") imgMedico.ImageUrl = Session["imgMedicoImageUrl"].ToString();
                     }
                     else
                     {
+                        imgMedico.ImageUrl = "~/imagenes/perfiles/00.png";
                         lblUsuario.Text = "Usuario: Invitado";
                         cerrarSesion.Visible = false;
                     }
@@ -103,6 +106,7 @@ namespace TP_INT_P2
             Session["FullName"] = String.Empty;
             Session["Legajo"] = String.Empty;
             Session["Tipo"] = String.Empty;
+            Session["Medico"] = String.Empty;
             cerrarSesion.Visible = true;
             Response.Redirect("~/Inicio.aspx");
         }

@@ -133,13 +133,15 @@
                     <div class="card-body">
                         <p class="card-text">
 
+                <%-- Imagen --%>
                             <div class="mb-3">
                                 <label for="fuImagenURL" class="form-label">
                                     Imagen:
                                 </label>
                                 <asp:FileUpload ID="fuImagenURL" runat="server" CssClass="form-control" />
                             </div>
-                            
+
+                <%-- Nombre --%>                            
                             <div class="mb-3">
                                 <label for="nombre_PTextBox" class="form-label">
                             Nombre:
@@ -147,6 +149,7 @@
                             <asp:TextBox ID="nombre_PTextBox" runat="server" Text='<%# Bind("nombre_P") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- Apellido --%>
                             <div class="mb-3">
                                 <label for="nombre_PTextBox" class="form-label">
                                     Apellido:
@@ -154,6 +157,7 @@
                                 <asp:TextBox ID="apellido_PTextBox" runat="server" Text='<%# Bind("apellido_P") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- Legajo --%>
                             <div class="mb-3">
                                 <label for="legajo_MLabel" class="form-label">
                                 Legajo:
@@ -161,6 +165,7 @@
                             <asp:Label ID="legajo_MLabel" runat="server" Text='<%# Eval("legajo_M") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- DNI --%>
                             <div class="mb-3">
                                 <label for="legajo_MLabel" class="form-label">
                                     DNI:
@@ -168,79 +173,77 @@
                                 <asp:Label ID="dni_PLabel" runat="server" Text='<%# Eval("dni_P") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- Sexo --%>
                             <div class="mb-3">
                                 <label for="sexo_PTextBox" class="form-label">
                             Sexo:
-                                    
                                 </label>
-                            <asp:TextBox ID="sexo_PTextBox" runat="server" Text='<%# Bind("sexo_P") %>' CssClass="form-control" />
+                                <asp:DropDownList ID="ddlSexo" runat="server" Text='<%# Bind("sexo_P") %>' CssClass="form-control">
+                                    <asp:ListItem Value="M">M</asp:ListItem>
+                                    <asp:ListItem Value="F">F</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
 
+                <%-- Nacionalidad --%>
                             <div class="mb-3">
                                 <label for="nacionalidad_PTextBox" class="form-label">
                             Nacionalidad:
-                                    
                                 </label>
                             <asp:TextBox ID="nacionalidad_PTextBox" runat="server" Text='<%# Bind("nacionalidad_P") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- Fecha de nacimiento --%>
                             <div class="mb-3">
                                 <label for="fechaNac_PTextBox" class="form-label">
                             Fecha de Nacimiento:
-                                    
                                 </label>
-                            <asp:TextBox ID="fechaNac_PTextBox" runat="server" Text='<%# Bind("fechaNac_P", "{0:dd/MM/yyyy}") %>'  CssClass="form-control"/>
+                            <asp:TextBox ID="fechaNac_PTextBox" runat="server" Text='<%# Bind("fechaNac_P", "{0:yyyy-MM-dd}") %>'  CssClass="form-control datepicker" />
                             </div>
 
-
+                <%-- Dirección --%>
                             <div class="mb-3">
                                 <label for="direccion_PTextBox" class="form-label">
-                                    
                             Dirección:
                                 </label>
                             <asp:TextBox ID="direccion_PTextBox" runat="server" Text='<%# Bind("direccion_P") %>'  CssClass="form-control"/>
                             </div>
 
+                <%-- Provincia --%>
                             <div class="mb-3">
                                 <label for="ddlProvincia" class="form-label">
                             Provincia:
-                                    
                                 </label>
                             <%--<asp:TextBox ID="idProvincia_PTextBox" runat="server" Text='<%# Bind("idProvincia_P") %>' CssClass="form-control"/>--%>
                                 <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" ></asp:DropDownList>
-
                             </div>
 
+                <%-- Localidad --%>
                             <div class="mb-3">
                                 <label for="ddlLocalidad" class="form-label">
                             Localidad:
-                                    
                                 </label>
                             <%--<asp:TextBox ID="idLocalidad_PTextBox" runat="server" Text='<%# Bind("idLocalidad_P") %>'  CssClass="form-control"/>--%>
                                 <asp:DropDownList ID="ddlLocalidades" runat="server" CssClass="form-select" ></asp:DropDownList>
                             </div>
-
+                <%-- Email --%>
                             <div class="mb-3">
                                 <label for="email_PTextBox" class="form-label">
                             Email:
-                                    
                                 </label>
                             <asp:Label ID="email_PTextBox" runat="server" Text='<%# Eval("email_P") %>'  CssClass="form-control"/>
                             </div>
 
-
+                <%-- Telefono --%>
                             <div class="mb-3">
                                 <label for="telefono_PTextBox" class="form-label">
                             Teléfono:
-                                    
                                 </label>
                             <asp:TextBox ID="telefono_PTextBox" runat="server" Text='<%# Bind("telefono_P") %>'  CssClass="form-control"/>
                             </div>
-
+                <%-- Especialidad --%>
                             <div class="mb-3">
                                 <label for="ddlEspecialidades" class="form-label">
                             Especialidad:
-                                    
                                 </label>
                             <%--<asp:TextBox ID="codEspecialidad_MTextBox" runat="server" Text='<%# Bind("codEspecialidad_M") %>'  CssClass="form-control"/>--%>
                                 <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" ></asp:DropDownList>
@@ -367,13 +370,27 @@
         </div>
     </asp:Panel>
 
+    <!-- Datepicker -->
     <script>
         $(document).ready(function () {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
+            $('.datepicker').each(function () {
+                var $input = $(this);
+
+                $input.datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true
+                }).on('keydown paste', function (e) {
+                    e.preventDefault();
+                });
+
+                // Establecer la fecha si ya hay una en el input
+                if ($input.val()) {
+                    $input.datepicker('setDate', $input.val());
+                }
             });
         });
+
     </script>
+
     </asp:Content>

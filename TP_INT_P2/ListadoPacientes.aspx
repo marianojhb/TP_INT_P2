@@ -32,7 +32,7 @@
             OnPageIndexChanging="gvPacientes_PageIndexChanging"
             Width="100%"
             CssClass="table table-hover table-bordered align-middle w-100"
-            HeaderStyle-CssClass="text-center table-primary"
+            HeaderStyle-CssClass="text-center table-primary" OnRowUpdated="gvPacientes_RowUpdated"
             >
             <EmptyDataTemplate>
                 <div class="container mt-3">
@@ -72,8 +72,8 @@
                 <asp:TemplateField HeaderText="Sexo">
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddlSexo" runat="server"  Text='<%# Bind("sexo_P") %>'>
-                            <asp:ListItem Value="M">Masculino</asp:ListItem>
-                            <asp:ListItem Value="F">Femenino</asp:ListItem>
+                            <asp:ListItem Value="M">M</asp:ListItem>
+                            <asp:ListItem Value="F">F</asp:ListItem>
                         </asp:DropDownList>
                     </EditItemTemplate>
                     <ItemTemplate>
@@ -162,13 +162,28 @@
             </asp:GridView>
         <%--<asp:Label ID="lblMensaje" runat="server" Text="" CssClass="mx-auto"></asp:Label>--%>
             </asp:Panel>
-        <script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
+
+
+    <!-- Datepicker para GridView -->
+    <script>
+        Sys.Application.add_load(function () {
+            $('.datepicker').each(function () {
+                var $input = $(this);
+
+                $input.datepicker({
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true
+                }).on('keydown paste', function (e) {
+                    e.preventDefault();
+                });
+
+                // Establecer la fecha si ya hay una en el input
+                if ($input.val()) {
+                    $input.datepicker('setDate', $input.val());
+                }
             });
         });
-        </script>
+    </script>
+
     </asp:Content>

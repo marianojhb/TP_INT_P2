@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Asignar Turno" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarTurno.aspx.cs" Inherits="TP_INT_P2.AgregarTurno" %>
+﻿<%@ Page Title="Agregar Turno | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarTurno.aspx.cs" Inherits="TP_INT_P2.AgregarTurno" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -20,7 +20,7 @@
     <div class="container py-5">
         <h2 class="text-center mb-4">Asignar un nuevo turno</h2>
 
-        <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-4 shadow rounded anchopanel bg-white">
+        <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-4 shadow rounded anchopanel">
 
             <div class="mb-4">
                 <label for="ddlEspecialidades" class="form-label">Especialidad:</label>

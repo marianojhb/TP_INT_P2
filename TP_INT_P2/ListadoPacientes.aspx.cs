@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Web;
@@ -181,6 +182,11 @@ namespace TP_INT_P2
         protected void btnBuscarPorNombreOApellido_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void gvPacientes_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+        {
+           
         }
     }
     

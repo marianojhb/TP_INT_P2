@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Agregar médico | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMedico.aspx.cs" Inherits="TP_INT_P2.AgregarMedico" %>
+﻿<%@ Page Title="Agregar Médico | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarMedico.aspx.cs" Inherits="TP_INT_P2.AgregarMedico" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <style>
 .form-check-input {
@@ -10,7 +10,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
 <h2 class="text-center my-4"><i class="fa-solid fa-user-doctor"></i> Agregar Médico</h2>
 
-<div class="container shadow-lg rounded-4 p-5 bg-white" style="max-width: 800px;">
+<div class="container shadow-lg rounded-4 p-5" style="max-width: 800px;">
   <div class="row g-4">
 
     <!-- Legajo (solo lectura) -->
@@ -52,7 +52,7 @@
           Display="Dynamic" 
           ValidationExpression="^[0-9]{8}$" ValidationGroup="vgAgregarMedico" />
 
-    <!-- Nombre / Apellido -->
+    <!-- Nombre -->
     <div class="col-md-6">
       <label for="txtNombre" class="form-label text-secondary">Nombre</label>
       <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" />
@@ -69,6 +69,8 @@
           CssClass="text-danger" 
           Display="Dynamic" 
           ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s.]+$" ValidationGroup="vgAgregarMedico" />
+
+     <!--  Apellido -->
     <div class="col-md-6">
       <label for="txtApellido" class="form-label text-secondary">Apellido</label>
       <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Apellido" />
@@ -221,6 +223,8 @@
     <div class="col-md-6">
       <label for="txtUsername" class="form-label text-secondary">Nombre de usuario</label>
       <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" placeholder="Username" />
+        <small id="passwordHelpBlock" class="form-text text-muted">
+        Debe tener entre 8 y 20 caracteres, contener letra y números, sin espacios, caracteres especiales o emoji.</small>
     </div>
       <asp:RegularExpressionValidator 
           ID="revUsername" runat="server" 
@@ -235,16 +239,15 @@
       <label for="txtPassword" class="form-label text-secondary">Contraseña</label>
       <asp:TextBox TextMode="Password" ID="txtPassword" runat="server" CssClass="form-control" placeholder="Contraseña" autocomplete="new-password" />
       <small class="form-text text-muted">
-        Debe tener entre 8 y 20 caracteres, letras y números.
-      </small>
+        Debe tener entre 5 y 20 caracteres, contener letra y números, sin espacios, caracteres especiales o emoji.</small>
     </div>
     <asp:RegularExpressionValidator 
           ID="revPassword" runat="server" 
           ControlToValidate="txtPassword" 
           CssClass="text-danger" 
           Display="Dynamic" 
-          ValidationExpression="^[a-zA-Z0-9]{8,20}$" 
-          ErrorMessage="Debe tener entre 8 y 20 caracteres, letras y números." ValidationGroup="vgAgregarMedico">
+          ValidationExpression="^[a-zA-Z0-9]{5,20}$" 
+          ErrorMessage="Debe tener entre 5 y 20 caracteres, letras y números." ValidationGroup="vgAgregarMedico">
       </asp:RegularExpressionValidator>
 
     <!-- Reingreso -->

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarPaciente.aspx.cs" Inherits="TP_INT_P2.AgregarPaciente" %>
+﻿<%@ Page Title="Agregar Paciente | Clínica TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgregarPaciente.aspx.cs" Inherits="TP_INT_P2.AgregarPaciente" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
     .form-check-input {
@@ -156,7 +156,7 @@
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
                 <div class="col-sm-9">
-                    <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control datepicker" placeholder="YYYY-MM-DD" />
+                    <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control datepicker" />
                 </div>
             </div>
             <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server"
@@ -251,11 +251,15 @@
 <%-- Script que genera un mini calendario para elegir la fecha --%>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true
-        });
+        $('.datepicker')
+            .datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            })
+            .on('keydown paste', function (e) {
+                e.preventDefault(); // Bloquea escribir con teclado o pegar
+            });
     });
 </script>
 

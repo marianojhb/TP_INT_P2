@@ -218,14 +218,19 @@
             </asp:GridView>
     </div>
  </asp:Panel>
-<script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
+<%-- Script que genera un mini calendario para elegir la fecha --%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker')
+            .datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true
+            })
+            .on('keydown paste', function (e) {
+                e.preventDefault(); // Bloquea escribir con teclado o pegar
             });
-        });
+    });
 </script>
     </asp:Content>
 
