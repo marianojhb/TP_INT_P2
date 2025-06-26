@@ -45,6 +45,7 @@ namespace Datos
                     usuario.Tipo = data["tipo_U"].ToString();
                     usuario.Email = data["email_U"].ToString();
                     usuario.Estado = Convert.ToBoolean(data["estado_U"]);
+                    usuario.Imagen = data["imagen_U"].ToString();
                 }
                 comando.Connection.Close();
                 return usuario;

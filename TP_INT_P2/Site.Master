@@ -25,6 +25,10 @@
     
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
     <script type="text/javascript">
         function setTheme(theme) {
             document.documentElement.setAttribute("data-bs-theme", theme);
@@ -34,6 +38,7 @@
         html {
             overflow-y: scroll;
         }
+
         #cambiarTema {
             text-decoration: none;
         }
@@ -41,7 +46,7 @@
             text-decoration: underline;
         }
 
-        .nav-item .active
+        .nav-link.active
         {
             border-bottom: 2px solid white !important;
         }
@@ -69,7 +74,11 @@
             height: 30px !important;
             margin-right: 5px;
         }
-
+/*        #logoUtn 
+        {
+            filter: invert(1);
+        }
+*/
     </style>
 
 </head>
@@ -80,7 +89,7 @@
   <div class="container-fluid">
 
     <a class="navbar-brand" href="Inicio.aspx">
-      <img src="/imagenes/site/logo-utn-siglas.png" alt="Alternate Text" width="100px" style="filter: invert(1);" />
+      <img src="/imagenes/site/logo-utn-siglas.png" alt="Alternate Text" width="100px"  />
       Clínica TUP
     </a>
 

@@ -20,5 +20,28 @@ namespace Entidades
         public string Especialidad { get; set; }
         public string EmailNuevo { get; set; }
         public object Usuario { get; set; }
+
+        // Métodos:
+
+        public override string ToString()
+        {
+            // Puedes usar <br/> para saltos de línea en HTML
+            return
+                $"DNI: {DNI}<br/>" +
+                $"Nombre: {Nombre} {Apellido}<br/>" +
+                $"Nacionalidad: {Nacionalidad}<br/>" +
+                $"Provincia ID: {IdProvincia}<br/>" +
+                $"Localidad ID: {IdLocalidad}<br/>" +
+                $"Email: {Email}<br/>" +
+                $"Legajo: {Legajo}<br/>" +
+                $"CodEspecialidad: {CodEspecialidad}<br/>" +
+                $"Horario: {Horario}<br/>" +
+                $"Estado: {Estado}<br/>" +
+                $"Imagen: {Imagen}<br/>" +
+                $"Username: {Username}<br/>" +
+                $"Password: {Password}<br/>" +
+                $"EmailNuevo: {EmailNuevo}<br/>" +
+                $"Usuario: {Usuario}<br/>";
+        }
     }
 }

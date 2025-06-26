@@ -101,7 +101,7 @@ namespace TP_INT_P2
                     {
                         lblUsuario.Text = "Usuario: Invitado";
                         cerrarSesion.Visible = false;
-                        imgPerfilUrl.ImageUrl = "~/imagenes/perfiles/00.png";
+                        imgPerfilUrl.ImageUrl = "";
                     }
                     string tema = Session["Tema"] as string ?? "light";
                     htmlTag.Attributes["data-bs-theme"] = tema;
@@ -118,6 +118,7 @@ namespace TP_INT_P2
             Session["Legajo"] = String.Empty;
             Session["Tipo"] = String.Empty;
             Session["Medico"] = String.Empty;
+            Session["ImgPerfilUrl"] = String.Empty;
             cerrarSesion.Visible = true;
             Response.Redirect("~/Inicio.aspx");
         }

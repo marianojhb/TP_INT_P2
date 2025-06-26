@@ -33,6 +33,15 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.TextBox txtTurnosHasta;
 
         /// <summary>
+        /// Control div_Especialista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_Especialista;
+
+        /// <summary>
         /// Control ddlMedicos.
         /// </summary>
         /// <remarks>

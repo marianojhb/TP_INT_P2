@@ -35,7 +35,7 @@
     </div>
 
     <!-- Especialista -->
-    <div class="col-sm-2">
+    <div runat="server" id="div_Especialista" class="col-sm-2">
       <label for="txtBuscarPorProfesional" class="form-label">Profesional:</label>
         <asp:DropDownList ID="ddlMedicos" runat="server" CssClass="form-control">
 

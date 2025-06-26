@@ -27,7 +27,7 @@ namespace TP_INT_P2
                 HttpCookie ckPerfilImageUrl = Request.Cookies["ckPerfilImageUrl"];
                 HttpCookie ckUsername = Request.Cookies["ckUsername"];
 
-                Response.Write(ckPerfilImageUrl.Value + "<br>");
+                
 
                 string perfilImageUrl = Session["ImgPerfilUrl"] as string;
                 if (!string.IsNullOrEmpty(perfilImageUrl))
@@ -46,12 +46,12 @@ namespace TP_INT_P2
 
                 else
                 {
-                    // Si no hay nada, default light
-                    perfilImageUrl = "~/imagenes/perfiles/00.png";
+                    // Si no hay nada, default
+                    perfilImageUrl = "~/imagenes/perfiles/img_avatar.png";
                     imgPerfilUrl.ImageUrl = perfilImageUrl;
 
                     ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", perfilImageUrl);
-                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
+                    ckPerfilImageUrl.Expires = DateTime.Now.AddMinutes(10);
                     this.Response.Cookies.Add(ckPerfilImageUrl);
 
                     Session["ImgPerfilUrl"] = perfilImageUrl;
@@ -81,11 +81,14 @@ namespace TP_INT_P2
 
                 if (usuario.Tipo == "01")
                 {
-                    Session["FullName"] = "Administrador";
+                    Session["FullName"] = $"{usuario.Username} (Admin)";
+                    Session["ImgPerfilUrl"] = usuario.Imagen;
                     Session["Legajo"] = String.Empty;
                     Response.Redirect("~/InicioAdministrador.aspx", false);
                     Context.ApplicationInstance.CompleteRequest();
-
+                    HttpCookie ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", Session["ImgPerfilUrl"].ToString());
+                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
+                    this.Response.Cookies.Add(ckPerfilImageUrl);
                 }
                 else if (usuario.Tipo == "02")
                 {
@@ -101,7 +104,7 @@ namespace TP_INT_P2
 
                     
                     HttpCookie ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", Session["ImgPerfilUrl"].ToString());
-                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
+                    ckPerfilImageUrl.Expires = DateTime.Now.AddMinutes(10);
                     this.Response.Cookies.Add(ckPerfilImageUrl);
 
                     Response.Redirect("~/InicioMedico.aspx", false);

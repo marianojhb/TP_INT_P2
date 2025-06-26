@@ -13,7 +13,6 @@ namespace TP_INT_P2
 {
     public partial class ListadoTurnos : System.Web.UI.Page
     {
-        string legajo;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
@@ -22,10 +21,21 @@ namespace TP_INT_P2
             }
             if (!Page.IsPostBack)
             {
-                legajo = Session["legajo"]?.ToString()?? "";
-                CargarTurnos(legajo);
                 CargarMedicos();
+                
             }
+            if ( Session["Tipo"].ToString() == "02") 
+            {
+                string legajo = Session["legajo"]?.ToString() ?? "";
+                CargarTurnos(legajo);
+                ddlMedicos.SelectedValue = legajo;
+                div_Especialista.Style["display"] = "none";
+            }
+            else if (Session["Tipo"].ToString() == "01")
+            {
+                CargarTurnos("");
+            } 
+
         }
         protected void CargarTurnos(string legajo)
         {
@@ -64,22 +74,22 @@ namespace TP_INT_P2
 
         protected void gvTurnos_RowEditing(object sender, GridViewEditEventArgs e)
         {
-
+            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.EditIndex = e.NewEditIndex;
-            legajo = Session["legajo"]?.ToString() ?? "";
+            
             CargarTurnos(legajo);
         }
 
         protected void gvTurnos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
+            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.EditIndex = -1;
-            legajo = Session["legajo"]?.ToString() ?? "";
             CargarTurnos(legajo);
         }
 
         protected void gvTurnos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            legajo = Session["legajo"]?.ToString() ?? "";
+            string legajo = Session["legajo"]?.ToString() ?? "";
             DateTime fecha;
             bool asistencia;
             string observacion;
@@ -117,8 +127,8 @@ namespace TP_INT_P2
 
         protected void gvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.PageIndex = e.NewPageIndex;
-            legajo = Session["legajo"]?.ToString() ?? "";
             CargarTurnos(legajo);
         }
 
@@ -188,6 +198,7 @@ namespace TP_INT_P2
         //}
         protected void ResetearFormulario()
         {
+            string legajo = Session["legajo"]?.ToString() ?? "";
             txtTurnosDesde.Text = String.Empty;
             txtTurnosHasta.Text = String.Empty;
             ddlMedicos.SelectedValue = "0";

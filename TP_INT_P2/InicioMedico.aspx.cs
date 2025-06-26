@@ -33,5 +33,11 @@ namespace TP_INT_P2
         {
             Response.Redirect("~/MisHorarios.aspx");
         }
+
+        protected void btnVerTurnos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ListadoTurnos.aspx");
+        }
+
     }
 }
