@@ -20,6 +20,7 @@ namespace Entidades
         public string Especialidad { get; set; }
         public string EmailNuevo { get; set; }
         public object Usuario { get; set; }
+        public int HorasSemanales { get; set;}
 
         // Métodos:
 

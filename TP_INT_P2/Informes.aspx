@@ -12,48 +12,237 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Informes</h2>
 
-    <div class="row">
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Pacientes Totales</h4>
-            <p class="fs-5">524 pacientes</p>
-        </div>
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Pacientes con Turnos</h4>
-            <p class="fs-5">43 pacientes con turno</p>
-        </div>
-    </div>
 
-    <div class="row">
+    <div class="row"> <%--// MEDICOS--%>
+
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
             <h4>Medicos Totales</h4>
-                <p class="fs-5">30 médicos totales</p>
+                <p class="fs-5">
+                    <asp:Label ID="lblTotalMedicos" runat="server" Text=""></asp:Label> 
+                    
+
+                </p>
         </div>
+
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Medicos con Turnos</h4>
-            <p class="fs-5">30 médicos con turnos</p>
+            <h4>Médicos Activos</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalMedicosActivos" runat="server" Text=""></asp:Label> 
+                
+            </p>
+        </div>
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Médicos inactivos totales</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalMedicosInactivos" runat="server" Text=""></asp:Label>
+                
+            </p>
+        </div>
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Porcentaje de médicos con turnos</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPorcentajeMedicosConTurnosSobreMedicosActivos" runat="server" Text=""></asp:Label>
+                
+            </p>
+        </div>
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Médicos por Especialidad</h4>
+            <p class="fs-5">
+                <asp:GridView ID="gvTotalMedicosPorEspecialidad" runat="server" CellPadding="3" BorderWidth="0">
+                    <EmptyDataTemplate>
+                        <div class=" text-center" role="alert">
+                            No se encontraron datos para mostrar
+                        </div>
+                    </EmptyDataTemplate>
+                </asp:GridView> 
+                
+            </p>
+        </div>
+    </div>
+    
+<div class="row"> <%--// HORARIOS--%>
+ 
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Médico con Mayor Atención Semanal</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblmedicoConMayorAtencionSemanalNombre" runat="server" Text=""></asp:Label> <asp:Label ID="lblmedicoConMayorAtencionSemanalApellido" runat="server" Text=""></asp:Label>
+                
+            </p>
+        </div>
+     
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos Semanales Habilitados Totales</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTurnosSemanalesHabilitadosTotales" runat="server" Text=""></asp:Label>
+                
+            </p>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row"> <%--// PACIENTES--%>
+        
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Turnos Activos</h4>
-            <p class="fs-5">45 turnos activos próxima semana</p>
+            <h4>Pacientes Totales</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalPacientes" runat="server" Text=""></asp:Label>  
+                </p>
         </div>
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Turnos Activos</h4>
-            <p class="fs-5">120 turnos activo</p>            
+            <h4>Pacientes Activos</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalPacientesActivos" runat="server" Text=""></asp:Label>
+                
+            </p>
         </div>
+
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Turnos Vencidos</h4>
-            <p class="fs-5">fs-7</p>
-        </div>
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Asistencia</h4>
-            <div class="progress mt-3">
-                <div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 0%;">0%</div>
-            </div>
+            <h4>Pacientes Inactivos</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalPacientesInactivos" runat="server" Text=""></asp:Label>
+                
+            </p>
         </div>
     </div>
+    <div class="row"> <%--// PACIENTES POR EDAD --%>          
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Adultos Mayores</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesAdultosMayores" runat="server" Text=""></asp:Label> 
+                
+            </p>
+        </div>
+                      
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Adultos</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesAdultos" runat="server" Text=""></asp:Label>   
+                 
+            </p>
+        </div>
+                           
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Juveniles</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesJuveniles" runat="server" Text=""></asp:Label> 
+                
+            </p>
+        </div>
+                           
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Infantiles</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesInfantiles" runat="server" Text=""></asp:Label>  
+                
+            </p>
+        </div>
+                          
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Preescolares</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesPreescolares" runat="server" Text=""></asp:Label> 
+                   
+            </p>
+        </div>
+                    
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Pacientes Lactantes</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPacientesLactantes" runat="server" Text=""></asp:Label>
+                
+            </p>
+        </div>
+                          
+
+       </div>
+
+    
+
+
+    <div class="row"> <%--// TURNOS--%>
+
+
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos Totales</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnos" runat="server" Text=""></asp:Label>  
+                
+            </p>
+        </div>
+                                  
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos Futuros</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnosFuturos" runat="server" Text=""></asp:Label>  
+                 
+            </p>
+        </div>
+                       
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos Próx Semana</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnosProximaSemana" runat="server" Text=""></asp:Label>  
+                
+            </p>
+        </div>
+                
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos pasados</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnosPasados" runat="server" Text=""></asp:Label>    
+                 
+            </p>
+        </div>
+                      
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos con Ausente</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnosAusentes" runat="server" Text=""></asp:Label>   
+                
+            </p>
+        </div>
+                        
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Porcentaje de Turnos con Ausente</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPorcentajeTurnosAusentes" runat="server" Text=""></asp:Label> 
+                
+            </p>
+        </div>
+                   
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Total de Turnos Ausentes por Médico</h4>
+            <p class="fs-5">
+                <asp:GridView ID="gvTotalTurnosAusentesPorMedico" runat="server" CellPadding="3" BorderWidth="0">
+                    <EmptyDataTemplate>
+                        <div class=" text-center" role="alert">
+                            No se encontraron datos para mostrar
+                        </div>
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </p>
+        </div>
+
+
+     </div>
+
+<%--            <div class="progress mt-3"><div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 0%;">0%</div></div>--%>
+
     
 <script>
     window.addEventListener("load", function () {

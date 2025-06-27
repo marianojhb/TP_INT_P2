@@ -31,8 +31,8 @@
     OnRowEditing="gvHorarios_RowEditing" OnRowUpdating="gvHorarios_RowUpdating" OnRowCancelingEdit="gvHorarios_RowCancelingEdit" CellPadding="20" GridLines="None">
     <Columns>
          <asp:CommandField ShowEditButton="True" EditText="Editar" UpdateText="Actualizar" CancelText="Cancelar">
-                <ItemStyle Width="150px" />
-                <HeaderStyle Width="150px" />
+                <ItemStyle Width="180px" />
+                <HeaderStyle Width="180px" />
              </asp:CommandField>
         <asp:BoundField DataField="hora_H" HeaderText="Hora" ReadOnly="True" DataFormatString="{0} hs"/>
 
