@@ -137,32 +137,7 @@ namespace TP_INT_P2
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-
-            // 1. Fecha desde
-            DateTime? turnosDesde = null;
-            if (DateTime.TryParse(txtTurnosDesde.Text, out DateTime fechaDesde))
-                turnosDesde = fechaDesde;
-
-            // 2. Fecha hasta
-            DateTime? turnosHasta = null;
-            if (DateTime.TryParse(txtTurnosHasta.Text, out DateTime fechaHasta))
-                turnosHasta = fechaHasta;
-
-            // 3. Legajo (médico)
-            int? legajo = null;
-            if (!string.IsNullOrWhiteSpace(ddlMedicos.SelectedValue) && ddlMedicos.SelectedValue != "0")
-            {
-                if (int.TryParse(ddlMedicos.SelectedValue, out int parsedLegajo))
-                    legajo = parsedLegajo;
-            }
-
-            // 4. Palabra clave (nombre, apellido, DNI)
-            string palabraClave = string.IsNullOrWhiteSpace(txtBuscarPorPalabraClave.Text)
-                                  ? null
-                                  : txtBuscarPorPalabraClave.Text.Trim();
-
-            // Buscar en la base de datos
-            gvTurnos.DataSource = negocioTurno.Buscar(turnosDesde, turnosHasta, legajo, palabraClave);
+            gvTurnos.DataSource = negocioTurno.Buscar(txtTurnosDesde.Text, txtTurnosHasta.Text, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
             gvTurnos.DataBind();
         }
 
@@ -211,21 +186,25 @@ namespace TP_INT_P2
             gvTurnos.DataBind();
         }
 
+        protected void lbTodos_Click(object sender, EventArgs e)
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            gvTurnos.DataSource = negocioTurno.Buscar(null, null, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataBind();
+        }
+
         protected void lbPasados_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-            gvTurnos.DataSource = negocioTurno.BuscarPasados();
-                gvTurnos.DataBind();
-
-            BuscarPorFecha(null, ayer);
+            gvTurnos.DataSource = negocioTurno.Buscar(null, txtTurnosHasta.Text, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataBind();
         }
 
         protected void lbFuturos_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-            DateTime hoy = DateTime.Today;
-
-            BuscarPorFecha(hoy, null);
+            gvTurnos.DataSource = negocioTurno.Buscar(txtTurnosDesde.Text, null, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataBind();
 
         }
 

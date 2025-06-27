@@ -142,17 +142,43 @@ namespace Negocio
             daoTurno.ActualizarTurno(turno);
         }
 
-        public DataTable Buscar(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
+        public DataTable Buscar(string turnosDesde, string turnosHasta, string strLegajo, string strPalabraClave)
         {
-            return daoTurno.Buscar(turnosDesde, turnosHasta, legajo, palabraClave);
-        }
-        public DataTable BuscarPasados(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
-        {
-            return daoTurno.Buscar(turnosDesde, DateTime.Now, legajo, palabraClave);
-        }
-        public DataTable BuscarFuturos(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
-        {
-            return daoTurno.Buscar(DateTime.Now, turnosHasta, legajo, palabraClave);
+            // 1. Fecha desde
+
+            DateTime? fechaDesde = null;
+
+            if (!string.IsNullOrWhiteSpace(turnosDesde) && DateTime.TryParse(turnosDesde, out DateTime fDesde))
+            {
+                fechaDesde = fDesde;
+                
+            }
+
+            // 2. Fecha hasta
+            DateTime? fechaHasta = null;
+
+            if (!string.IsNullOrWhiteSpace(turnosHasta) && DateTime.TryParse(turnosHasta, out DateTime fHasta))
+            {
+                fechaHasta = fHasta;
+            }
+
+            // 3. Legajo (médico)
+
+            int? legajo = null;
+            if (!string.IsNullOrWhiteSpace(strLegajo) &&  (strLegajo  != "0") && int.TryParse(strLegajo, out int parsedLegajo))
+            {
+                legajo = parsedLegajo;
+            }
+
+            // 4. Palabra clave (nombre, apellido, DNI)
+
+            string palabraClave = null;
+            if (!string.IsNullOrEmpty(strPalabraClave))
+            {
+                palabraClave = strPalabraClave;
+            }
+
+            return daoTurno.Buscar(fechaDesde, fechaHasta, legajo, palabraClave);
         }
     }
 }

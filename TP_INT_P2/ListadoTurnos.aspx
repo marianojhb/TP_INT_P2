@@ -72,6 +72,11 @@
     <!-- Botones Pasados y Futuros -->
     <div class="row mb-3">
       <div class="d-flex gap-2">
+        <asp:LinkButton ID="lbTodos" runat="server" CssClass="btn btn-outline-primary" OnClick="lbTodos_Click">
+          Todos 
+          <asp:Label ID="lblBadgeTodos" runat="server" Text="12" CssClass="badge bg-secondary"></asp:Label>
+        </asp:LinkButton>
+
         <asp:LinkButton ID="lbPasados" runat="server" CssClass="btn btn-outline-primary" OnClick="lbPasados_Click">
           Pasados 
           <asp:Label ID="lblBadgePasados" runat="server" Text="12" CssClass="badge bg-secondary"></asp:Label>

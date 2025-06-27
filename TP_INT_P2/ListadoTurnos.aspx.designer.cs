@@ -87,6 +87,24 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.Button btnReset;
 
         /// <summary>
+        /// Control lbTodos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbTodos;
+
+        /// <summary>
+        /// Control lblBadgeTodos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBadgeTodos;
+
+        /// <summary>
         /// Control lbPasados.
         /// </summary>
         /// <remarks>
