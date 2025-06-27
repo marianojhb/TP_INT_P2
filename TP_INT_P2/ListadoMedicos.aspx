@@ -30,7 +30,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
-     <h2>Listado de Médicos</h2>
+     <h2 class="text-center my-4"><i class="fa-solid fa-user-doctor"></i> Listado de Médicos</h2>
     <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
     <div class="p-3 mb-3 text-center">

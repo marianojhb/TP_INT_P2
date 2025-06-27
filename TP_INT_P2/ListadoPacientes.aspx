@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Listado de Pacientes</h2>
+
+     <h2 class="text-center my-4"><i class="fa-solid fa-user-injured"></i> Listado de Pacientes</h2>
     <div class="form-group row mx-auto p-3 mb-3 col-9">
         <div class="form-group row">
             <div class="col-4">

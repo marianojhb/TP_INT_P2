@@ -23,6 +23,7 @@ namespace Entidades
         public int M20TotalMedicosActivos { get; set; }
         public int M30TotalMedicosInactivos { get; set; }
         public double M40PorcentajeMedicosConTurnosSobreMedicosActivos { get; set; }
+        public int M41TotalMedicosConTurnos { get; set; }
         public DataTable M50TotalMedicosPorEspecialidad { get; set; }
 
         // Horarios

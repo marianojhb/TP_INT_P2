@@ -16,7 +16,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server" >
-    <h2>Listado de Turnos</h2>
+     <h2 class="text-center my-4"><i class="fa-solid fa-calendar-days"></i> Listado de Turnos</h2>
 <div class="container px-3">
   <div class="row align-items-end g-2 mb-3">
 

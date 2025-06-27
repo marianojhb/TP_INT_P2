@@ -36,29 +36,44 @@ namespace Datos
                     cmd.CommandText = "SELECT COUNT(M.dni_M) FROM MEDICOS M WHERE M.estado_M = 1";
                     informe.M20TotalMedicosActivos = (int)cmd.ExecuteScalar();
 
+                    
                     informe.M30TotalMedicosInactivos = informe.M10TotalMedicos - informe.M20TotalMedicosActivos;
 
+                    cmd.CommandText =
+                        @"SELECT
+	                            COUNT(
+	                            DISTINCT
+	                            T.legajo_T)
+                            FROM 
+	                            TURNOS T 
+                            WHERE 
+	                            T.cancelado_T = 0";
+                    informe.M41TotalMedicosConTurnos = (int)cmd.ExecuteScalar();
+                    
                     if (informe.M30TotalMedicosInactivos != 0)
                     {
                         informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos =
-                            (double)informe.M20TotalMedicosActivos / informe.M30TotalMedicosInactivos;
+                            (double)informe.M41TotalMedicosConTurnos / informe.M20TotalMedicosActivos;
                     }
                     else
                     {
                         informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos = 0; // or double.NaN, or throw
                     }
 
-                    cmd.CommandText = @"SELECT 
-                                                E.nombre_E AS [Especialidad], 
-                                                COUNT(M.dni_M) AS [Cantidad] 
-                                            FROM 
-                                                MEDICOS [M] 
-                                            INNER JOIN 
-                                                ESPECIALIDADES [E] 
-                                            ON 
-                                                E.codEspecialidad_E = M.codEspecialidad_M 
-                                            GROUP BY 
-                                                E.nombre_E";
+                    cmd.CommandText =
+                        @"SELECT 
+                            E.nombre_E AS [Especialidad], 
+                            COUNT(M.dni_M) AS [Cantidad] 
+                        FROM 
+                            MEDICOS [M] 
+                        INNER JOIN          
+                        ESPECIALIDADES [E] 
+                        ON 
+                            E.codEspecialidad_E = M.codEspecialidad_M 
+                        WHERE  
+	                        M.estado_M = 1
+                        GROUP BY 
+                            E.nombre_E;";
                     SqlDataReader data = cmd.ExecuteReader();
                     informe.M50TotalMedicosPorEspecialidad = new DataTable();
                     informe.M50TotalMedicosPorEspecialidad.Columns.Add("Especialidad", typeof(string));
@@ -73,22 +88,30 @@ namespace Datos
                     data.Close();
                     // H10MedicoConMayorAtencionSemanal
                     cmd.CommandText =
-                                            @"SELECT TOP(1) 
-                                                 Legajo, 
-                                                 Cantidad,
-                                                 PERSONAS.*, 
-                                                 MEDICOS.*
-                                                FROM(
-                                                    SELECT
-                                                        HORARIOS.legajo_H as Legajo,
-                                                        Count(HORARIOS.disponible_h) as Cantidad
-                                                    FROM HORARIOS
-                                                    where HORARIOS.disponible_h = 1
-                                                    group by HORARIOS.legajo_H
-                                                ) as C
-                                                inner join MEDICOS on MEDICOS.legajo_m = C.Legajo
-                                                inner join PERSONAS on PERSONAS.dni_P = MEDICOS.dni_M
-                                                ORDER BY Cantidad DESC";
+                        @"SELECT TOP(1) 
+                            Legajo, 
+                            Cantidad,
+                            PERSONAS.*, 
+                            MEDICOS.*
+                        FROM(
+                            SELECT
+                                HORARIOS.legajo_H as Legajo,
+                                Count(HORARIOS.disponible_h) as Cantidad
+                            FROM 
+		                        HORARIOS
+                            WHERE 
+		                        HORARIOS.disponible_h = 1
+                            GROUP BY
+		                        HORARIOS.legajo_H
+                        ) AS C
+                        INNER JOIN
+	                        MEDICOS on MEDICOS.legajo_m = C.Legajo
+                        INNER JOIN
+	                        PERSONAS on PERSONAS.dni_P = MEDICOS.dni_M
+                        WHERE
+	                        MEDICOS.estado_M = 1
+                        ORDER BY 
+	                        Cantidad DESC";
                     Medico medico = new Medico();
                     data = cmd.ExecuteReader();
                     while (data.Read())

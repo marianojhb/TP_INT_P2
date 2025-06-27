@@ -29,6 +29,7 @@ namespace TP_INT_P2
                 lblTotalMedicos.Text = informe.M10TotalMedicos == 0 ? "No hay médicos" : (informe.M10TotalMedicos == 1 ? "1 médico" : informe.M10TotalMedicos + " médicos");
                 lblTotalMedicosActivos.Text = informe.M20TotalMedicosActivos == 0 ? "No hay médicos" : (informe.M20TotalMedicosActivos == 1 ? "1 médico" : informe.M20TotalMedicosActivos + " médicos");
                 lblTotalMedicosInactivos.Text = informe.M30TotalMedicosInactivos == 0 ? "No hay médicos" : (informe.M30TotalMedicosInactivos == 1 ? "1 médico" : informe.M30TotalMedicosInactivos + " médicos");
+                lblTotalMedicosConTurnos.Text = informe.M41TotalMedicosConTurnos == 0 ? "No hay médicos" : (informe.M41TotalMedicosConTurnos == 1 ? "1 médico" : informe.M41TotalMedicosConTurnos + " médicos");
                 lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString() + "%";
                 gvTotalMedicosPorEspecialidad.DataSource = informe.M50TotalMedicosPorEspecialidad;
                 gvTotalMedicosPorEspecialidad.DataBind();
@@ -75,6 +76,7 @@ namespace TP_INT_P2
             lblTotalMedicos.Text = informe.M10TotalMedicos == 0 ? "No hay médicos" : (informe.M10TotalMedicos == 1 ? "1 médico" : informe.M10TotalMedicos + " médicos");
             lblTotalMedicosActivos.Text = informe.M20TotalMedicosActivos == 0 ? "No hay médicos" : (informe.M20TotalMedicosActivos == 1 ? "1 médico" : informe.M20TotalMedicosActivos + " médicos");
             lblTotalMedicosInactivos.Text = informe.M30TotalMedicosInactivos == 0 ? "No hay médicos" : (informe.M30TotalMedicosInactivos == 1 ? "1 médico" : informe.M30TotalMedicosInactivos + " médicos");
+            lblTotalMedicosConTurnos.Text = informe.M41TotalMedicosConTurnos == 0 ? "No hay médicos" : (informe.M41TotalMedicosConTurnos == 1 ? "1 médico" : informe.M41TotalMedicosConTurnos + " médicos");
             lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString() + "%";
             gvTotalMedicosPorEspecialidad.DataSource = informe.M50TotalMedicosPorEspecialidad;
             gvTotalMedicosPorEspecialidad.DataBind();
