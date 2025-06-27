@@ -15,6 +15,15 @@ namespace TP_INT_P2
     {
 
         /// <summary>
+        /// Control btnAgregarMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarMedico;
+
+        /// <summary>
         /// Control paginaBloqueada.
         /// </summary>
         /// <remarks>
@@ -31,15 +40,6 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel panelContenidoListadoMedicos;
-
-        /// <summary>
-        /// Control btnAgregarMedico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarMedico;
 
         /// <summary>
         /// Control ScriptManager1.

@@ -30,12 +30,12 @@
     </style>
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
-     <h2 class="text-center my-4"><i class="fa-solid fa-user-doctor"></i> Listado de Médicos</h2>
-    <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="fa-solid fa-user-doctor"></i> Listado de Médicos</h2>
+    <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico"
+        OnClick="btnAgregarMedico_Click" Visible="False" CssClass="btn btn-outline-danger" />
+</div>    <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
-    <div class="p-3 mb-3 text-center">
-        <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico" OnClick="btnAgregarMedico_Click" Visible="False" CssClass="btn btn-primary" />
-    </div>
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
@@ -287,7 +287,7 @@
                 <div class="d-flex justify-content-center mt-3">
                     <asp:DataPager ID="DataPager1" runat="server" PageSize="3">
                         <Fields>
-                           <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" LastPageText="Última" FirstPageText="Primera" NextPageText="Siguiente" PreviousPageText="Anterior" />
+                           <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" LastPageText="Última" FirstPageText="Primera" NextPageText="Siguiente" PreviousPageText="Anterior" ButtonCssClass="btn btn-outline-primary mx-1" />
                         </Fields>
                     </asp:DataPager>
 

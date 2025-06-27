@@ -214,7 +214,8 @@ namespace TP_INT_P2
         protected void lbPasados_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-            DateTime ayer = DateTime.Today.AddDays(-1);
+            gvTurnos.DataSource = negocioTurno.BuscarPasados();
+                gvTurnos.DataBind();
 
             BuscarPorFecha(null, ayer);
         }
@@ -226,12 +227,6 @@ namespace TP_INT_P2
 
             BuscarPorFecha(hoy, null);
 
-        }
-        protected void BuscarPorFecha (DateTime? inicio, DateTime? fin )
-        {
-            NegocioTurno negocioTurno = new NegocioTurno();
-            //gvTurnos.DataSource = negocioTurno.BuscarPorFecha(inicio, fin);
-            gvTurnos.DataBind();
         }
 
     }

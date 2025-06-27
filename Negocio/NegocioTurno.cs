@@ -146,6 +146,14 @@ namespace Negocio
         {
             return daoTurno.Buscar(turnosDesde, turnosHasta, legajo, palabraClave);
         }
+        public DataTable BuscarPasados(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
+        {
+            return daoTurno.Buscar(turnosDesde, DateTime.Now, legajo, palabraClave);
+        }
+        public DataTable BuscarFuturos(DateTime? turnosDesde, DateTime? turnosHasta, int? legajo, string palabraClave)
+        {
+            return daoTurno.Buscar(DateTime.Now, turnosHasta, legajo, palabraClave);
+        }
     }
 }
 

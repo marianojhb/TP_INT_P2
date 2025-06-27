@@ -158,6 +158,8 @@ namespace TP_INT_P2
             if (txtUsername.Text != medicoActual.Username)
             {
                 medicoActualizado.Username = txtUsername.Text;
+                Session["Username"] = txtUsername.Text;
+                ((Label)Master.FindControl("lblUsuario")).Text = "Usuario: " + txtUsername.Text;
             }
             else
             {

@@ -222,12 +222,11 @@ namespace Datos
                     comando.Connection = conexion;
 
                     // Listado de Turnos con palabra clave
-
                     int? legajo = _legajo;
                     comando.Parameters.AddWithValue("@palabraClave", string.IsNullOrEmpty(palabraClave) ? (object)DBNull.Value : "%" + palabraClave + "%");
                     comando.Parameters.AddWithValue("@legajo", legajo.HasValue ? legajo.Value : (object)DBNull.Value);
                     comando.Parameters.AddWithValue("@turnosDesde", turnosDesde == null ? (object)DBNull.Value : turnosDesde);
-                    comando.Parameters.AddWithValue("@turnosHasta", turnosHasta == null ? (object)DBNull.Value : turnosHasta);
+                    comando.Parameters.AddWithValue("@turnosHasta", turnosHasta == null ? (object)DBNull.Value : turnosHasta.Value.AddDays(1));
 
                     comando.CommandText = consulta;
                     SqlDataAdapter adaptador = new SqlDataAdapter(comando);
