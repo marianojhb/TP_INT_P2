@@ -22,20 +22,34 @@ namespace TP_INT_P2
             if (!Page.IsPostBack)
             {
                 CargarMedicos();
-                txtTurnosDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                txtTurnosHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
-
             }
             if ( Session["Tipo"].ToString() == "02") 
             {
+                // Turnos:
                 string legajo = Session["legajo"]?.ToString() ?? "";
                 CargarTurnos(legajo);
+
+                // Badges:
+                Informe informe = CargarBadges(legajo);
+                lblBadgeTodos.Text = informe.T10TotalTurnos.ToString();
+                lblBadgePasados.Text = informe.T40TotalTurnosPasados.ToString();
+                lblBadgeFuturos.Text = informe.T20TotalTurnosFuturos.ToString();
+                lblBadgeProxSemana.Text = informe.T30TotalTurnosProximaSemana.ToString();
+                
+
+                // ddl Especialidades:
                 ddlMedicos.SelectedValue = legajo;
                 div_Especialista.Style["display"] = "none";
+
             }
             else if (Session["Tipo"].ToString() == "01")
             {
                 CargarTurnos("");
+                Informe informe = CargarBadges("");
+                lblBadgeTodos.Text = informe.T10TotalTurnos.ToString();
+                lblBadgePasados.Text = informe.T40TotalTurnosPasados.ToString();
+                lblBadgeFuturos.Text = informe.T20TotalTurnosFuturos.ToString();
+                lblBadgeProxSemana.Text = informe.T30TotalTurnosProximaSemana.ToString();
             } 
 
         }
@@ -57,6 +71,14 @@ namespace TP_INT_P2
             }
         }
     
+        protected Informe CargarBadges(string legajo)
+        {
+            Informe informe = new Informe();
+            NegocioTurno negocioTurno = new NegocioTurno();
+            informe = negocioTurno.CargarBadges(legajo);
+            return informe;
+        }
+    
         protected void gvTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             string fechaString = ((Label)gvTurnos.Rows[e.RowIndex].FindControl("lbl_it_fecha")).Text;
@@ -72,6 +94,7 @@ namespace TP_INT_P2
 
             legajo = Session["legajo"]?.ToString() ?? "";
             CargarTurnos(legajo);
+            CargarBadges(legajo);
         }
 
         protected void gvTurnos_RowEditing(object sender, GridViewEditEventArgs e)
@@ -80,6 +103,7 @@ namespace TP_INT_P2
             gvTurnos.EditIndex = e.NewEditIndex;
             
             CargarTurnos(legajo);
+            CargarBadges(legajo);
         }
 
         protected void gvTurnos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -87,6 +111,7 @@ namespace TP_INT_P2
             string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.EditIndex = -1;
             CargarTurnos(legajo);
+            CargarBadges(legajo);
         }
 
         protected void gvTurnos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -120,6 +145,7 @@ namespace TP_INT_P2
 
             gvTurnos.EditIndex = -1;
             CargarTurnos(legajo);
+            CargarBadges(legajo);
         }
 
 
@@ -176,8 +202,8 @@ namespace TP_INT_P2
         protected void ResetearFormulario()
         {
             string legajo = Session["legajo"]?.ToString() ?? "";
-            txtTurnosDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            txtTurnosHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtTurnosDesde.Text = "Inicio";
+            txtTurnosHasta.Text = "Fin";
             ddlMedicos.SelectedValue = "0";
             txtBuscarPorPalabraClave.Text = String.Empty;
             NegocioTurno negocioTurno = new NegocioTurno();
@@ -196,14 +222,23 @@ namespace TP_INT_P2
         protected void lbPasados_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-            gvTurnos.DataSource = negocioTurno.Buscar(null, txtTurnosHasta.Text, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataSource = negocioTurno.Buscar(null, DateTime.Now.AddDays(1).ToString(), ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
             gvTurnos.DataBind();
         }
 
         protected void lbFuturos_Click(object sender, EventArgs e)
         {
             NegocioTurno negocioTurno = new NegocioTurno();
-            gvTurnos.DataSource = negocioTurno.Buscar(txtTurnosDesde.Text, null, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataSource = negocioTurno.Buscar(DateTime.Now.ToString(), null, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
+            gvTurnos.DataBind();
+
+        }
+
+        protected void lbProxSemana_Click(object sender, EventArgs e)
+        {
+            NegocioTurno negocioTurno = new NegocioTurno();
+            string semanaProxima = DateTime.Now.AddDays(7).ToString();
+            gvTurnos.DataSource = negocioTurno.Buscar(DateTime.Now.ToString(), semanaProxima, ddlMedicos.SelectedValue, txtBuscarPorPalabraClave.Text);
             gvTurnos.DataBind();
 
         }

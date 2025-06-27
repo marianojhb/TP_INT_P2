@@ -180,6 +180,11 @@ namespace Negocio
 
             return daoTurno.Buscar(fechaDesde, fechaHasta, legajo, palabraClave);
         }
+        public Informe CargarBadges(string legajo)
+        {            
+            return daoTurno.CargarBadges(legajo);
+        }
+
     }
 }
 

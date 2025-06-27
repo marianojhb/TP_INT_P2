@@ -141,6 +141,24 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.Label lblBadgeFuturos;
 
         /// <summary>
+        /// Control lbProxSemana.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbProxSemana;
+
+        /// <summary>
+        /// Control lblBadgeProxSemana.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBadgeProxSemana;
+
+        /// <summary>
         /// Control Panel1.
         /// </summary>
         /// <remarks>

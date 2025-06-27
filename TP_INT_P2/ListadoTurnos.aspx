@@ -86,6 +86,11 @@
           Futuros 
           <asp:Label ID="lblBadgeFuturos" runat="server" Text="12" CssClass="badge bg-secondary"></asp:Label>
         </asp:LinkButton>
+
+        <asp:LinkButton ID="lbProxSemana" runat="server" CssClass="btn btn-outline-primary" OnClick="lbProxSemana_Click">
+          Próxima Semana 
+          <asp:Label ID="lblBadgeProxSemana" runat="server" Text="12" CssClass="badge bg-secondary"></asp:Label>
+        </asp:LinkButton>
       </div>
     </div>
 

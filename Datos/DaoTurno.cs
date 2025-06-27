@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -192,30 +193,30 @@ namespace Datos
             using (SqlConnection conexion = ac.obtenerConexion())
             {
                 string consulta =
-                "SELECT T.*, PA.*, P.*, M.*, (PM.nombre_P + ' ' + PM.apellido_P) AS fullNameMedico, L.*, PROV.* " +
-                "FROM TURNOS T " +
-                "INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA " +
-                "INNER JOIN PERSONAS P ON T.dni_T = P.dni_P " +
-                "INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M " +
-                "INNER JOIN PERSONAS PM ON M.dni_M = PM.dni_P " +
-                "INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l " +
-                "INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV " +
-                "WHERE " +
-                "(@palabraClave IS NULL OR (" +
-                    "P.nombre_P LIKE @palabraClave " +
-                    "OR P.apellido_P LIKE @palabraClave " +
-                    "OR P.dni_P LIKE @palabraClave " +
-                    "OR P.email_P LIKE @palabraClave)) " +
-                "AND(" +
-                    "@legajo IS NULL " +
-                    "OR M.legajo_M = @legajo) " +
-                "AND(" +
-                    "@turnosDesde IS NULL " +
-                    "OR(T.fecha_T >= @turnosDesde)) " +
-                "AND(@turnosHasta IS NULL " +
-                    "OR(T.fecha_T <= @turnosHasta)) " +
-                "AND PA.estado_PA = 1 " +
-                "ORDER BY T.fecha_T ASC";
+                @"SELECT T.*, PA.*, P.*, M.*, (PM.nombre_P + ' ' + PM.apellido_P) AS fullNameMedico, L.*, PROV.* 
+                FROM TURNOS T 
+                INNER JOIN PACIENTES PA ON T.dni_T = PA.dni_PA 
+                INNER JOIN PERSONAS P ON T.dni_T = P.dni_P 
+                INNER JOIN MEDICOS M ON T.legajo_T = M.legajo_M 
+                INNER JOIN PERSONAS PM ON M.dni_M = PM.dni_P 
+                INNER JOIN LOCALIDADES L ON P.idLocalidad_P = L.idLocalidad_l 
+                INNER JOIN PROVINCIAS PROV ON P.idProvincia_P = PROV.idProvincia_PROV 
+                WHERE 
+                (@palabraClave IS NULL OR (
+                   P.nombre_P LIKE @palabraClave 
+                   OR P.apellido_P LIKE @palabraClave 
+                   OR P.dni_P LIKE @palabraClave 
+                   OR P.email_P LIKE @palabraClave)) 
+                AND(
+                   @legajo IS NULL 
+                   OR M.legajo_M = @legajo) 
+                AND(
+                   @turnosDesde IS NULL 
+                   OR(T.fecha_T >= @turnosDesde)) 
+                AND(@turnosHasta IS NULL 
+                   OR(T.fecha_T <= @turnosHasta)) 
+                AND PA.estado_PA = 1 
+                ORDER BY T.fecha_T ASC";
 
                 using (SqlCommand comando = new SqlCommand())
                 {
@@ -236,6 +237,103 @@ namespace Datos
                 }
             }
             
+        }
+
+        public Informe CargarBadges(string legajo)
+        {
+            Informe informe = new Informe();
+
+            using (SqlConnection conn = ac.obtenerConexion())
+            {
+                if (conn == null)
+                    throw new Exception("No se pudo establecer la conexión con la base de datos.");
+                using (SqlCommand comando = new SqlCommand())
+                {
+                    comando.Connection = conn;
+
+
+                    comando.CommandText =
+                        @"
+                        SELECT
+	                        COUNT(fecha_T)
+                        FROM
+	                        TURNOS
+                        INNER JOIN PACIENTES PA ON PA.dni_PA = TURNOS.dni_T
+                        WHERE
+	                        cancelado_T = 0
+	                        AND PA.estado_PA = 1
+	                        AND(
+                           @legajo IS NULL 
+                           OR legajo_T = @legajo)
+                        ";
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@legajo", string.IsNullOrWhiteSpace(legajo) ? (object)DBNull.Value : legajo);
+                    object result = comando.ExecuteScalar();
+                    informe.T10TotalTurnos = (result != null) ? Convert.ToInt32(result) : 0;
+
+                    comando.CommandText =
+                        @"
+                        SELECT
+	                        COUNT(fecha_T)
+                        FROM
+	                        TURNOS
+                        INNER JOIN PACIENTES PA ON PA.dni_PA = TURNOS.dni_T
+                        WHERE
+	                        cancelado_T = 0
+	                        AND PA.estado_PA = 1
+	                        AND(
+                           @legajo IS NULL 
+                           OR legajo_T = @legajo) 
+	                        and fecha_T > getdate()
+                    ";
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@legajo", string.IsNullOrWhiteSpace(legajo) ? (object)DBNull.Value : legajo);
+                    result = comando.ExecuteScalar();
+                    informe.T20TotalTurnosFuturos = (result != null) ? Convert.ToInt32(result) : 0;
+
+                    comando.CommandText =
+                        @"
+                        SELECT
+	                        COUNT(fecha_T)
+                        FROM
+	                        TURNOS
+                        INNER JOIN PACIENTES PA ON PA.dni_PA = TURNOS.dni_T
+                        WHERE
+	                        cancelado_T = 0
+	                        AND PA.estado_PA = 1
+	                        AND(
+                           @legajo IS NULL 
+                           OR legajo_T = @legajo) 
+	                        and fecha_T BETWEEN getdate() AND dateadd(day,7,getdate())
+                        ";
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@legajo", string.IsNullOrWhiteSpace(legajo) ? (object)DBNull.Value : legajo);
+                    result = comando.ExecuteScalar();
+                    informe.T30TotalTurnosProximaSemana = (result != null) ? Convert.ToInt32(result) : 0;
+
+                    comando.CommandText =
+                    @"
+                    SELECT
+	                        COUNT(fecha_T)
+                        FROM
+	                        TURNOS
+                        INNER JOIN PACIENTES PA ON PA.dni_PA = TURNOS.dni_T
+                        WHERE
+	                        cancelado_T = 0
+                            AND PA.estado_PA = 1
+	                        AND(
+                           @legajo IS NULL 
+                           OR legajo_T = @legajo) 
+	                        and fecha_T < dateadd(day,1,getdate())
+                    ";
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@legajo", string.IsNullOrWhiteSpace(legajo) ? (object)DBNull.Value : legajo);
+                    result = comando.ExecuteScalar();
+                    informe.T40TotalTurnosPasados = (result != null) ? Convert.ToInt32(result) : 0;
+
+                }
+            }
+            return informe;
         }
 
     }
