@@ -22,7 +22,9 @@ namespace TP_INT_P2
             if (!Page.IsPostBack)
             {
                 CargarMedicos();
-                
+                txtTurnosDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                txtTurnosHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
             }
             if ( Session["Tipo"].ToString() == "02") 
             {
@@ -199,8 +201,8 @@ namespace TP_INT_P2
         protected void ResetearFormulario()
         {
             string legajo = Session["legajo"]?.ToString() ?? "";
-            txtTurnosDesde.Text = String.Empty;
-            txtTurnosHasta.Text = String.Empty;
+            txtTurnosDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtTurnosHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
             ddlMedicos.SelectedValue = "0";
             txtBuscarPorPalabraClave.Text = String.Empty;
             NegocioTurno negocioTurno = new NegocioTurno();

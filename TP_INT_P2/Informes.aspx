@@ -11,8 +11,33 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Informes</h2>
+    <div class="container px-3">
+      <div class="row align-items-end g-2 mb-3">
 
+        <!-- Desde -->
+        <div class="col-sm-2">
+          <label for="txtInformeDesde" class="form-label">Desde:</label>
+      
+            <asp:TextBox ID="txtInformeDesde" runat="server" Text="Inicio" CssClass="form-control datepicker"></asp:TextBox>
+        
+        </div>
 
+        <!-- Hasta -->
+        <div class="col-sm-2">
+          <label for="txtInformeHasta" class="form-label">Hasta:</label>
+            <asp:TextBox ID="txtInformeHasta" runat="server" Text="Fin" CssClass="form-control datepicker"></asp:TextBox>
+        </div>
+        <div class="col-sm-auto">
+            <label class="form-label d-block invisible">.</label>
+            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary form-control" OnClick="btnBuscar_Click" />
+        </div>
+
+        <div class="col-sm-auto">
+          <label class="form-label d-block invisible">.</label>
+          <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary form-control" OnClick="btnReset_Click" />
+        </div>
+      </div>
+    </div>
     <div class="row"> <%--// MEDICOS--%>
 
         <div class="col-2 shadow mb-3 mx-3 p-3" style="">
@@ -243,7 +268,7 @@
 
 <%--            <div class="progress mt-3"><div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 0%;">0%</div></div>--%>
 
-    
+<%--Script para progress bar animacion--%>    
 <script>
     window.addEventListener("load", function () {
         const bar = document.querySelector(".progress-bar");
@@ -252,6 +277,21 @@
         bar.style.width = porcentaje + "%";
         bar.innerText = porcentaje + "%";
         }, 300); // pequeño retraso para mejor efecto
+    });
+</script>
+
+<%-- Script que genera un mini calendario para elegir la fecha --%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker')
+            .datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            })
+            .on('keydown paste', function (e) {
+                e.preventDefault(); // Bloquea escribir con teclado o pegar
+            });
     });
 </script>
 </asp:Content>
