@@ -26,7 +26,6 @@ namespace Entidades
 
         public override string ToString()
         {
-            // Puedes usar <br/> para saltos de línea en HTML
             return
                 $"DNI: {DNI}<br/>" +
                 $"Nombre: {Nombre} {Apellido}<br/>" +

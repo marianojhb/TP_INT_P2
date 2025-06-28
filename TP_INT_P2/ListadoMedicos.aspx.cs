@@ -24,13 +24,13 @@ namespace TP_INT_P2
                 }
                 else if (Session["Tipo"].ToString() == "02")
                 {
-                    paginaBloqueada.Text = "Sección exclusiva para usuarios Admin";
-                    panelContenidoListadoMedicos.Visible = false;
+                    //
                 } 
                 else if (Session["Tipo"].ToString() == "01")
                 {
                     MostrarBotonAgregarMedico();
                 }
+                CargarEspecialidades();
 
             }
         }
@@ -283,6 +283,21 @@ namespace TP_INT_P2
                             }";
                 ClientScript.RegisterStartupScript(this.GetType(), "MostrarToastError", script, true);
                 e.ExceptionHandled = true;
+            }
+        }
+
+        protected void CargarEspecialidades()
+        {
+            {
+                NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
+                List<Especialidad> especialidades = negocioEspecialidad.GetEspecialidades();
+
+                ddlEspecialidades.DataSource = especialidades;
+                ddlEspecialidades.DataTextField = "Nombre";
+                ddlEspecialidades.DataValueField = "codEspecialidad";
+                ddlEspecialidades.DataBind();
+
+                ddlEspecialidades.Items.Insert(0, new ListItem("-- Seleccione una especialidad --", "0"));
             }
         }
     }

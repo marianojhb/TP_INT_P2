@@ -154,8 +154,8 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
     </form>
-<div class="container-fluid fixed-bottom bg-light border-top shadow-sm py-2 mt-4">
-  <p class="mb-0 text-center text-muted small">
+<div class="container-fluid fixed-bottom bg-dark border-top shadow-sm py-2 mt-4">
+  <p class="mb-0 text-center text-light small">
     Grupo 11 | Mariano Belgrano, Carlos Zubilete | Trabajo Integrador | Programación 3 | Cuatrimestre 1 | Año 2025 | Facultad Regional General Pacheco | Universidad Tecnológica Nacional
   </p>
 </div>

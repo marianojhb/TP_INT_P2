@@ -1,9 +1,11 @@
 ﻿using Entidades;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -140,5 +142,41 @@ namespace Datos
             return ac.Existe(consulta);
         }
 
+        public DataTable BuscarPorPalabraClave (string palabraClave)
+        {
+            using (SqlConnection conn = ac.obtenerConexion())
+            {
+                string consulta =
+                    @"
+                        SELECT * 
+                        FROM 
+	                        PACIENTES PA
+	                        INNER JOIN PERSONAS P ON P.dni_P = PA.dni_PA
+	                        INNER JOIN LOCALIDADES L ON L.idLocalidad_L = P.idLocalidad_P
+	                        INNER JOIN PROVINCIAS PROV ON PROV.idProvincia_PROV = P.idProvincia_P
+                        WHERE 
+	                        PA.estado_PA = 1
+	                        AND (
+	                        P.nombre_P LIKE @palabraClave
+	                        OR P.apellido_P LIKE @palabraClave
+	                        OR P.email_P LIKE @palabraClave
+	                        OR P.dni_P LIKE @palabraClave)
+                        ";
+                            
+                using (SqlCommand comando = new SqlCommand())
+                {
+
+                    comando.CommandText = consulta;
+                    comando.Parameters.AddWithValue("@palabraClave", "%" + palabraClave + "%");
+                    comando.Connection = conn;
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(comando);
+                    DataTable tablaPacientes = new DataTable();
+                    sqlDataAdapter.Fill(tablaPacientes);
+
+                    return tablaPacientes;
+
+                }
+            }
+        }
     }
 }

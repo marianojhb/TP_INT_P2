@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Entidades
 {
@@ -21,6 +22,16 @@ namespace Entidades
             Fecha = fecha;
             Legajo = legajo;
             DNI = dni;
+        }
+        public override string ToString()
+        {
+            return
+                $"Fecha: {Fecha}<br/>" +
+                $"Legajo: {Legajo}<br/>" +
+                $"Asistencia: {Asistencia}<br/>" +
+                $"DNI: {DNI}<br/>" +
+                $"Observación: {Observacion}<br/>" +
+                $"Cancelado: {Cancelado}<br/>";
         }
     }
 }

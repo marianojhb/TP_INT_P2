@@ -179,9 +179,15 @@ namespace TP_INT_P2
             CargarPacientes();
         }
 
-        protected void btnBuscarPorNombreOApellido_Click(object sender, EventArgs e)
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
-
+            NegocioPaciente negocioPaciente = new NegocioPaciente();
+            if (txtBuscar.Text.Trim().Length > 0)
+            {
+                gvPacientes.DataSource = negocioPaciente.BuscarPorPalabraClave(txtBuscar.Text);
+                gvPacientes.DataBind();
+            }
+            else return;
         }
 
         protected void gvPacientes_RowUpdated(object sender, GridViewUpdatedEventArgs e)

@@ -31,10 +31,19 @@
 </asp:Content>
 <asp:Content ID="contenidoListadoMedicos" ContentPlaceHolderID="MainContent" runat="server">
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0"><i class="fa-solid fa-user-doctor"></i> Listado de Médicos</h2>
-    <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico"
+    <h2 class="mb-0 col-md-4"><i class="fa-solid fa-user-doctor"></i> Listado de Médicos</h2>
+    <div class="col-md-2 offset-md-2 text-end me-2">
+      <label for="ddlEspecialidades" class="form-label text-secondary text-end">Especialidad: </label>
+    </div>
+    <div class="col-md-2 me-2">
+      <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" />
+    </div>
+    <div class="col-md-2">
+        <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico"
         OnClick="btnAgregarMedico_Click" Visible="False" CssClass="btn btn-outline-danger" />
-</div>    <p style="text-align: center"><asp:Label ID="paginaBloqueada" runat="server" Text=""></asp:Label></p>
+    </div>
+</div>
+
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />

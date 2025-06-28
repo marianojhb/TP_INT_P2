@@ -40,7 +40,7 @@
           opacity: 1;
         }
 
-        .animate__animated.animate__fadeIn,
+        .animate__animated.animate__flipInX,
         .animate__animated.animate__fadeInRight 
         {
           --animate-duration: 1.5s;
@@ -83,11 +83,11 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-        <h2 style="text-align:center;" class="animate__animated animate__fadeIn">
+        <h1 style="text-align:center;" class="animate__animated animate__flipInX">
                             
             Bienvenido a la Clínica TUP - Sistema de Gestión
 
-        </h2>
+        </h1>
 
         <div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
             <div class="card shadow p-4" style="width: 100%; max-width: 400px;">

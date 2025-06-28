@@ -7,9 +7,9 @@
     <div class="form-group row mx-auto p-3 mb-3 col-9">
         <div class="form-group row">
             <div class="col-4">
-            <asp:TextBox ID="txtBuscarPorNombreOApellido" runat="server" CssClass="form-control " Placeholder="Buscar por nombre o apellido ..."></asp:TextBox></div>
+            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control " Placeholder="Buscar por nombre o apellido ..."></asp:TextBox></div>
             <div class="col-3" >
-            <asp:Button ID="btnBuscarPorNombreOApellido" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscarPorNombreOApellido_Click" /></div>
+            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" /></div>
             
         </div>
     </div>

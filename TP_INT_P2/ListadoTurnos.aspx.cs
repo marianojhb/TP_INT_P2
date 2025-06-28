@@ -15,27 +15,35 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string legajo = Session["legajo"]?.ToString() ?? "";
+
             if (Session["Tipo"] == null || (Session["Tipo"].ToString() != "02" && Session["Tipo"].ToString() != "01"))
             {
                 Response.Redirect("~/Login.aspx");
             }
+
+            // EN POSTBACK:
             if (!Page.IsPostBack)
             {
                 CargarMedicos();
-            }
-            if ( Session["Tipo"].ToString() == "02") 
-            {
-                // Turnos:
-                string legajo = Session["legajo"]?.ToString() ?? "";
-                CargarTurnos(legajo);
+                CargarTurnos("");
 
+                // Turnos:
+                if (Session["Tipo"].ToString() == "02") CargarTurnos(legajo);
+                else if (Session["Tipo"].ToString() == "01") CargarTurnos("");
+
+            }
+
+            // FUERA DE POSTBACK:
+            if (Session["Tipo"].ToString() == "02")
+            {
                 // Badges:
                 Informe informe = CargarBadges(legajo);
                 lblBadgeTodos.Text = informe.T10TotalTurnos.ToString();
                 lblBadgePasados.Text = informe.T40TotalTurnosPasados.ToString();
                 lblBadgeFuturos.Text = informe.T20TotalTurnosFuturos.ToString();
                 lblBadgeProxSemana.Text = informe.T30TotalTurnosProximaSemana.ToString();
-                
+
 
                 // ddl Especialidades:
                 ddlMedicos.SelectedValue = legajo;
@@ -44,13 +52,12 @@ namespace TP_INT_P2
             }
             else if (Session["Tipo"].ToString() == "01")
             {
-                CargarTurnos("");
                 Informe informe = CargarBadges("");
                 lblBadgeTodos.Text = informe.T10TotalTurnos.ToString();
                 lblBadgePasados.Text = informe.T40TotalTurnosPasados.ToString();
                 lblBadgeFuturos.Text = informe.T20TotalTurnosFuturos.ToString();
                 lblBadgeProxSemana.Text = informe.T30TotalTurnosProximaSemana.ToString();
-            } 
+            }
 
         }
         protected void CargarTurnos(string legajo)
@@ -81,9 +88,8 @@ namespace TP_INT_P2
     
         protected void gvTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            string fechaString = ((Label)gvTurnos.Rows[e.RowIndex].FindControl("lbl_it_fecha")).Text;
-            DateTime fecha = Convert.ToDateTime(fechaString);
-            string legajo = ((HiddenField)gvTurnos.Rows[e.RowIndex].FindControl("hfLegajo")).Value;
+            DateTime fecha = Convert.ToDateTime(gvTurnos.DataKeys[e.RowIndex]["fecha_T"]);
+            string legajo = gvTurnos.DataKeys[e.RowIndex]["legajo_T"].ToString();
             string dni = ((Label)gvTurnos.Rows[e.RowIndex].FindControl("lbl_it_DNI")).Text;
 
             Turno turno = new Turno(fecha, legajo, dni);
@@ -92,72 +98,54 @@ namespace TP_INT_P2
 
             negocioTurno.EliminarTurno(turno);
 
-            legajo = Session["legajo"]?.ToString() ?? "";
-            CargarTurnos(legajo);
-            CargarBadges(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
         }
 
         protected void gvTurnos_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.EditIndex = e.NewEditIndex;
-            
-            CargarTurnos(legajo);
-            CargarBadges(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
         }
 
         protected void gvTurnos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.EditIndex = -1;
-            CargarTurnos(legajo);
-            CargarBadges(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
         }
 
         protected void gvTurnos_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string legajo = Session["legajo"]?.ToString() ?? "";
-            DateTime fecha;
-            bool asistencia;
-            string observacion;
-            bool cancelado;
-
-            string fechaString = ((Label)gvTurnos.Rows[e.RowIndex].FindControl("lbl_eit_Fecha")).Text;
-            fecha = Convert.ToDateTime(fechaString);
-
-            asistencia = ((CheckBox)gvTurnos.Rows[e.RowIndex].FindControl("chb_eit_Asistencia")).Checked;
-
-            observacion = ((TextBox)gvTurnos.Rows[e.RowIndex].FindControl("tb_eit_Observacion")).Text;
-
-            cancelado = ((CheckBox)gvTurnos.Rows[e.RowIndex].FindControl("chb_eit_Cancelado")).Checked;
-
             Turno turno = new Turno();
+        
+            // Campos lectura
+            turno.Fecha = Convert.ToDateTime(gvTurnos.DataKeys[e.RowIndex]["fecha_T"]);
+            turno.Legajo = gvTurnos.DataKeys[e.RowIndex]["legajo_T"].ToString();
 
-
-            turno.Fecha = fecha;
-            turno.Legajo = legajo;
-            turno.Asistencia = asistencia;
-            turno.Observacion = observacion;
-            turno.Cancelado = cancelado;
+            // Campos escritura
+            CheckBox tbAsistencia = (CheckBox)gvTurnos.Rows[e.RowIndex].FindControl("chb_eit_Asistencia");
+            turno.Asistencia = tbAsistencia.Checked;
+            TextBox tbObservacion = (TextBox)gvTurnos.Rows[e.RowIndex].FindControl("tb_eit_Observacion");
+            turno.Observacion = tbObservacion.Text;
+            CheckBox tbCancelado = (CheckBox)gvTurnos.Rows[e.RowIndex].FindControl("chb_eit_Cancelado");
+            turno.Cancelado = tbCancelado.Checked;
 
             NegocioTurno negocioTurno = new NegocioTurno();
             negocioTurno.ActualizarTurno(turno);
 
             gvTurnos.EditIndex = -1;
-            CargarTurnos(legajo);
-            CargarBadges(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
         }
-
-
-
-
 
 
         protected void gvTurnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            string legajo = Session["legajo"]?.ToString() ?? "";
             gvTurnos.PageIndex = e.NewPageIndex;
-            CargarTurnos(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -185,20 +173,6 @@ namespace TP_INT_P2
 
         }
 
-        //protected void ddlMedicos_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    txtBuscarPorPalabraClave.Text = String.Empty;
-        //    NegocioTurno negocioTurno = new NegocioTurno();
-        //    if (ddlMedicos.SelectedValue != "0")
-        //    { 
-        //        gvTurnos.DataSource = negocioTurno.BuscarPorMedico(ddlMedicos.SelectedValue);
-        //        gvTurnos.DataBind();
-        //    }
-        //    else
-        //    {
-        //        ResetearFormulario();
-        //    }
-        //}
         protected void ResetearFormulario()
         {
             string legajo = Session["legajo"]?.ToString() ?? "";
@@ -208,7 +182,8 @@ namespace TP_INT_P2
             txtBuscarPorPalabraClave.Text = String.Empty;
             NegocioTurno negocioTurno = new NegocioTurno();
             legajo = Session["legajo"]?.ToString() ?? "";
-            CargarTurnos(legajo);
+            CargarTurnos(Session["Legajo"].ToString());
+            CargarBadges(Session["Legajo"].ToString());
             gvTurnos.DataBind();
         }
 

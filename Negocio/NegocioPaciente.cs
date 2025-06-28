@@ -39,5 +39,9 @@ namespace Negocio
         {
             return daoPaciente.ExisteDNI(dni);
         }
+        public DataTable BuscarPorPalabraClave(string palabraClave)
+        {
+            return daoPaciente.BuscarPorPalabraClave(palabraClave);
+        }
     }
 }
