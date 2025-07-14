@@ -24,4 +24,5 @@ This web application is a microsite designed for managing appointments in a medi
 
 ---
 
-> This project was developed for learning purposes, but it is polished and can be easily adapted for production environments.
+> This project was developed for learning purposes, but it is polished and can be easily adapted for production environments.<br>
+> Final project PROGRAMACION 3, 2025 1C G11 TPFINAL [UTN FRGP](https://www.frgp.utn.edu.ar/)
