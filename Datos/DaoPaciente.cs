@@ -160,7 +160,11 @@ namespace Datos
 	                        P.nombre_P LIKE @palabraClave
 	                        OR P.apellido_P LIKE @palabraClave
 	                        OR P.email_P LIKE @palabraClave
-	                        OR P.dni_P LIKE @palabraClave)
+	                        OR P.dni_P LIKE @palabraClave
+	                        OR PROV.nombre_PROV LIKE @palabraClave
+	                        OR L.nombre_L LIKE @palabraClave
+	                        OR P.direccion_P LIKE @palabraClave
+                            )
                         ";
                             
                 using (SqlCommand comando = new SqlCommand())

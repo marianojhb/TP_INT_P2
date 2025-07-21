@@ -36,7 +36,7 @@
       <label for="ddlEspecialidades" class="form-label text-secondary text-end">Especialidad: </label>
     </div>
     <div class="col-md-2 me-2">
-      <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" />
+      <asp:DropDownList ID="ddlEspecialidades" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlEspecialidades_SelectedIndexChanged" AutoPostBack="true" />
     </div>
     <div class="col-md-2">
         <asp:Button ID="btnAgregarMedico" runat="server" Text="Agregar Médico"
@@ -68,7 +68,7 @@
 
                 <div class="card">
                     <div class="profilepicDiv">
-                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' OnClick="ImageButton1_Click" CssClass="card-img-top imagenMedico shadow mt-3" AlternateText="Imagen de perfil" />
+                        <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl='<%# Eval("imagen_M") %>' CssClass="card-img-top imagenMedico shadow mt-3" AlternateText="Imagen de perfil" CommandName="Edit" ToolTip="Editar"/>
                     </div>
                         <div class="card-body">
                         <h5 class="card-title">
@@ -316,6 +316,9 @@
         UpdateCommand="SP_UPDATEMEDICO" 
         UpdateCommandType="StoredProcedure"
         >
+        <SelectParameters>
+            <asp:ControlParameter Name="codEspecialidad_M" ControlID="ddlEspecialidades" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
         <DeleteParameters>
             <asp:Parameter Name="dni_P" Type="String" />
         </DeleteParameters>

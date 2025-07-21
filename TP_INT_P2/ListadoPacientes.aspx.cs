@@ -108,10 +108,7 @@ namespace TP_INT_P2
             CargarPacientes();
         }
 
-        protected void gvPacientes_DataBound(object sender, EventArgs e)
-        {
-
-        }
+        
 
         protected void gvPacientes_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -139,8 +136,6 @@ namespace TP_INT_P2
 
                 string idLocalidadActual = DataBinder.Eval(e.Row.DataItem, "idLocalidad_P").ToString();
                 ddlLocalidades.SelectedValue = idLocalidadActual;
-
-
             }
         }
 
@@ -190,9 +185,21 @@ namespace TP_INT_P2
             else return;
         }
 
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = String.Empty;
+            CargarPacientes();
+
+        }
+
         protected void gvPacientes_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
            
+        }
+
+        protected void gvPacientes_DataBound(object sender, EventArgs e)
+        {
+
         }
     }
     

@@ -1,18 +1,19 @@
 ﻿<%@ Page Title="Listado de Pacientes | TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoPacientes.aspx.cs" Inherits="TP_INT_P2.ListadoPacientes" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        table a {
+            text-decoration: none;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
      <h2 class="text-center my-4"><i class="fa-solid fa-user-injured"></i> Listado de Pacientes</h2>
-    <div class="form-group row mx-auto p-3 mb-3 col-9">
-        <div class="form-group row">
-            <div class="col-4">
-            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control " Placeholder="Buscar por nombre o apellido ..."></asp:TextBox></div>
-            <div class="col-3" >
-            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" /></div>
-            
-        </div>
-    </div>
+<div class="form-group d-flex align-items-center gap-1 w-50 mx-auto">
+    <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-1" Placeholder="Buscar por palabra clave ..."></asp:TextBox>
+    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary me-1" OnClick="btnBuscar_Click" />
+    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-secondary" OnClick="btnLimpiar_Click" />
+</div>
         <%--<asp:Panel ID="Panel1" runat="server" CssClass="col-md-8 mx-auto card p-3">--%>
         <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-3">
         <asp:GridView ID="gvPacientes" runat="server" 
@@ -23,9 +24,9 @@
             CellSpacing="5"
             GridLines="None" 
             OnRowDeleting="gvPacientes_RowDeleting" 
-            OnDataBound="gvPacientes_DataBound" 
-            OnRowCancelingEdit="gvPacientes_RowCancelingEdit"
+            OnDataBound="gvPacientes_DataBound"
             OnRowDataBound="gvPacientes_RowDataBound" 
+            OnRowCancelingEdit="gvPacientes_RowCancelingEdit"
             OnRowEditing="gvPacientes_RowEditing" 
             OnRowUpdating="gvPacientes_RowUpdating" 
             AllowPaging="True" 
@@ -42,14 +43,13 @@
                 </div>
             </EmptyDataTemplate>
             <Columns>
-                <asp:CommandField 
-                    ShowDeleteButton="True" 
-                    DeleteText="Eliminar" 
-                    ShowEditButton="True" 
-                    EditText="Editar" 
-                    UpdateText="Guardar" 
-                    CancelText="Cancelar" />                    
-                        
+        <asp:CommandField
+                ShowEditButton="True"
+                ShowDeleteButton="True"
+                EditText="✏️ Editar"
+                DeleteText="🗑️ Eliminar"
+                UpdateText="Guardar"
+                CancelText="Cancelar" ItemStyle-Width="200px" />                          
                     
                 <asp:TemplateField HeaderText="DNI">
                     <EditItemTemplate>

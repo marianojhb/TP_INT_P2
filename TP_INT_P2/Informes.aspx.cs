@@ -24,17 +24,17 @@ namespace TP_INT_P2
                 txtInformeDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txtInformeHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
-                Informe informe = ObtenerInforme(DateTime.Now , DateTime.Now);
+                Informe informe = ObtenerInforme(DateTime.Now, DateTime.Now);
 
                 lblTotalMedicos.Text = informe.M10TotalMedicos == 0 ? "No hay médicos" : (informe.M10TotalMedicos == 1 ? "1 médico" : informe.M10TotalMedicos + " médicos");
                 lblTotalMedicosActivos.Text = informe.M20TotalMedicosActivos == 0 ? "No hay médicos" : (informe.M20TotalMedicosActivos == 1 ? "1 médico" : informe.M20TotalMedicosActivos + " médicos");
                 lblTotalMedicosInactivos.Text = informe.M30TotalMedicosInactivos == 0 ? "No hay médicos" : (informe.M30TotalMedicosInactivos == 1 ? "1 médico" : informe.M30TotalMedicosInactivos + " médicos");
                 lblTotalMedicosConTurnos.Text = informe.M41TotalMedicosConTurnos == 0 ? "No hay médicos" : (informe.M41TotalMedicosConTurnos == 1 ? "1 médico" : informe.M41TotalMedicosConTurnos + " médicos");
-                lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString() + "%";
+                lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos == -1 ? "No hay médicos" : informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString("P0");
                 gvTotalMedicosPorEspecialidad.DataSource = informe.M50TotalMedicosPorEspecialidad;
                 gvTotalMedicosPorEspecialidad.DataBind();
                 Medico medicoConMayorAtencionSemanal = informe.H10MedicoConMayorAtencionSemanal;
-                lblmedicoConMayorAtencionSemanalNombre.Text = medicoConMayorAtencionSemanal.Nombre;
+                lblmedicoConMayorAtencionSemanalNombre.Text = medicoConMayorAtencionSemanal.Nombre == null && medicoConMayorAtencionSemanal.Apellido == null ? "No hay médicos" : medicoConMayorAtencionSemanal.Nombre;
                 lblmedicoConMayorAtencionSemanalApellido.Text = medicoConMayorAtencionSemanal.Apellido;
                 lblTurnosSemanalesHabilitadosTotales.Text = informe.H20TurnosSemanalesHabilitadosTotales == 0 ? "No hay turnos" : (informe.H20TurnosSemanalesHabilitadosTotales == 1 ? "1 turnos" : informe.H20TurnosSemanalesHabilitadosTotales + " turnos");
                 lblTotalPacientes.Text = informe.P10TotalPacientes == 0 ? "No hay pacientes" : (informe.P10TotalPacientes == 1 ? "1 paciente" : informe.P10TotalPacientes + " pacientes");
@@ -51,7 +51,7 @@ namespace TP_INT_P2
                 lblTotalTurnosProximaSemana.Text = informe.T30TotalTurnosProximaSemana == 0 ? "No hay turnos" : (informe.T30TotalTurnosProximaSemana == 1 ? "1 turnos" : informe.T30TotalTurnosProximaSemana + " turnos");
                 lblTotalTurnosPasados.Text = informe.T40TotalTurnosPasados == 0 ? "No hay turnos" : (informe.T40TotalTurnosPasados == 1 ? "1 turnos" : informe.T40TotalTurnosPasados + " turnos");
                 lblTotalTurnosAusentes.Text = informe.T50TotalTurnosAusentes == 0 ? "No hay turnos" : (informe.T50TotalTurnosAusentes == 1 ? "1 turnos" : informe.T50TotalTurnosAusentes + " turnos");
-                lblPorcentajeTurnosAusentes.Text = informe.T60PorcentajeTurnosAusentesSobreTurnosPasados.ToString() + "%";
+                lblPorcentajeTurnosAusentes.Text = informe.T60PorcentajeTurnosAusentesSobreTurnosPasados == -1 ? "No hay turnos" : informe.T60PorcentajeTurnosAusentesSobreTurnosPasados.ToString("P0");
                 gvTotalTurnosAusentesPorMedico.DataSource = informe.T70TotalTurnosAusentesPorMedico;
                 gvTotalTurnosAusentesPorMedico.DataBind();
 
@@ -60,7 +60,7 @@ namespace TP_INT_P2
         protected Informe ObtenerInforme(DateTime inicio, DateTime fin)
         {
             NegocioInforme negocioInforme = new NegocioInforme();
-            
+
             Informe informe = new Informe();
             informe = negocioInforme.ObtenerInforme(inicio, fin);
             return informe;
@@ -72,16 +72,16 @@ namespace TP_INT_P2
             DateTime hasta = Convert.ToDateTime(txtInformeHasta.Text);
 
             Informe informe = ObtenerInforme(desde, hasta);
-            
+
             lblTotalMedicos.Text = informe.M10TotalMedicos == 0 ? "No hay médicos" : (informe.M10TotalMedicos == 1 ? "1 médico" : informe.M10TotalMedicos + " médicos");
             lblTotalMedicosActivos.Text = informe.M20TotalMedicosActivos == 0 ? "No hay médicos" : (informe.M20TotalMedicosActivos == 1 ? "1 médico" : informe.M20TotalMedicosActivos + " médicos");
             lblTotalMedicosInactivos.Text = informe.M30TotalMedicosInactivos == 0 ? "No hay médicos" : (informe.M30TotalMedicosInactivos == 1 ? "1 médico" : informe.M30TotalMedicosInactivos + " médicos");
             lblTotalMedicosConTurnos.Text = informe.M41TotalMedicosConTurnos == 0 ? "No hay médicos" : (informe.M41TotalMedicosConTurnos == 1 ? "1 médico" : informe.M41TotalMedicosConTurnos + " médicos");
-            lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString() + "%";
+            lblPorcentajeMedicosConTurnosSobreMedicosActivos.Text = informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos == -1 ? "No hay médicos" : informe.M40PorcentajeMedicosConTurnosSobreMedicosActivos.ToString("P0");
             gvTotalMedicosPorEspecialidad.DataSource = informe.M50TotalMedicosPorEspecialidad;
             gvTotalMedicosPorEspecialidad.DataBind();
             Medico medicoConMayorAtencionSemanal = informe.H10MedicoConMayorAtencionSemanal;
-            lblmedicoConMayorAtencionSemanalNombre.Text = medicoConMayorAtencionSemanal.Nombre;
+            lblmedicoConMayorAtencionSemanalNombre.Text = medicoConMayorAtencionSemanal.Nombre == null && medicoConMayorAtencionSemanal.Apellido == null ? "No hay médicos" : medicoConMayorAtencionSemanal.Nombre;
             lblmedicoConMayorAtencionSemanalApellido.Text = medicoConMayorAtencionSemanal.Apellido;
             lblTurnosSemanalesHabilitadosTotales.Text = informe.H20TurnosSemanalesHabilitadosTotales == 0 ? "No hay turnos" : (informe.H20TurnosSemanalesHabilitadosTotales == 1 ? "1 turnos" : informe.H20TurnosSemanalesHabilitadosTotales + " turnos");
             lblTotalPacientes.Text = informe.P10TotalPacientes == 0 ? "No hay pacientes" : (informe.P10TotalPacientes == 1 ? "1 paciente" : informe.P10TotalPacientes + " pacientes");
@@ -98,7 +98,7 @@ namespace TP_INT_P2
             lblTotalTurnosProximaSemana.Text = informe.T30TotalTurnosProximaSemana == 0 ? "No hay turnos" : (informe.T30TotalTurnosProximaSemana == 1 ? "1 turnos" : informe.T30TotalTurnosProximaSemana + " turnos");
             lblTotalTurnosPasados.Text = informe.T40TotalTurnosPasados == 0 ? "No hay turnos" : (informe.T40TotalTurnosPasados == 1 ? "1 turnos" : informe.T40TotalTurnosPasados + " turnos");
             lblTotalTurnosAusentes.Text = informe.T50TotalTurnosAusentes == 0 ? "No hay turnos" : (informe.T50TotalTurnosAusentes == 1 ? "1 turnos" : informe.T50TotalTurnosAusentes + " turnos");
-            lblPorcentajeTurnosAusentes.Text = informe.T60PorcentajeTurnosAusentesSobreTurnosPasados.ToString() + "%";
+            lblPorcentajeTurnosAusentes.Text = informe.T60PorcentajeTurnosAusentesSobreTurnosPasados == -1  ? "No hay turnos" : informe.T60PorcentajeTurnosAusentesSobreTurnosPasados.ToString("P0");
             gvTotalTurnosAusentesPorMedico.DataSource = informe.T70TotalTurnosAusentesPorMedico;
             gvTotalTurnosAusentesPorMedico.DataBind();
 

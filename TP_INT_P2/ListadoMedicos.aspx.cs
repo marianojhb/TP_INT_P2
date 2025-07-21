@@ -288,7 +288,7 @@ namespace TP_INT_P2
 
         protected void CargarEspecialidades()
         {
-            {
+            
                 NegocioEspecialidad negocioEspecialidad = new NegocioEspecialidad();
                 List<Especialidad> especialidades = negocioEspecialidad.GetEspecialidades();
 
@@ -298,7 +298,12 @@ namespace TP_INT_P2
                 ddlEspecialidades.DataBind();
 
                 ddlEspecialidades.Items.Insert(0, new ListItem("-- Seleccione una especialidad --", "0"));
-            }
+
+        }
+
+        protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lvMedicos.DataBind();
         }
     }
 
