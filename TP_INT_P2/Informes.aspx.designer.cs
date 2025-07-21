@@ -51,6 +51,33 @@ namespace TP_INT_P2
         protected global::System.Web.UI.WebControls.Button btnReset;
 
         /// <summary>
+        /// Control lblTotalTurnosAusentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalTurnosAusentes;
+
+        /// <summary>
+        /// Control lblPorcentajeTurnosAusentes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPorcentajeTurnosAusentes;
+
+        /// <summary>
+        /// Control gvTotalTurnosAusentesPorMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTotalTurnosAusentesPorMedico;
+
+        /// <summary>
         /// Control lblTotalMedicos.
         /// </summary>
         /// <remarks>
@@ -247,32 +274,5 @@ namespace TP_INT_P2
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalTurnosFuturos;
-
-        /// <summary>
-        /// Control lblTotalTurnosAusentes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalTurnosAusentes;
-
-        /// <summary>
-        /// Control lblPorcentajeTurnosAusentes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPorcentajeTurnosAusentes;
-
-        /// <summary>
-        /// Control gvTotalTurnosAusentesPorMedico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTotalTurnosAusentesPorMedico;
     }
 }

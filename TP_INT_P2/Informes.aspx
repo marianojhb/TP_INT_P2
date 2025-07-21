@@ -10,8 +10,14 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <h2 class="text-center my-4"><i class="fa-solid fa-file-contract"></i> Informes</h2>
-    <div class="container px-3">
+     <h2 class="text-center my-4 py-4"><i class="fa-solid fa-file-contract"></i> Informes</h2>
+
+
+        <hr class="my-4">
+    <h3 class="text-primary">Turnos con Ausente</h3>
+    <div class="row"> <%--// TURNOS con Ausentes --%>
+
+            <div class="container px-3">
       <div class="row align-items-end g-2 mb-3">
 
         <!-- Desde -->
@@ -38,6 +44,41 @@
         </div>
       </div>
     </div>
+
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos con Ausente</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblTotalTurnosAusentes" runat="server" Text=""></asp:Label>   
+                
+            </p>
+        </div>
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Porcentaje de Turnos con Ausente</h4>
+            <p class="fs-5">
+                <asp:Label ID="lblPorcentajeTurnosAusentes" runat="server" Text=""></asp:Label> 
+                
+            </p>
+        </div>
+
+        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
+            <h4>Turnos Ausentes por Médico</h4>
+            <p class="fs-5">
+                <asp:GridView ID="gvTotalTurnosAusentesPorMedico" runat="server" CellPadding="3" BorderWidth="0">
+                    <EmptyDataTemplate>
+                        <div class=" text-center" role="alert">
+                            No se encontraron datos para mostrar
+                        </div>
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </p>
+        </div>
+
+
+     </div>
+
+
 
     <hr class="my-4">
     <h3 class="text-primary">Médicos</h3>
@@ -254,41 +295,7 @@
         </div>
      </div>
 
-    <hr class="my-4">
-    <h3 class="text-primary">Turnos con Ausente</h3>
-    <div class="row"> <%--// TURNOS con Ausentes --%>
 
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Turnos con Ausente</h4>
-            <p class="fs-5">
-                <asp:Label ID="lblTotalTurnosAusentes" runat="server" Text=""></asp:Label>   
-                
-            </p>
-        </div>
-
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Porcentaje de Turnos con Ausente</h4>
-            <p class="fs-5">
-                <asp:Label ID="lblPorcentajeTurnosAusentes" runat="server" Text=""></asp:Label> 
-                
-            </p>
-        </div>
-
-        <div class="col-2 shadow mb-3 mx-3 p-3" style="">
-            <h4>Turnos Ausentes por Médico</h4>
-            <p class="fs-5">
-                <asp:GridView ID="gvTotalTurnosAusentesPorMedico" runat="server" CellPadding="3" BorderWidth="0">
-                    <EmptyDataTemplate>
-                        <div class=" text-center" role="alert">
-                            No se encontraron datos para mostrar
-                        </div>
-                    </EmptyDataTemplate>
-                </asp:GridView>
-            </p>
-        </div>
-
-
-     </div>
 
 <%--            <div class="progress mt-3"><div class="progress-bar bg-info progress-bar-animated" role="progressbar" style="width: 0%;">0%</div></div>--%>
 

@@ -21,10 +21,11 @@ namespace TP_INT_P2
             if (!IsPostBack)
             {
 
-                txtInformeDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                txtInformeDesde.Text = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd");
                 txtInformeHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
-                Informe informe = ObtenerInforme(DateTime.Now, DateTime.Now);
+                Informe informe = ObtenerInforme(Convert.ToDateTime(txtInformeDesde.Text), DateTime.Now);
+
 
                 lblTotalMedicos.Text = informe.M10TotalMedicos == 0 ? "No hay médicos" : (informe.M10TotalMedicos == 1 ? "1 médico" : informe.M10TotalMedicos + " médicos");
                 lblTotalMedicosActivos.Text = informe.M20TotalMedicosActivos == 0 ? "No hay médicos" : (informe.M20TotalMedicosActivos == 1 ? "1 médico" : informe.M20TotalMedicosActivos + " médicos");
@@ -106,7 +107,8 @@ namespace TP_INT_P2
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-
+            txtInformeDesde.Text = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd");
+            txtInformeHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
     }
 }

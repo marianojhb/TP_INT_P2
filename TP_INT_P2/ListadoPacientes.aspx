@@ -4,6 +4,18 @@
         table a {
             text-decoration: none;
         }
+        .gridview-container .aspNetPager {
+            text-align: center;
+        }
+
+        .gridview-container .gridview-pager {
+            text-align: center;
+        }
+
+        .gridview-container table {
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -16,6 +28,7 @@
 </div>
         <%--<asp:Panel ID="Panel1" runat="server" CssClass="col-md-8 mx-auto card p-3">--%>
         <asp:Panel ID="Panel1" runat="server" CssClass="mx-auto p-3">
+        <div class="gridview-container">
         <asp:GridView ID="gvPacientes" runat="server" 
             AutoGenerateColumns="False" 
 
@@ -169,6 +182,7 @@
               
             </Columns>
             </asp:GridView>
+         </div>
         <%--<asp:Label ID="lblMensaje" runat="server" Text="" CssClass="mx-auto"></asp:Label>--%>
             </asp:Panel>
 

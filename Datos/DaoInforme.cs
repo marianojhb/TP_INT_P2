@@ -225,13 +225,29 @@ namespace Datos
                     cmd.CommandText = "SELECT COUNT(fecha_T) FROM TURNOS WHERE CANCELADO_T = 0 AND fecha_T < getdate()";
                     informe.T40TotalTurnosPasados = (int)cmd.ExecuteScalar();
 
-                    cmd.CommandText = "SELECT COUNT(fecha_T) FROM TURNOS WHERE CANCELADO_T = 0 AND asistencia_T = 0 AND fecha_T < getdate()";
+                    cmd.CommandText =
+                        @"
+                            SELECT 
+                                COUNT(fecha_T) 
+                            FROM 
+                                TURNOS 
+                            WHERE 
+                                CANCELADO_T = 0 
+                            AND 
+                                asistencia_T = 0 
+                            AND (fecha_T BETWEEN @inicio AND @fin)
+                        ";
+                    cmd.Parameters.AddWithValue("@inicio", inicio);
+                    cmd.Parameters.AddWithValue("@fin", fin);
                     informe.T50TotalTurnosAusentes = (int)cmd.ExecuteScalar();
 
                     informe.T60PorcentajeTurnosAusentesSobreTurnosPasados = (double)informe.T50TotalTurnosAusentes / informe.T40TotalTurnosPasados;
 
+
+
                     cmd.CommandText =
-                        @"SELECT  Legajo, nombre_P, apellido_P, Cantidad
+                        @"
+                        SELECT  Legajo, nombre_P, apellido_P, Cantidad
                             FROM
                              (SELECT 
                               legajo_t AS [Legajo], COUNT(fecha_T) AS [Cantidad] 
@@ -240,27 +256,28 @@ namespace Datos
                              WHERE 
                               cancelado_T = 0 
                               AND asistencia_T = 0
-                              AND fecha_T < getdate()
+                              AND (fecha_T BETWEEN @inicio AND @fin)
                             GROUP BY 
                              legajo_T 
                             ) AS SUBCONSULTA
                             INNER JOIN MEDICOS M ON M.legajo_M = SUBCONSULTA.Legajo
                             INNER JOIN ESPECIALIDADES E ON E.codEspecialidad_E = M.codEspecialidad_M
-                            INNER JOIN PERSONAS P ON P.dni_P = M.dni_M";
+                            INNER JOIN PERSONAS P ON P.dni_P = M.dni_M
+                        ";
                     data = cmd.ExecuteReader();
                     informe.T70TotalTurnosAusentesPorMedico = new DataTable();
-                    informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Legajo", typeof(int));
+                    informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Leg", typeof(int));
                     informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Nombre", typeof(string));
                     informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Apellido", typeof(string));
-                    informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Cantidad", typeof(int));
+                    informe.T70TotalTurnosAusentesPorMedico.Columns.Add("Cant", typeof(int));
                     while (data.Read())
                     {
                         {
                             DataRow fila = informe.T70TotalTurnosAusentesPorMedico.NewRow();
-                            fila["Legajo"] = data["Legajo"];
+                            fila["Leg"] = data["Legajo"];
                             fila["Nombre"] = data["nombre_P"];
                             fila["Apellido"] = data["apellido_P"];
-                            fila["Cantidad"] = data["Cantidad"];
+                            fila["Cant"] = data["Cantidad"];
                             informe.T70TotalTurnosAusentesPorMedico.Rows.Add(fila);
                         }
                     }
