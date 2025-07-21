@@ -86,6 +86,8 @@ namespace TP_INT_P2
             txtDireccion.Text = String.Empty;
             ddlProvincias.SelectedValue = "0";
             ddlLocalidades.SelectedValue = "0";
+            lblChequearDNIValido.Text = String.Empty;
+            lblChequearDNI.Text = String.Empty;
         }
 
         // Valida que el RadioButton sexo esté chequeado con alguna alternativa
