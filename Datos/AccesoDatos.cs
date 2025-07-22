@@ -7,13 +7,25 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using Entidades;
+using System.Configuration;
 
 namespace Datos
 {
     public class AccesoDatos
     {
-        private const string cadenaConexion = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=BDClinica;Integrated Security=True;TrustServerCertificate=True";
+        private string cadenaConexion;
+
+        public AccesoDatos()
+        {
+            #if DEBUG
+                cadenaConexion = ConfigurationManager.ConnectionStrings["BDClinicaLocal"].ConnectionString;
+            #else
+                cadenaConexion = ConfigurationManager.ConnectionStrings["BDClinicaAzure"].ConnectionString;
+            #endif
+        }
+
         SqlConnection sqlConnection;
+
 
         public SqlConnection obtenerConexion()
         {

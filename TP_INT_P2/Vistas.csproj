@@ -70,6 +70,36 @@
     <Content Include="AgregarMedico.aspx" />
     <Content Include="AgregarPaciente.aspx" />
     <Content Include="AgregarTurno.aspx" />
+    <Content Include="imagenes\perfiles\00.png" />
+    <Content Include="imagenes\perfiles\01.jpg" />
+    <Content Include="imagenes\perfiles\02.jpg" />
+    <Content Include="imagenes\perfiles\03.jpg" />
+    <Content Include="imagenes\perfiles\04.jpg" />
+    <Content Include="imagenes\perfiles\05.jpg" />
+    <Content Include="imagenes\perfiles\06.jpg" />
+    <Content Include="imagenes\perfiles\07.jpg" />
+    <Content Include="imagenes\perfiles\08.jpg" />
+    <Content Include="imagenes\perfiles\arieltapia.jpg" />
+    <Content Include="imagenes\perfiles\carlos.png" />
+    <Content Include="imagenes\perfiles\Ching.jpg" />
+    <Content Include="imagenes\perfiles\claudiofernandez.png" />
+    <Content Include="imagenes\perfiles\cormillot.jpg" />
+    <Content Include="imagenes\perfiles\danielkloster.jpg" />
+    <Content Include="imagenes\perfiles\estol.jpg" />
+    <Content Include="imagenes\perfiles\favaloro.jpg" />
+    <Content Include="imagenes\perfiles\img_avatar.png" />
+    <Content Include="imagenes\perfiles\lopezrosseti.jpg" />
+    <Content Include="imagenes\perfiles\malaga.jpg" />
+    <Content Include="imagenes\perfiles\manes.jpg" />
+    <Content Include="imagenes\perfiles\mbelgrano.jpg" />
+    <Content Include="imagenes\perfiles\sevilla.jpg" />
+    <Content Include="imagenes\perfiles\snl-will-ferrell.gif" />
+    <Content Include="imagenes\perfiles\socolinsky.jpg" />
+    <Content Include="imagenes\perfiles\tartaglione.jpg" />
+    <Content Include="imagenes\perfiles\torregrosa.jpg" />
+    <Content Include="imagenes\perfiles\zin.jpg" />
+    <Content Include="imagenes\site\logo-utn-siglas - Copy.png" />
+    <Content Include="imagenes\site\logo-utn-siglas.png" />
     <Content Include="Informes.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="InicioAdministrador.aspx" />
@@ -184,8 +214,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="imagenes\site\logo-utn-siglas.xcf" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
+    <None Include="Properties\PublishProfiles\clinicatup - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
