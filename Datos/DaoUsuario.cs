@@ -14,18 +14,22 @@ namespace Datos
         public bool ExisteUsuario(Usuario u)
         {
             string consulta = "SELECT 1 FROM USUARIOS WHERE username_U = @username AND password_U = @password AND estado_U = 1";
-            using (SqlCommand comando = new SqlCommand())
+
+            using (SqlConnection conexion = ac.obtenerConexion())
             {
-                comando.CommandText = consulta;
-                comando.Connection = ac.obtenerConexion();
-                comando.Parameters.AddWithValue("@username", u.Username);
-                comando.Parameters.AddWithValue("@password", u.Password);
+                if (conexion == null)
+                    throw new Exception("No se pudo abrir la conexión a la base de datos.");
 
-                object result = comando.ExecuteScalar();
+                using (SqlCommand comando = new SqlCommand(consulta, conexion))
+                {
+                    comando.Parameters.AddWithValue("@username", u.Username);
+                    comando.Parameters.AddWithValue("@password", u.Password);
 
-                return result != null;
+                    object result = comando.ExecuteScalar();
+
+                    return result != null;
+                }
             }
-
         }
 
         public Usuario GetData(Usuario usuario)

@@ -14,6 +14,7 @@ namespace Datos
     public class AccesoDatos
     {
         private string cadenaConexion;
+        SqlConnection sqlConnection;
 
         public AccesoDatos()
         {
@@ -24,7 +25,6 @@ namespace Datos
             #endif
         }
 
-        SqlConnection sqlConnection;
 
 
         public SqlConnection obtenerConexion()
@@ -37,7 +37,8 @@ namespace Datos
             }
             catch (Exception err)
             {
-                return null;
+                // Lanzar la excepción para saber el error real
+                throw new Exception("Error abriendo la conexión: " + err.Message, err);
             }
         }
 
