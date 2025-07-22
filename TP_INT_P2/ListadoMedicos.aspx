@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Listado de Médicos | TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoMedicos.aspx.cs" Inherits="TP_INT_P2.ListadoMedicos" %>
+﻿<%@ Page Title="Listado de Médicos | TUP" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="True" CodeBehind="ListadoMedicos.aspx.cs" Inherits="TP_INT_P2.ListadoMedicos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         th {
@@ -43,7 +43,7 @@
         OnClick="btnAgregarMedico_Click" Visible="False" CssClass="btn btn-outline-danger" />
     </div>
 </div>
-
+   
 <asp:Panel ID="panelContenidoListadoMedicos" runat="server" CssClass="mx-auto w-100 p-3">
     
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
@@ -308,7 +308,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:BDClinicaConnectionString %>" 
+        ConnectionString="<%$ ConnectionStrings:BDClinicaAzure %>"
         DeleteCommand="SP_INACTIVARMEDICO" 
         DeleteCommandType="StoredProcedure" 
         SelectCommand="SP_SELECCIONARMEDICO" 

@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,11 @@ namespace TP_INT_P2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+#if DEBUG
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["BDClinicaLocal"].ConnectionString;
+#else
+                    SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["BDClinicaAzure"].ConnectionString;
+#endif
             if (!IsPostBack)
             {
                 if (Session["Tipo"] == null)
