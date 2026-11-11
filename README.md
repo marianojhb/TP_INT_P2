@@ -2,7 +2,7 @@
 
 This web application is a microsite designed for managing appointments in a medical institution, although it can be easily adapted for any type of organization. It is built with scalability in mind, supporting unlimited user roles, appointments, and specializations.
 
-Recently deployed thanks to Microsoft Azure cloud platform at [https://clinicatup.azurewebsites.net/](https://clinicatup.azurewebsites.net)
+Recently deployed thanks to Microsoft Azure cloud platform at [clinicatup.runasp.net](clinicatup.runasp.net)
 Feel free to try. Access with admin:12345 credential (admin user) or drlopezrosetti:12345 (doctor user)
 
 ## Features
@@ -26,7 +26,7 @@ Feel free to try. Access with admin:12345 credential (admin user) or drlopezrose
 - **Database**: Microsoft SQL Server
 
 ## Deployment
-- Azure
+- MonsterASP
 
 ---
 
