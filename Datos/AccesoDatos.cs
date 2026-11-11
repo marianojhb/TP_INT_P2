@@ -21,7 +21,7 @@ namespace Datos
             #if DEBUG
                 cadenaConexion = ConfigurationManager.ConnectionStrings["BDClinicaLocal"].ConnectionString;
             #else
-                cadenaConexion = ConfigurationManager.ConnectionStrings["BDClinicaAzure"].ConnectionString;
+                cadenaConexion = ConfigurationManager.ConnectionStrings["ClinicaTUP"].ConnectionString;
             #endif
         }
 

@@ -119,4 +119,9 @@
                 <asp:Label ID="lblError" runat="server" CssClass="text-danger mt-3 d-block" Visible="false" />
             </div>
         </div>
+    <div>
+        <p>Admin users: admin | ariel | carlos | claudio </p>
+        <p>Medical doctor users: coombes | dravuolo | drcormillot | drvergara | drzin | rossini</p>
+        <p>Password in all cases is 12345 :)</p>
+    </div>
 </asp:Content>

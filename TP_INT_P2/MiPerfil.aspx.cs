@@ -21,17 +21,20 @@ namespace TP_INT_P2
                 Response.Redirect("~/Login.aspx");
             }
 
-            if (!IsPostBack)
             {
+                Medico medicoSession = Session["Medico"] as Medico;
+
+                if (medicoSession == null)
+                {
+                    Response.Redirect("~/Login.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                    return;
+                }
+
                 CargarProvincias();
                 CargarEspecialidades();
-                // CARGAR EL USUARIO ACTUAL
-                Usuario usuario = new Usuario();
-                Medico medicoSession = Session["Medico"] as Medico;
-                usuario.Username = medicoSession.Username;
-                usuario.Email = medicoSession.Email;
-                CargarPerfil(usuario);
-                CargarLocalidades(ddlProvincias.SelectedValue);
+
+                CargarPerfilDesdeMedico(medicoSession);
             }
         }
 
@@ -227,41 +230,32 @@ namespace TP_INT_P2
             
         }
 
-        protected void CargarPerfil(Usuario usuario)
+        protected void CargarPerfilDesdeMedico(Medico medico)
         {
+            txtLegajo.Text = medico.Legajo.ToString();
+            txtDni.Text = medico.DNI;
+            txtNombre.Text = medico.Nombre;
+            txtApellido.Text = medico.Apellido;
 
-            
-            Medico medicoDao = new Medico();
-            NegocioMedico negocioMedico= new NegocioMedico();
-            medicoDao = negocioMedico.getDatos(usuario);
+            rbMasculino.Checked = medico.Sexo == 'M';
+            rbFemenino.Checked = medico.Sexo == 'F';
 
-            txtLegajo.Text = medicoDao.Legajo.ToString();
-            txtDni.Text = medicoDao.DNI;
-            txtNombre.Text = medicoDao.Nombre;
-            txtApellido.Text = medicoDao.Apellido;
-            if (medicoDao.Sexo.ToString() == "M")
-            {
-                rbMasculino.Checked = true;
-            }
-            else if (medicoDao.Sexo.ToString() == "F")
-            {
-                rbFemenino.Checked = true;
-            }
+            txtNacionalidad.Text = medico.Nacionalidad;
+            ddlProvincias.SelectedValue = medico.IdProvincia.ToString();
 
-            txtNacionalidad.Text = medicoDao.Nacionalidad;
-            ddlProvincias.SelectedValue = medicoDao.IdProvincia.ToString();
-            ddlLocalidades.SelectedValue = medicoDao.IdLocalidad.ToString();
-            txtFechaNac.Text = (medicoDao.FechaNac).ToString("yyyy-MM-dd");
-            txtDireccion.Text = medicoDao.Direccion;
-            txtEmail.Text = medicoDao.Email;
-            txtTelefono.Text = medicoDao.Telefono;
-            txtHorario.Text = medicoDao.Horario;
-            ddlEspecialidades.SelectedValue = medicoDao.CodEspecialidad.ToString();
-            txtUsername.Text = medicoDao.Username;
-            txtPassword.Text = medicoDao.Password;
+            CargarLocalidades(ddlProvincias.SelectedValue);
+            ddlLocalidades.SelectedValue = medico.IdLocalidad.ToString();
 
+            txtFechaNac.Text = medico.FechaNac.ToString("yyyy-MM-dd");
+            txtDireccion.Text = medico.Direccion;
+            txtEmail.Text = medico.Email;
+            txtTelefono.Text = medico.Telefono;
+            txtHorario.Text = medico.Horario;
+            ddlEspecialidades.SelectedValue = medico.CodEspecialidad.ToString();
+            txtUsername.Text = medico.Username;
 
-
+            // No mostrar la contraseña almacenada en el formulario.
+            txtPassword.Text = string.Empty;
         }
 
         // Valida que el RadioButton sexo esté chequeado con alguna alternativa

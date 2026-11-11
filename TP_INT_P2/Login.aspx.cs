@@ -1,63 +1,41 @@
-﻿using Entidades;
+﻿
+using Entidades;
 using Negocio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
 
 namespace TP_INT_P2
 {
     public partial class Login : System.Web.UI.Page
     {
+        private const string ImagenDefault = "~/imagenes/perfiles/img_avatar.png";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            HttpCookie ckPerfilImageUrl = Request.Cookies["ckPerfilImageUrl"];
 
-            // Chequea variables de sesion para Depurar:
-            //foreach (string key in Session.Keys)
-            //{
-            //    Response.Write($"<p><strong>{key}</strong>: {Session[key]}</p>");
-            //}
+            string perfilImageUrl = Session["ImgPerfilUrl"] as string;
 
-            // Gestion de cookies para la imagen del login
+            if (string.IsNullOrWhiteSpace(perfilImageUrl))
             {
-                HttpCookie ckPerfilImageUrl = Request.Cookies["ckPerfilImageUrl"];
-                HttpCookie ckUsername = Request.Cookies["ckUsername"];
-
-                
-
-                string perfilImageUrl = Session["ImgPerfilUrl"] as string;
-                if (!string.IsNullOrEmpty(perfilImageUrl))
+                if (ckPerfilImageUrl != null &&
+                    !string.IsNullOrWhiteSpace(ckPerfilImageUrl.Value))
                 {
-                    // Poner la imagen guardada en sesión
-                    imgPerfilUrl.ImageUrl = perfilImageUrl;
-                }
-
-                else if (ckPerfilImageUrl != null && !string.IsNullOrEmpty(ckPerfilImageUrl.Value))
-                {
-                    // Si hay cookie pero no sesión, uso la cookie
                     perfilImageUrl = ckPerfilImageUrl.Value;
-                    imgPerfilUrl.ImageUrl = perfilImageUrl;
-                    Session["ImgPerfilUrl"] = perfilImageUrl;
                 }
-
                 else
                 {
-                    // Si no hay nada, default
-                    perfilImageUrl = "~/imagenes/perfiles/img_avatar.png";
-                    imgPerfilUrl.ImageUrl = perfilImageUrl;
-
-                    ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", perfilImageUrl);
-                    ckPerfilImageUrl.Expires = DateTime.Now.AddMinutes(10);
-                    this.Response.Cookies.Add(ckPerfilImageUrl);
-
-                    Session["ImgPerfilUrl"] = perfilImageUrl;
+                    perfilImageUrl = ImagenDefault;
+                    GuardarCookieImagen(perfilImageUrl, 10);
                 }
+
+                Session["ImgPerfilUrl"] = perfilImageUrl;
             }
+
+            imgPerfilUrl.ImageUrl = perfilImageUrl;
         }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             NegocioUsuario negUsuario = new NegocioUsuario();
@@ -65,57 +43,92 @@ namespace TP_INT_P2
 
             bool accesoAprobado = negUsuario.LoginOK(usuario);
 
-            if (accesoAprobado)
+            if (!accesoAprobado)
             {
-                // Si hay una persona logueada, muestro cartel de Cerrar Sesión
-                Master.FindControl("cerrarSesion").Visible = true;
+                MostrarError("Usuario y contraseña inválidos");
+                return;
+            }
 
-                // Guardo el nombre de usuario logueado en una variable de sesión para usar en toda la app
+            // Recuperar los datos del usuario autenticado
+            usuario = negUsuario.GetData(usuario);
+
+            if (usuario == null)
+            {
+                MostrarError("No se pudieron recuperar los datos del usuario.");
+                return;
+            }
+
+            if (usuario.Tipo == "01")
+            {
+                // Administrador
                 Session["Username"] = txtUsername.Text;
-
-
-                // Busco el rol de la persona logueada para ver a donde la redirijo
-                usuario = negUsuario.GetData(usuario);
-                
                 Session["Tipo"] = usuario.Tipo;
+                Session["FullName"] = $"{usuario.Username} (Admin)";
+                Session["Legajo"] = string.Empty;
 
-                if (usuario.Tipo == "01")
+                string imagen = ObtenerImagenSegura(usuario.Imagen);
+
+                Session["ImgPerfilUrl"] = imagen;
+                GuardarCookieImagen(imagen, 365 * 24 * 60);
+
+                Response.Redirect("~/InicioAdministrador.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            else if (usuario.Tipo == "02")
+            {
+                // Médico
+                NegocioMedico negocioMedico = new NegocioMedico();
+                Medico medico = negocioMedico.getDatos(usuario);
+
+                if (medico == null)
                 {
-                    Session["FullName"] = $"{usuario.Username} (Admin)";
-                    Session["ImgPerfilUrl"] = usuario.Imagen;
-                    Session["Legajo"] = String.Empty;
-                    Response.Redirect("~/InicioAdministrador.aspx", false);
-                    Context.ApplicationInstance.CompleteRequest();
-                    HttpCookie ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", Session["ImgPerfilUrl"].ToString());
-                    ckPerfilImageUrl.Expires = DateTime.Now.AddDays(365);
-                    this.Response.Cookies.Add(ckPerfilImageUrl);
+                    MostrarError("No se encontraron los datos del médico.");
+                    return;
                 }
-                else if (usuario.Tipo == "02")
-                {
-                    // Busco datos de la persona que se logueó:
-                    NegocioMedico negocioMedico = new NegocioMedico();
-                    Medico medico = new Medico();
-                    medico = negocioMedico.getDatos(usuario);
-                    Session["FullName"] = $"{medico.Nombre} {medico.Apellido}";
-                    Session["Name"] = medico.Nombre;
-                    Session["Legajo"] = medico.Legajo;
-                    Session["Medico"] = medico;
-                    Session["ImgPerfilUrl"] = medico.Imagen;
 
-                    
-                    HttpCookie ckPerfilImageUrl = new HttpCookie("ckPerfilImageUrl", Session["ImgPerfilUrl"].ToString());
-                    ckPerfilImageUrl.Expires = DateTime.Now.AddMinutes(10);
-                    this.Response.Cookies.Add(ckPerfilImageUrl);
+                Session["Username"] = txtUsername.Text;
+                Session["Tipo"] = usuario.Tipo;
+                Session["FullName"] = $"{medico.Nombre} {medico.Apellido}";
+                Session["Name"] = medico.Nombre;
+                Session["Legajo"] = medico.Legajo;
+                Session["Medico"] = medico;
 
-                    Response.Redirect("~/InicioMedico.aspx", false);
-                    Context.ApplicationInstance.CompleteRequest();
-                }
+                string imagen = ObtenerImagenSegura(medico.Imagen);
+
+                Session["ImgPerfilUrl"] = imagen;
+                GuardarCookieImagen(imagen, 10);
+
+                Response.Redirect("~/InicioMedico.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             else
             {
-                lblError.Visible = true;
-                lblError.Text = "Usuario y contraseña inválidos";
+                MostrarError("El usuario no tiene un rol válido.");
             }
+        }
+
+        private string ObtenerImagenSegura(string imagen)
+        {
+            return string.IsNullOrWhiteSpace(imagen)
+                ? ImagenDefault
+                : imagen;
+        }
+
+        private void GuardarCookieImagen(string imagen, int minutos)
+        {
+            HttpCookie cookie = new HttpCookie("ckPerfilImageUrl", imagen);
+
+            cookie.Expires = DateTime.Now.AddMinutes(minutos);
+            cookie.HttpOnly = true;
+            cookie.Secure = Request.IsSecureConnection;
+
+            Response.Cookies.Add(cookie);
+        }
+
+        private void MostrarError(string mensaje)
+        {
+            lblError.Visible = true;
+            lblError.Text = mensaje;
         }
     }
 }

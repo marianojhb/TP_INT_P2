@@ -308,7 +308,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:BDClinicaAzure %>"
+        ConnectionString="<%$ ConnectionStrings:ClinicaTUP %>"
         DeleteCommand="SP_INACTIVARMEDICO" 
         DeleteCommandType="StoredProcedure" 
         SelectCommand="SP_SELECCIONARMEDICO" 

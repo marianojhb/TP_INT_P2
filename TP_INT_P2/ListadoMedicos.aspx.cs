@@ -20,7 +20,7 @@ namespace TP_INT_P2
 #if DEBUG
             SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["BDClinicaLocal"].ConnectionString;
 #else
-                    SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["BDClinicaAzure"].ConnectionString;
+                    SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ClinicaTUP"].ConnectionString;
 #endif
             if (!IsPostBack)
             {

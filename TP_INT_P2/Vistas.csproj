@@ -218,6 +218,7 @@
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Properties\PublishProfiles\clinicatup - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\site106665-WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

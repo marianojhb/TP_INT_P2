@@ -20,6 +20,15 @@ namespace Datos
         {
             Medico medico = new Medico();
 
+
+            if (u == null || string.IsNullOrWhiteSpace(u.Email))
+            {
+                throw new ArgumentException(
+                    "GetMedico: el usuario no tiene un email válido."
+                );
+            }
+
+
             string consulta = "SELECT * FROM USUARIOS AS [U] " +
                                 "INNER JOIN PERSONAS AS[P] ON U.email_U = P.email_P " +
                                 "INNER JOIN MEDICOS AS[M] ON P.dni_P = M.dni_M " +
@@ -30,7 +39,7 @@ namespace Datos
 
             SqlCommand comando = new SqlCommand();
             comando.CommandText = consulta;
-            comando.Parameters.AddWithValue("@email", u.Email);
+            comando.Parameters.Add("@email", SqlDbType.NVarChar, 255).Value = u.Email;
 
             comando.Connection = ac.obtenerConexion();
             SqlDataReader data = comando.ExecuteReader();
